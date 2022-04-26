@@ -7,7 +7,7 @@ ALLOWED_HOSTS = ["*"]
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgres',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'students_attendance_db',
         'USER': 'hotice',
         'PASSWORD': 'testpass1234',
