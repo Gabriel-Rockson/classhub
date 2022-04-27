@@ -1,18 +1,21 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from attendance.models import Class
 
 
 class Student(models.Model):
     """Model to represent individual student"""
-    
+
     class Gender(models.TextChoices):
         """Text choices for the gender"""
+
         MALE = "M", _("Male")
         FEMALE = "F", _("Female")
         OTHER = "O", _("Other")
 
     class Race(models.TextChoices):
         """Text choices for the race"""
+
         WHITE = "W", _("White")
         BLACK = "B", _("Black / African American")
         AMERICAN_INDIAN = "AIN", _("American Indian / Alaska Native")
@@ -52,6 +55,15 @@ class Student(models.Model):
     )
     race = models.CharField(
         verbose_name=_("Race"), max_length=3, choices=Race.choices, default=Race.WHITE
+    )
+    grade = models.ForeignKey(
+        "attendance.Class",
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+        related_name="students",
+        help_text="What class is this student?",
+        default=Class.Grades.ONE,
     )
     student_id = models.CharField(
         verbose_name=_("Student's ID"), max_length=20, null=True, blank=True
@@ -107,7 +119,6 @@ class Student(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-    
 
     class Meta:
         ordering = ("first_name",)
