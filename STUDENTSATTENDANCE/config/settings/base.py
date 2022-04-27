@@ -3,6 +3,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
+DEBUG = 'RENDER' not in os.environ
+
 BACKEND_DIR = BASE_DIR
 FRONTEND_DIR = BASE_DIR / "frontend"
 
@@ -94,6 +96,9 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [FRONTEND_DIR / "build" / "static"]
 
+if not DEBUG:
+    STATIC_ROOT = BASE_DIR / "staticfiles"
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 WHITENOISE_ROOT = FRONTEND_DIR / "build" / "root"
 
