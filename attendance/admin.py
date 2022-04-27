@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Class
+
+
+@admin.register(Class)
+class ClassAdmin(admin.ModelAdmin):
+    list_display = ["grade"]
