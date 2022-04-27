@@ -3,7 +3,8 @@ set -o errexit
 cd frontend
 
 # Build the frontend
-npm run build
+npm install # install the packages
+npm run build # build the application
 
 # Move files at the build root inside a root subdirectory
 mkdir -p build/root
