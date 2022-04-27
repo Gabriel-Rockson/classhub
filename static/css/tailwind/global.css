@@ -1,9 +1,6 @@
-/* THIS FILE CONTAINS THE UTILITY CLASSES FOR TAILWINDCSS */
-/* IF YOU NEED TO ADD ANY CUSTOM CSS, PLEASE WRITE IT IN ANOTHER FILE */
-
-/* ! tailwindcss v3.0.24 | MIT License | https://tailwindcss.com */
-
 /*
+! tailwindcss v3.0.24 | MIT License | https://tailwindcss.com
+*//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
@@ -343,7 +340,6 @@ button,
 /*
 Make sure disabled buttons don't get the pointer cursor.
 */
-
 :disabled {
   cursor: default;
 }
@@ -428,21 +424,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
-
-/* custom classes */
-
-.btn {
-  border-radius: 0.25rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+.static {
+  position: static;
+}
+.font-bold {
   font-weight: 700;
 }
-
-.btn-blue {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+.text-red-600 {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
