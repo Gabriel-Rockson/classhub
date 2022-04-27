@@ -1,14 +1,23 @@
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+
+ALLOWED_HOSTS = ["localhost"]
 
 DEBUG = "RENDER" not in os.environ
 
 BACKEND_DIR = BASE_DIR
 FRONTEND_DIR = BASE_DIR / "frontend"
 
+SECRET_KEY = os.environ.get("SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j")
+
+# Render
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
