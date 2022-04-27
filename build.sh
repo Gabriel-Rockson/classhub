@@ -3,7 +3,7 @@ set -o errexit
 cd frontend
 
 # Build the frontend
-yarn build
+npm run build
 
 # Move files at the build root inside a root subdirectory
 mkdir -p build/root
