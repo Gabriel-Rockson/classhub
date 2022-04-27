@@ -4,7 +4,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
-DEBUG = 'RENDER' not in os.environ
+DEBUG = "RENDER" not in os.environ
 
 BACKEND_DIR = BASE_DIR
 FRONTEND_DIR = BASE_DIR / "frontend"
@@ -111,3 +111,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 
 SHELL_PLUS = "ipython"
+
+if not DEBUG:
+    DATABASES = {
+        "default": dj_database_url.config(
+            default="postgresql://postgres:postgres@localhost:5432/mysite",
+            conn_max_age=600,
+        )
+    }
