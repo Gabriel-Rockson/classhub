@@ -1,5 +1,8 @@
 from .base import *
+import os
 
+
+SECRET_KEY = os.environ.get("SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j")
 
 DEBUG = True
 

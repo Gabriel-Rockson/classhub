@@ -7,9 +7,6 @@ BACKEND_DIR = BASE_DIR
 FRONTEND_DIR = BASE_DIR / "frontend"
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-9u%s3!&tk-@7nvs4d8w!*7%1fnp@nx-027k8z9@ci3#koizq4o"
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -96,8 +93,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [FRONTEND_DIR / "build" / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 WHITENOISE_ROOT = FRONTEND_DIR / "build" / "root"
 
