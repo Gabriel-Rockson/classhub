@@ -24,7 +24,7 @@ if RENDER_EXTERNAL_HOSTNAME:
 # Databases
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgres://students_attendance_user:tg16chbacahdDcvCoRqVrRN2qqiom7rx@dpg-c9ktesc41ls49b94eek0-a/students_attendance_db_up8o",
+        default='postgresql://postgres:postgres@localhost:5432/Database',
         conn_max_age=600,
     )
 }
