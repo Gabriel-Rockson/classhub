@@ -16,6 +16,6 @@ cd ..
 
 poetry install 
 
-python manage.py collectstatic --no-input
+python prod-manage.py collectstatic --no-input
 
-python manage.py migrate
+python prod-manage.py migrate

@@ -10,7 +10,7 @@ def main():
     os.environ.setdefault(
         "DJANGO_SETTINGS_MODULE",
         os.environ.get(
-            "DJANGO_SETTINGS_MODULE", default="STUDENTSATTENDANCE.config.settings.dev"
+            "DJANGO_SETTINGS_MODULE", default="STUDENTSATTENDANCE.config.settings.base"
         ),
     )
     try:

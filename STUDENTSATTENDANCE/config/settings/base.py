@@ -5,19 +5,15 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
-ALLOWED_HOSTS = ["localhost"]
-
-DEBUG = "RENDER" not in os.environ
-
 BACKEND_DIR = BASE_DIR
 FRONTEND_DIR = BASE_DIR / "frontend"
 
 SECRET_KEY = os.environ.get("SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j")
 
-# Render
-RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# # Render
+# RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+# if RENDER_EXTERNAL_HOSTNAME:
+#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -106,9 +102,9 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [FRONTEND_DIR / "build" / "static"]
 
-if not DEBUG:
-    STATIC_ROOT = BASE_DIR / "staticfiles"
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# if not DEBUG:
+#     STATIC_ROOT = BASE_DIR / "staticfiles"
+#     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 WHITENOISE_ROOT = FRONTEND_DIR / "build" / "root"
 
@@ -121,10 +117,10 @@ AUTH_USER_MODEL = "users.User"
 
 SHELL_PLUS = "ipython"
 
-if not DEBUG:
-    DATABASES = {
-        "default": dj_database_url.config(
-            default="postgres://students_attendance_user:tg16chbacahdDcvCoRqVrRN2qqiom7rx@dpg-c9ktesc41ls49b94eek0-a/students_attendance_db_up8o",
-            conn_max_age=600,
-        )
-    }
+# if not DEBUG:
+#     DATABASES = {
+#         "default": dj_database_url.config(
+#             default="postgres://students_attendance_user:tg16chbacahdDcvCoRqVrRN2qqiom7rx@dpg-c9ktesc41ls49b94eek0-a/students_attendance_db_up8o",
+#             conn_max_age=600,
+#         )
+#     }
