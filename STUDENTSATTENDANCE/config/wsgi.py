@@ -11,6 +11,11 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'STUDENTSATTENDANCE.config.settings.prod')
+os.environ.setdefault(
+    "DJANGO_SETTINGS_MODULE",
+    os.environ.get(
+        "DJANGO_SETTINGS_MODULE", default="STUDENTSATTENDANCE.config.settings.base"
+    ),
+)
 
 application = get_wsgi_application()

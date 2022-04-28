@@ -14,10 +14,13 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = 'RENDER' not in os.environ
 
-# # Render
-# RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-# if RENDER_EXTERNAL_HOSTNAME:
-#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+if not DEBUG:
+    ALLOWED_HOSTS = ["localhost"]
+
+    # Render
+    RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+    if RENDER_EXTERNAL_HOSTNAME:
+        ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -121,10 +124,10 @@ AUTH_USER_MODEL = "users.User"
 
 SHELL_PLUS = "ipython"
 
-# if not DEBUG:
-#     DATABASES = {
-#         "default": dj_database_url.config(
-#             default="postgres://students_attendance_user:tg16chbacahdDcvCoRqVrRN2qqiom7rx@dpg-c9ktesc41ls49b94eek0-a/students_attendance_db_up8o",
-#             conn_max_age=600,
-#         )
-#     }
+if not DEBUG:
+    DATABASES = {
+        "default": dj_database_url.config(
+            default="postgres://students_attendance_user:tg16chbacahdDcvCoRqVrRN2qqiom7rx@dpg-c9ktesc41ls49b94eek0-a/students_attendance_db_up8o",
+            conn_max_age=600,
+        )
+    }
