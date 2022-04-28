@@ -12,6 +12,8 @@ SECRET_KEY = os.environ.get(
     "SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j"
 )
 
+DEBUG = 'RENDER' not in os.environ
+
 # # Render
 # RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 # if RENDER_EXTERNAL_HOSTNAME:
