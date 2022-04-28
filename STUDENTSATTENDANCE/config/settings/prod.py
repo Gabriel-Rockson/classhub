@@ -22,9 +22,9 @@ if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Databases
-DATABASES = {
-    "default": dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost:5432/Database',
-        conn_max_age=600,
-    )
-}
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default='postgresql://postgres:postgres@localhost:5432/Database',
+#         conn_max_age=600,
+#     )
+# }
