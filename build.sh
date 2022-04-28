@@ -1,6 +1,6 @@
 set -o errexit
 
-cd frontend
+# cd frontend
 
 # Build the frontend
 # npm install # install the packages
