@@ -8,7 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 BACKEND_DIR = BASE_DIR
 FRONTEND_DIR = BASE_DIR / "frontend"
 
-SECRET_KEY = os.environ.get("SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j")
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j"
+)
 
 # # Render
 # RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
@@ -102,9 +104,9 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [FRONTEND_DIR / "build" / "static"]
 
-# if not DEBUG:
-#     STATIC_ROOT = BASE_DIR / "staticfiles"
-#     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+if not DEBUG:
+    STATIC_ROOT = BASE_DIR / "staticfiles"
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 WHITENOISE_ROOT = FRONTEND_DIR / "build" / "root"
 
