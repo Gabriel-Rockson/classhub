@@ -2,7 +2,7 @@ set -o errexit
 
 cd frontend
 
-Build the frontend
+# Build the frontend
 npm install # install the packages
 npm run build # build the application
 
