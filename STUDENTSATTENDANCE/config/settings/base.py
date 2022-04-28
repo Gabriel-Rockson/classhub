@@ -121,10 +121,10 @@ AUTH_USER_MODEL = "users.User"
 
 SHELL_PLUS = "ipython"
 
-if not DEBUG:
-    DATABASES = {
-        "default": dj_database_url.config(
-            default='postgresql://postgres:postgres@localhost:5432/Database',
-            conn_max_age=600,
-        )
-    }
+# if not DEBUG:
+#     DATABASES = {
+#         "default": dj_database_url.config(
+#             default='postgresql://postgres:postgres@localhost:5432/Database',
+#             conn_max_age=600,
+#         )
+#     }
