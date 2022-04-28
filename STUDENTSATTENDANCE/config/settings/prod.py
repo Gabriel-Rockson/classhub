@@ -8,7 +8,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = []
 
 # Static Files
 STATIC_ROOT = BASE_DIR / "staticfiles"
