@@ -4,6 +4,9 @@ from attendance.api.serializers import AttendanceListSerializer
 
 
 class StudentSerializer(serializers.ModelSerializer):
+    gender = serializers.CharField(source="get_gender_display")
+    race = serializers.CharField(source="get_race_display")
+
     class Meta:
         model = Student
         fields = [
