@@ -8,9 +8,11 @@ function Dashboard() {
     <>
       <Box>
         <TopNavBar />
-        <Heading fontWeight={"bold"} color="red.600">
-          This is the Dashboard
-        </Heading>
+        <Box px={10} py={2}>
+          <Heading fontWeight={"bold"} textAlign="center" color="red.600">
+            This is the Dashboard
+          </Heading>
+        </Box>
       </Box>
     </>
   );
