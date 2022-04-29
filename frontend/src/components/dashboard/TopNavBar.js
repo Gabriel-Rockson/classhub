@@ -12,11 +12,8 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 
-import {
-  AiFillCaretDown,
-  AiOutlineSearch,
-  AiOutlineMenu,
-} from "react-icons/ai";
+import { AiFillCaretDown, AiOutlineSearch } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/ai";
 
 function TopNavBar() {
   return (
@@ -28,7 +25,12 @@ function TopNavBar() {
         backgroundColor="white"
       >
         <Flex alignItems={"center"}>
-          <Icon as={AiOutlineMenu} fontSize={"2xl"} mr={3} color={"blue.600"}/>
+          <Icon
+            as={GiHamburgerMenu}
+            fontSize={"2xl"}
+            mr={3}
+            color={"blue.600"}
+          />
           <Heading
             fontSize={["3xl", "2xl", "xl"]}
             color={"teal.600"}
@@ -44,7 +46,11 @@ function TopNavBar() {
                 <Icon as={AiOutlineSearch} color="gray.500" fontSize={"2xl"} />
               }
             />
-            <Input placeholder="Search ..." focusBorderColor='blue.600' rounded={"none"} />
+            <Input
+              placeholder="Search ..."
+              focusBorderColor="blue.600"
+              rounded={"none"}
+            />
           </InputGroup>
           <Avatar
             name="Dan Abrahmov"
