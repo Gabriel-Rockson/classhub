@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from attendance.models import Class
+import uuid
 
 
 class Student(models.Model):
@@ -23,6 +24,14 @@ class Student(models.Model):
         HAWAIIAN = "H", "Native Hawaiian / Other Pacific Islander"
         OTHER = "O", "Some Other Race"
 
+    student_uid = models.UUIDField(
+        _("Student Unique Identifier"),
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        null=False,
+        blank=False,
+    )
     first_name = models.CharField(
         verbose_name=_("First Name"),
         help_text="Enter student's first name",
