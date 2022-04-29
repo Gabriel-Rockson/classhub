@@ -1,10 +1,14 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   return (
     <>
-      <Box color="red.600">Nae</Box>
+      <Box>
+        <Heading color="blue.600">This is the HomePage</Heading>
+        <Link to="/dashboard">Dashboard</Link>
+      </Box>
     </>
   );
 }
