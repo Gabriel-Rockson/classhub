@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 
 import { AiFillCaretDown, AiOutlineSearch } from "react-icons/ai";
-import { GiHamburgerMenu } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function TopNavBar() {
   return (
