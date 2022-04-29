@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get(
     "SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j"
 )
 
-DEBUG = 'RENDER' not in os.environ
+DEBUG = "RENDER" not in os.environ
 
 if not DEBUG:
     ALLOWED_HOSTS = ["localhost"]
@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",  # whitenoise
     "django.contrib.staticfiles",
+    # 3rd party app
+    "corsheaders",
     # developer created apps
     "users.apps.UsersConfig",
     "teacher.apps.TeacherConfig",
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -131,3 +134,7 @@ if not DEBUG:
             conn_max_age=600,
         )
     }
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000', "http://example.com"]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', "http://example.com"]
