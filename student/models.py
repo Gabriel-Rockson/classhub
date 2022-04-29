@@ -40,18 +40,18 @@ class Student(models.Model):
         blank=False,
     )
     middle_name = models.CharField(
+        verbose_name=_("Middle Name"),
+        help_text="Enter student's middle name if any",
+        max_length=50,
+        null=True,
+        blank=True,
+    )
+    last_name = models.CharField(
         verbose_name=_("Last Name"),
         help_text="Enter student's last name",
         max_length=50,
         null=False,
         blank=False,
-    )
-    last_name = models.CharField(
-        verbose_name=_("Middle Name"),
-        help_text="Enter student's middle name",
-        max_length=50,
-        null=True,
-        blank=True,
     )
     date_of_birth = models.DateField(
         verbose_name=_("Date of Birth"), help_text="Pick the student's date of birth"
