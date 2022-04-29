@@ -8,10 +8,7 @@ def main():
     """Run administrative tasks."""
 
     os.environ.setdefault(
-        "DJANGO_SETTINGS_MODULE",
-        os.environ.get(
-            "DJANGO_SETTINGS_MODULE", default="STUDENTSATTENDANCE.config.settings.dev"
-        ),
+        "DJANGO_SETTINGS_MODULE", "STUDENTSATTENDANCE.config.settings.dev"
     )
     try:
         from django.core.management import execute_from_command_line

@@ -56,7 +56,7 @@ ROOT_URLCONF = "STUDENTSATTENDANCE.config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [FRONTEND_DIR / "build"],
+        "DIRS": [BACKEND_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -107,13 +107,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [FRONTEND_DIR / "build" / "static"]
+STATICFILES_DIRS = [BACKEND_DIR / "staticfiles"]
 
 if not DEBUG:
     STATIC_ROOT = BASE_DIR / "staticfiles"
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-WHITENOISE_ROOT = FRONTEND_DIR / "build" / "root"
+# WHITENOISE_ROOT = FRONTEND_DIR / "build" / "root"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
