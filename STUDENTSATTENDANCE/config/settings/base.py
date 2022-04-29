@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "student.apps.StudentConfig",
     "attendance.apps.AttendanceConfig",
     "home.apps.HomeConfig",
+    "frontend.apps.FrontendConfig",
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BACKEND_DIR / "staticfiles"]
+STATICFILES_DIRS = [BACKEND_DIR / "static"]
 
 if not DEBUG:
     STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -136,5 +137,5 @@ if not DEBUG:
     }
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = ['http://localhost:3000', "http://example.com"]
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', "http://example.com"]
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://example.com"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://example.com"]
