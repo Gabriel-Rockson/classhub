@@ -1,4 +1,4 @@
-from attendance.models import StudentAttendance
+from attendance.models import StudentAttendance, Class
 from rest_framework import serializers
 
 
@@ -26,3 +26,6 @@ class StudentAttendanceSerializer(serializers.ModelSerializer):
             "student": {"write_only": True},
             "attendance": {"write_only": True},
         }
+
+
+# NOTE - the class serializer is in student.api.serializers

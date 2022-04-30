@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from student.models import Student
 from attendance.api.serializers import StudentAttendanceSerializer
+from attendance.models import Class
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -34,3 +35,16 @@ class StudentSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["attendances"]
         extra_kwargs = {"race": {"write_only": True}, "gender": {"write_only": True}}
+
+
+# ! - I am defining the Class Serializer here so as to avoid import errors
+class ClassSerializer(serializers.ModelSerializer):
+    students = StudentSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Class
+        fields = [
+            "class_uid",
+            "grade",
+            "students",
+        ]
