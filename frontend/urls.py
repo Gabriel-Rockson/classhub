@@ -6,5 +6,5 @@ from frontend import views
 app_name = "frontend"
 urlpatterns = [
     path("", views.Index.as_view(), name="index"),
-    re_path(r"^(?:.*)/?$", views.Index.as_view()),
+    re_path(r"^app/(?:.*)/?$", views.Index.as_view()),
 ]
