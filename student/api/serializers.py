@@ -48,3 +48,10 @@ class ClassSerializer(serializers.ModelSerializer):
             "grade",
             "students",
         ]
+
+    def create(self, validated_data):
+        if Class.objects.filter(grade=validated_data["grade"]):
+            raise serializers.ValidationError(f"Class {validated_data['grade']} exists already")
+        instance = super(ClassSerializer, self).create(validated_data)
+        instance.save()
+        return instance
