@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+import uuid
 
 
 class Class(models.Model):
@@ -23,6 +24,14 @@ class Class(models.Model):
         FIFTEEN = 15, _("15")
         SIXTEEN = 16, _("16")
 
+    class_uid = models.UUIDField(
+        _("Class Unique Identifier"),
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        null=False,
+        blank=False,
+    )
     grade = models.CharField(
         verbose_name=_("Grade"),
         max_length=2,
@@ -59,7 +68,14 @@ class StudentAttendance(models.Model):
         blank=False,
         related_name="attendances",
     )
-
+    attendance_uid = models.UUIDField(
+        _("Attendance Unique Identifier"),
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        null=False,
+        blank=False,
+    )
     attendance_created = models.DateTimeField(
         _("Attendance Creation Date"), blank=False, null=False, auto_now_add=True
     )
@@ -77,5 +93,3 @@ class StudentAttendance(models.Model):
 
     def __str__(self):
         return f"Attendance on - {self.attendance_created}"
-
-

@@ -7,7 +7,7 @@ function HomePage() {
     <>
       <Box>
         <Heading color="blue.600">This is the HomePage</Heading>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/app/dashboard">Dashboard</Link>
       </Box>
     </>
   );

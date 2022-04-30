@@ -23,7 +23,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/app/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
