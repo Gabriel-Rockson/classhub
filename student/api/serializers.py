@@ -1,11 +1,12 @@
 from rest_framework import serializers
 from student.models import Student
-from attendance.api.serializers import AttendanceListSerializer
+from attendance.api.serializers import StudentAttendanceSerializer
 
 
 class StudentSerializer(serializers.ModelSerializer):
-    gender = serializers.CharField(source="get_gender_display")
-    race = serializers.CharField(source="get_race_display")
+    gender_display = serializers.CharField(source="get_gender_display", read_only=True)
+    race_display = serializers.CharField(source="get_race_display", read_only=True)
+    attendances = StudentAttendanceSerializer(many=True, read_only=True)
 
     class Meta:
         model = Student
@@ -16,7 +17,9 @@ class StudentSerializer(serializers.ModelSerializer):
             "last_name",
             "date_of_birth",
             "gender",
+            "gender_display",
             "race",
+            "race_display",
             "grade",
             "student_id",
             "address",
@@ -27,5 +30,7 @@ class StudentSerializer(serializers.ModelSerializer):
             "guardian_name",
             "guardian_email",
             "home_phone",
+            "attendances",
         ]
-        read_only_fields = ["student_uid"]
+        read_only_fields = ["attendances"]
+        extra_kwargs = {"race": {"write_only": True}, "gender": {"write_only": True}}
