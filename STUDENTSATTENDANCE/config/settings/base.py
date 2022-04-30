@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # 3rd party app
     "corsheaders",
+    "rest_framework",
     # developer created apps
     "users.apps.UsersConfig",
     "teacher.apps.TeacherConfig",
