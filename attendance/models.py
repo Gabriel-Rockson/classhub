@@ -24,6 +24,14 @@ class Class(models.Model):
         FIFTEEN = 15, _("15")
         SIXTEEN = 16, _("16")
 
+    class_uid = models.UUIDField(
+        _("Class Unique Identifier"),
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        null=False,
+        blank=False,
+    )
     grade = models.CharField(
         verbose_name=_("Grade"),
         max_length=2,
