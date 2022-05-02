@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, forwardRef } from "react";
 import {
   Heading,
-  Text,
   Flex,
   Avatar,
   Icon,
@@ -10,7 +9,6 @@ import {
   InputLeftElement,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
