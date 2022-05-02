@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Flex, Box, Heading, Text, Link, Icon, HStack } from "@chakra-ui/react";
+import { Flex, Link, Icon, HStack } from "@chakra-ui/react";
 import { Link as ReactLink } from "react-router-dom";
 
 import { MdGroups } from "react-icons/md";

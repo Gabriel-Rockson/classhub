@@ -1,6 +1,6 @@
 import React from "react";
 import { Link as ReactLink } from "react-router-dom";
-import { Box, Link, Flex, Icon, VStack } from "@chakra-ui/react";
+import { Link, Flex, Icon, VStack } from "@chakra-ui/react";
 import { MdGroups } from "react-icons/md";
 import { GoChecklist } from "react-icons/go";
 
