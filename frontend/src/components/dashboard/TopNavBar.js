@@ -31,7 +31,7 @@ const SearchInput = () => {
       <InputGroup mr={[null, 10]}>
         <InputLeftElement
           children={
-            <Icon as={AiOutlineSearch} color="gray.500" fontSize={"2xl"} />
+            <Icon as={AiOutlineSearch} color="gray.500" fontSize={"xl"} />
           }
         />
         <Input
@@ -54,9 +54,9 @@ const TopNavBar = () => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-    window.addEventListener("resize", handleResize());
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize());
+      window.removeEventListener("resize", handleResize);
     };
   }, [windowWidth]);
 
