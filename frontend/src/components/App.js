@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HomePage from "./HomePage";
 import Dashboard from "../dashboard/Dashboard";
+import ClassList from "../dashboard/ClassList";
+import ClassAttendance from "../dashboard/ClassAttendance";
 
 const colors = {
   brand: {
@@ -23,7 +25,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/app/dashboard" element={<Dashboard />} />
+          <Route path="/app/dashboard" element={<Dashboard />}>
+            <Route index element={<ClassList />} />
+            <Route path="class-list" element={<ClassList />} />
+            <Route path="class-attendance" element={<ClassAttendance />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
