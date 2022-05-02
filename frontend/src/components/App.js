@@ -8,6 +8,8 @@ import HomePage from "./HomePage";
 import Dashboard from "../dashboard/Dashboard";
 import ClassList from "../dashboard/ClassList";
 import ClassAttendance from "../dashboard/ClassAttendance";
+import StudentDetail from "../dashboard/StudentDetail";
+import StudentList from "../dashboard/StudentList";
 
 const colors = {
   brand: {
@@ -27,7 +29,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/app/dashboard" element={<Dashboard />}>
             <Route index element={<ClassList />} />
-            <Route path="class-list" element={<ClassList />} />
+            <Route path="class-list" element={<ClassList />}>
+              <Route index element={<StudentList />} />
+              <Route path=":studentUid" element={<StudentDetail />} />
+            </Route>
             <Route path="class-attendance" element={<ClassAttendance />} />
           </Route>
         </Routes>
