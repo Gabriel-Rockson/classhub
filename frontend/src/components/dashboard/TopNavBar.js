@@ -25,6 +25,8 @@ import {
   AiOutlineMenuFold,
 } from "react-icons/ai";
 
+import SecondaryNavBarMobile from "./SecondaryNavBarMobile";
+
 const SearchInput = () => {
   return (
     <>
@@ -64,7 +66,7 @@ const TopNavBar = () => {
     <>
       <Flex
         justifyContent={"space-between"}
-        py={2}
+        py={[2, 3]}
         px={[2, 4, 6]}
         backgroundColor="white"
       >
@@ -96,18 +98,22 @@ const TopNavBar = () => {
             >
               <DrawerOverlay />
               <DrawerContent>
-                <DrawerCloseButton />
+                <DrawerCloseButton
+                  style={{ boxShadow: "none" }}
+                  color={"red.600"}
+                />
                 <DrawerHeader>StudentsAttendance</DrawerHeader>
 
                 <DrawerBody>
                   <SearchInput />
+                  <SecondaryNavBarMobile onClose={onClose} />
                 </DrawerBody>
               </DrawerContent>
             </Drawer>
           )}
           <Heading
-            fontSize={["lg", "xl", "2xl"]}
-            color={"teal.400"}
+            fontSize={["lg", "xl", "xl"]}
+            color={"facebook.800"}
             fontFamily={"fantasy"}
           >
             StudentsAttendance
