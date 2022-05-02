@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Flex, Box, Heading, Text, Link, Icon } from "@chakra-ui/react";
+import { Flex, Box, Heading, Text, Link, Icon, HStack } from "@chakra-ui/react";
 import { Link as ReactLink } from "react-router-dom";
 
 import { MdGroups } from "react-icons/md";
@@ -23,12 +23,13 @@ const SecondaryNavBar = () => {
   return (
     <>
       {windowWidth >= 768 && (
-        <Flex
+        <HStack
           pt={8}
           px={[null, 5, 10]}
-          backgroundColor={"blue.700"}
+          backgroundColor={"telegram.800"}
           color={"white"}
           alignItems={"start"}
+          spacing={10}
         >
           <Link
             as={ReactLink}
@@ -45,7 +46,7 @@ const SecondaryNavBar = () => {
               <Icon fontSize={"2xl"} mr={2} as={MdGroups} /> Class List
             </Flex>
           </Link>
-          <Box mx={5} />
+          
           <Link
             as={ReactLink}
             to="/app/dashboard/class-attendance"
@@ -61,7 +62,7 @@ const SecondaryNavBar = () => {
               <Icon as={GoChecklist} fontSize={"2xl"} mr={2} /> Class Attendance
             </Flex>
           </Link>
-        </Flex>
+        </HStack>
       )}
     </>
   );
