@@ -4,13 +4,13 @@ import React from "react";
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
 import HomePage from "./HomePage";
 import Dashboard from "./dashboard/Dashboard";
 import ClassList from "./dashboard/ClassList";
 import ClassAttendance from "./dashboard/ClassAttendance";
 import StudentDetail from "./dashboard/StudentDetail";
 import StudentList from "./dashboard/StudentList";
+import AddAttendance from "./dashboard/AddAttendance";
 
 const colors = {
   brand: {
@@ -34,7 +34,9 @@ function App() {
               <Route index element={<StudentList />} />
               <Route path=":studentUid" element={<StudentDetail />} />
             </Route>
-            <Route path="class-attendance" element={<ClassAttendance />} />
+            <Route path="class-attendance" element={<ClassAttendance />}>
+              <Route index element={<AddAttendance />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
