@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Link, Icon, HStack } from "@chakra-ui/react";
-import { Link as ReactLink } from "react-router-dom";
+import { Link as ReactLink, useLocation } from "react-router-dom";
 
 import { MdGroups } from "react-icons/md";
 import { GoChecklist } from "react-icons/go";
 
+import { useWindowWidth } from "../../hooks/custom-hooks";
+
 const SecondaryNavBar = () => {
-  // TODO you are utilizing this in the TopNavBar too, extract it into a custom hook
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const windowWidth = useWindowWidth();
+  const [addStyleA, setAddStyleA] = useState(false);
+  const [addStyleB, setAddStyleB] = useState(false);
+
+  const location = useLocation();
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+    if (location.pathname === "/app/dashboard/class-list") {
+      setAddStyleA(true);
+      setAddStyleB(false);
+    } else if (location.pathname === "/app/dashboard/class-attendance") {
+      setAddStyleB(true);
+      setAddStyleA(false);
+    }
+  }, [location]);
 
-      window.addEventListener("resize", handleResize);
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    };
-  }, [windowWidth]);
+  const style = {
+    textDecoration: "none",
+    boxShadow: "none",
+    color: "orange",
+    fontWeight: "bold",
+  };
 
   return (
     <>
@@ -35,28 +46,22 @@ const SecondaryNavBar = () => {
             as={ReactLink}
             to="/app/dashboard/class-list"
             fontSize={"md"}
-            style={{ textDecoration: "none", boxShadow: "none" }}
-            _focus={{
-              fontWeight: "bold",
-              borderBottom: "solid",
-              borderColor: "white",
-            }}
+            style={
+              addStyleA ? style : { textDecoration: "none", boxShadow: "none" }
+            }
           >
             <Flex alignContent={"center"} mr={5} pb={2}>
               <Icon fontSize={"2xl"} mr={2} as={MdGroups} /> Class List
             </Flex>
           </Link>
-          
+
           <Link
             as={ReactLink}
             to="/app/dashboard/class-attendance"
             fontSize={"md"}
-            style={{ textDecoration: "none", boxShadow: "none" }}
-            _focus={{
-              fontWeight: "bold",
-              borderBottom: "solid",
-              borderColor: "white",
-            }}
+            style={
+              addStyleB ? style : { textDecoration: "none", boxShadow: "none" }
+            }
           >
             <Flex pb={2}>
               <Icon as={GoChecklist} fontSize={"2xl"} mr={2} /> Class Attendance
