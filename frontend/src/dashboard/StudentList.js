@@ -30,7 +30,7 @@ import {
   Select,
   VStack,
 } from "@chakra-ui/react";
-import { DatePicker } from "@orange_digital/chakra-datepicker";
+import { useWindowWidth } from "../hooks/custom-hooks";
 
 import { MdPersonAdd } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
@@ -44,8 +44,8 @@ const data = {
   student_id: "20594513",
 };
 function StudentList() {
+  const windowWidth = useWindowWidth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const navigate = useNavigate();
 
   const handleClick = (student_uid) => {
@@ -86,7 +86,7 @@ function StudentList() {
         >
           <ModalOverlay />
           <ModalContent borderRadius={0}>
-            <ModalHeader>Add Student</ModalHeader>
+            <ModalHeader>Add New Student</ModalHeader>
             <ModalCloseButton style={{ boxShadow: "none" }} color="red" />
 
             <ModalBody>
@@ -194,9 +194,11 @@ function StudentList() {
           </ModalContent>
         </Modal>
 
-        <Text as={"small"} color={"telegram.900"} fontWeight={"bold"}>
-          Swipe on the table to reveal more data
-        </Text>
+        {windowWidth <= 1024 && (
+          <Text as={"small"} color={"telegram.900"} fontWeight={"bold"}>
+            Swipe on the table to reveal more data
+          </Text>
+        )}
         <TableContainer mb={10} boxShadow="lg" rounded="md">
           <Table variant={"unstyled"}>
             <Thead borderBottom={"2px"} borderColor={"gray.200"}>
