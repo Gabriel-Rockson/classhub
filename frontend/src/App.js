@@ -11,7 +11,7 @@ import ClassAttendance from "./dashboard/ClassAttendance";
 import StudentDetail from "./dashboard/StudentDetail";
 import StudentList from "./dashboard/StudentList";
 import AddAttendance from "./dashboard/AddAttendance";
-import AllAttendances from "./dashboard/AttendanceList";
+import AttendanceList from "./dashboard/AttendanceList";
 
 const colors = {
   brand: {
@@ -30,13 +30,13 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/app/dashboard" element={<Dashboard />}>
-            <Route index element={<ClassList />} />
+            <Route index element={<AttendanceList />} />
             <Route path="class-list" element={<ClassList />}>
               <Route index element={<StudentList />} />
               <Route path=":studentUid" element={<StudentDetail />} />
             </Route>
             <Route path="class-attendance" element={<ClassAttendance />}>
-              <Route index element={<AllAttendances />} />
+              <Route index element={<AttendanceList />} />
               <Route path="add-attendance" element={<AddAttendance />} />
             </Route>
           </Route>
