@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   TableContainer,
   Table,
@@ -11,11 +12,12 @@ import {
   Button,
   Flex,
   Icon,
-  Heading
+  Heading,
 } from "@chakra-ui/react";
 
 import { GiCheckMark } from "react-icons/gi";
 import { ImUserCheck } from "react-icons/im";
+import { AiOutlineRollback } from "react-icons/ai";
 
 const data = {
   name: "Gabriel Rockson",
@@ -23,10 +25,32 @@ const data = {
 };
 
 const AddAttendance = () => {
+  const navigate = useNavigate();
+
   return (
     <>
-      <Flex my={10}>
-        <Heading fontSize={['lg', 'xl', '3xl']}>Class 2 Attendance - {new Date().toDateString()}</Heading>
+      <Button
+        mt={6}
+        size={["md"]}
+        fontSize={"14px"}
+        borderRadius={0}
+        style={{ boxShadow: "none" }}
+        backgroundColor={"orange.800"}
+        color={"white"}
+        _hover={{ backgroundColor: "orange.900" }}
+        _active={{ backgroundColor: "orange.900" }}
+        shadow={"md"}
+        onClick={() => navigate(-1)}
+      >
+        <Flex alignItems={"center"}>
+          <Icon as={AiOutlineRollback} mr={2} /> Attendance List
+        </Flex>
+      </Button>
+
+      <Flex mt={3} mb={6} justifyContent={"center"}>
+        <Heading fontSize={["lg", "xl", "2xl"]}>
+          Class 2 Attendance - {new Date().toDateString()}
+        </Heading>
       </Flex>
 
       <TableContainer py={4} boxShadow="lg" rounded="md">
