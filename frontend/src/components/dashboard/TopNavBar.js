@@ -21,6 +21,8 @@ import {
   MenuDivider,
 } from "@chakra-ui/react";
 
+import { useWindowWidth } from "../../hooks/custom-hooks";
+
 import {
   AiFillCaretDown,
   AiOutlineSearch,
@@ -52,19 +54,9 @@ const SearchInput = () => {
 };
 
 const TopNavBar = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const windowWidth = useWindowWidth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const sideMenuBtn = useRef();
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [windowWidth]);
 
   return (
     <>
