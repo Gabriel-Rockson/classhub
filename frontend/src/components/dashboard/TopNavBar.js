@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, forwardRef } from "react";
 import {
   Heading,
-  Text,
   Flex,
   Avatar,
   Icon,
@@ -10,13 +9,19 @@ import {
   InputLeftElement,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
 } from "@chakra-ui/react";
+
+import { useWindowWidth } from "../../hooks/custom-hooks";
 
 import {
   AiFillCaretDown,
@@ -24,6 +29,9 @@ import {
   AiOutlineMenuUnfold,
   AiOutlineMenuFold,
 } from "react-icons/ai";
+import { CgProfile, CgLogOut } from "react-icons/cg";
+
+import SecondaryNavBarMobile from "./SecondaryNavBarMobile";
 
 const SearchInput = () => {
   return (
@@ -31,13 +39,13 @@ const SearchInput = () => {
       <InputGroup mr={[null, 10]}>
         <InputLeftElement
           children={
-            <Icon as={AiOutlineSearch} color="gray.500" fontSize={"2xl"} />
+            <Icon as={AiOutlineSearch} color="gray.500" fontSize={"xl"} />
           }
         />
         <Input
           placeholder="Search ..."
-          borderColor={"blue.200"}
-          focusBorderColor="blue.600"
+          borderColor={"telegram.600"}
+          focusBorderColor="telegram.800"
           rounded={"none"}
         />
       </InputGroup>
@@ -46,27 +54,18 @@ const SearchInput = () => {
 };
 
 const TopNavBar = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const windowWidth = useWindowWidth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const sideMenuBtn = useRef();
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize());
-    return () => {
-      window.removeEventListener("resize", handleResize());
-    };
-  }, [windowWidth]);
 
   return (
     <>
       <Flex
         justifyContent={"space-between"}
-        py={2}
+        py={[3]}
         px={[2, 4, 6]}
         backgroundColor="white"
+        borderBottom={["solid", "none"]}
       >
         <Flex alignItems={"center"}>
           {windowWidth < 768 &&
@@ -96,18 +95,22 @@ const TopNavBar = () => {
             >
               <DrawerOverlay />
               <DrawerContent>
-                <DrawerCloseButton />
+                <DrawerCloseButton
+                  style={{ boxShadow: "none" }}
+                  color={"red.600"}
+                />
                 <DrawerHeader>StudentsAttendance</DrawerHeader>
 
                 <DrawerBody>
                   <SearchInput />
+                  <SecondaryNavBarMobile onClose={onClose} />
                 </DrawerBody>
               </DrawerContent>
             </Drawer>
           )}
           <Heading
-            fontSize={["lg", "xl", "2xl"]}
-            color={"teal.400"}
+            fontSize={["lg", "xl", "xl"]}
+            color={"telegram.900"}
             fontFamily={"fantasy"}
           >
             StudentsAttendance
@@ -116,20 +119,35 @@ const TopNavBar = () => {
         <Flex alignItems={"center"}>
           {windowWidth >= 768 && <SearchInput />}
 
-          <Flex
-            alignItems={"center"}
-            color="blue.400"
-            fontWeight={"semibold"}
-            cursor="pointer"
-          >
-            <Avatar
-              name="Dan Abrahmov"
-              size={"sm"}
-              src="https://bit.ly/dan-abramov"
-              mr={2}
-            />
-            <Text>Nancy</Text> <Icon as={AiFillCaretDown} />
-          </Flex>
+          {/* <Text>Nancy</Text> <Icon as={AiFillCaretDown} /> */}
+          <Menu>
+            <MenuButton>
+              <Flex
+                alignItems={"center"}
+                color="telegram.600"
+                fontWeight={"semibold"}
+                cursor="pointer"
+              >
+                <Avatar
+                  name="Dan Abrahmov"
+                  size={"sm"}
+                  src="https://bit.ly/dan-abramov"
+                  mr={2}
+                />
+                Nancy <Icon as={AiFillCaretDown} />
+              </Flex>
+            </MenuButton>
+            <MenuList
+              border={"1px"}
+              borderColor={"telegram.300"}
+              color={"telegram.900"}
+              fontWeight={"bold"}
+            >
+              <MenuItem icon={<CgProfile />}>Profile</MenuItem>
+              <MenuDivider />
+              <MenuItem icon={<CgLogOut />}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
       </Flex>
     </>
