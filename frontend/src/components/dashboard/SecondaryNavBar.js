@@ -18,7 +18,10 @@ const SecondaryNavBar = () => {
     if (location.pathname === "/app/dashboard/class-list") {
       setAddStyleA(true);
       setAddStyleB(false);
-    } else if (location.pathname === "/app/dashboard/class-attendance") {
+    } else if (
+      location.pathname === "/app/dashboard/class-attendance" ||
+      location.pathname === "/app/dashboard"
+    ) {
       setAddStyleB(true);
       setAddStyleA(false);
     }
