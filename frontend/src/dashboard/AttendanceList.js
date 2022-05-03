@@ -13,7 +13,7 @@ import {
   Icon,
   HStack,
   Box,
-  Tooltip,
+  Heading
 } from "@chakra-ui/react";
 
 import { MdOutlinePostAdd, MdDelete } from "react-icons/md";
@@ -35,7 +35,6 @@ const QuestionIcon = () => {
     />
   );
 };
-
 
 // FIX - Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
 // This is the error that is preventing you from using tooltips or popovers, fix that and use popovers to show more information on the question marks
@@ -66,6 +65,12 @@ const AllAttendances = () => {
             <Icon fontSize={"xl"} mr={2} as={MdOutlinePostAdd} /> Add Attendance
           </Flex>
         </Button>
+      </Flex>
+
+      <Flex mt={3} mb={6} justifyContent={"center"}>
+        <Heading fontSize={["lg", "xl", "2xl"]}>
+          All Recorded Attendances
+        </Heading>
       </Flex>
 
       <TableContainer py={4} boxShadow="lg" rounded="md">
