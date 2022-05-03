@@ -8,21 +8,37 @@ import {
   Th,
   Tr,
   Td,
-  Select,
   Button,
   Flex,
   Icon,
-  Heading,
   HStack,
   Box,
+  Tooltip,
 } from "@chakra-ui/react";
 
 import { MdOutlinePostAdd, MdDelete } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
+import { BsFillPatchQuestionFill } from "react-icons/bs";
 
 const data = {
   date: "Tue May 03 2022",
 };
+
+const QuestionIcon = () => {
+  return (
+    <Icon
+      cursor="pointer"
+      color={"telegram.600"}
+      fontSize={"xl"}
+      ml={2}
+      as={BsFillPatchQuestionFill}
+    />
+  );
+};
+
+
+// FIX - Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+// This is the error that is preventing you from using tooltips or popovers, fix that and use popovers to show more information on the question marks
 
 const AllAttendances = () => {
   const navigate = useNavigate();
@@ -58,10 +74,27 @@ const AllAttendances = () => {
             <Tr>
               <Th>Date Submitted</Th>
               <Th>Present</Th>
-              <Th>SC-UNEX</Th>
-              <Th>SC-ETRD</Th>
-              <Th>SC-UTRD</Th>
-              <Th>SC-VTP</Th>
+              <Th>
+                <Flex alignItems={"center"}>
+                  SC-UNEX <QuestionIcon />
+                </Flex>
+              </Th>
+              <Th>
+                <Flex alignItems={"center"}>
+                  SC-ETRD
+                  <QuestionIcon />
+                </Flex>
+              </Th>
+              <Th>
+                <Flex alignItems={"center"}>
+                  SC-UTRD <QuestionIcon />
+                </Flex>
+              </Th>
+              <Th>
+                <Flex alignItems={"center"}>
+                  SC-VTP <QuestionIcon />
+                </Flex>
+              </Th>
               {/* TODO add tooltips to show the full of the code */}
             </Tr>
           </Thead>
