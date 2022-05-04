@@ -67,6 +67,7 @@ class RefreshTokenAPIView(generics.CreateAPIView, TokenRefreshView):
 
 class UserListAPIView(generics.ListAPIView):
     serializer_class = UserSerializer
+    queryset = User.objects.all()
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -77,4 +78,5 @@ class UserListAPIView(generics.ListAPIView):
 class UserDetailAPIView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
     lookup_field = "user_uid"
