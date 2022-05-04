@@ -140,3 +140,9 @@ if not DEBUG:
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://example.com"]
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://example.com"]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
