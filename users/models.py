@@ -27,6 +27,7 @@ class UserManager(BaseUserManager):
         )
         user.is_staff = True
         user.save(using=self._db)
+        return user
 
     def create_superuser(self, username=None, email=None, password=None, **kwargs):
 
@@ -52,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Username"), null=False, blank=False, max_length=50, unique=True
     )
     email = models.EmailField(
-        verbose_name=_("Email"), null=True, blank=True, max_length=255, unique=True
+        verbose_name=_("Email"), null=True, blank=True, max_length=255
     )
     is_staff = models.BooleanField(
         verbose_name=_("Staff Status"),
@@ -61,7 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = "username"
-    
+
     objects = UserManager()
 
     def __str__(self):
