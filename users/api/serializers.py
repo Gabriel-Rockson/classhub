@@ -7,17 +7,17 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 class UserSerializer(serializers.ModelSerializer):
-
-    model = User
-    fields = [
-        "id",
-        "user_uid",
-        "username",
-        "email",
-        "is_staff",
-        "is_superuser",
-        "date_joined",
-    ]
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "user_uid",
+            "username",
+            "email",
+            "is_staff",
+            "is_superuser",
+            "date_joined",
+        ]
 
 
 class LoginSerializer(TokenObtainPairSerializer):
@@ -26,9 +26,9 @@ class LoginSerializer(TokenObtainPairSerializer):
 
         refresh = self.get_token(self.user)
 
-        data["user"] = UserSerializer(self.user).data
+        # data["user"] = UserSerializer(self.user).data
         data["refresh"] = str(refresh)
-        data["access"] = str(refres.access_token)
+        data["access"] = str(refresh.access_token)
 
         if api_settings.UPDATE_LAST_LOGIN:
             update_last_login(None, self.user)
