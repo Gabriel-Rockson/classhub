@@ -39,7 +39,7 @@ class RegistrationAPIView(generics.CreateAPIView, TokenObtainPairView):
         user = serializer.save()
 
         refresh = RefreshToken.for_user(user)
-        res = {"refresh": str(refresh), "access": str(refres.access_token)}
+        res = {"refresh": str(refresh), "access": str(refresh.access_token)}
 
         return Response(
             {
