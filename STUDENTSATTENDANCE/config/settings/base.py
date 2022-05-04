@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # 3rd party app
     "corsheaders",
     "rest_framework",
+    "rest_framework_simplejwt",
     # developer created apps
     "users.apps.UsersConfig",
     "teacher.apps.TeacherConfig",
