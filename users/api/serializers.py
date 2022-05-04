@@ -1,9 +1,11 @@
 from rest_framework import serializers
-from users.models import User
+from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.settings import api_settings
 from django.contrib.auth.models import update_last_login
 from django.core.exceptions import ObjectDoesNotExist
+
+User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -26,7 +28,7 @@ class LoginSerializer(TokenObtainPairSerializer):
 
         refresh = self.get_token(self.user)
 
-        # data["user"] = UserSerializer(self.user).data
+        data["user"] = UserSerializer(self.user).data
         data["refresh"] = str(refresh)
         data["access"] = str(refresh.access_token)
 
@@ -41,16 +43,21 @@ class RegisterSerializer(UserSerializer):
     )
 
     class Meta:
-        models = User
+        model = User
         fields = [
             "id",
-            "student_uid",
+            "user_uid",
             "username",
             "password",
-            "created",
-            "is_active",
+            "email",
+            "date_joined",
             "is_staff",
+            "is_superuser",
         ]
+        extra_kwargs = {
+            "is_staff": {"read_only": True},
+            "is_superuser": {"read_only": True},
+        }
 
     def create(self, validated_data):
         try:
