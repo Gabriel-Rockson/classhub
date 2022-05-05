@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as ReactLink } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -8,6 +9,7 @@ import {
   Input,
   VStack,
   Heading,
+  Link,
   Button,
 } from "@chakra-ui/react";
 import { Formik, Field } from "formik";
@@ -24,8 +26,8 @@ export default function Login() {
 
   return (
     <>
-      <Flex bg="gray.200" align="center" justify="center" h="100vh">
-        <Box bg="white" px={5} py={8} w={["80%", 96]}>
+      <Flex bg="whitesmoke" align="center" justify="center" h="100vh">
+        <Box w={["80%", 96]} px={5} py={8}>
           <Heading py={3} textAlign="center" fontSize="2xl">
             Login
           </Heading>
@@ -42,6 +44,7 @@ export default function Login() {
               <form method="post" onSubmit={handleSubmit}>
                 <VStack spacing={6}>
                   <FormControl
+                    colorScheme="messenger"
                     isInvalid={!!errors.username && touched.username}
                   >
                     <FormLabel htmlFor="username">Username</FormLabel>
@@ -50,10 +53,13 @@ export default function Login() {
                       type="text"
                       id="username"
                       name="username"
+                      variant="filled"
+                      borderColor="facebook.400"
                     />
                     <FormErrorMessage>{errors.username}</FormErrorMessage>
                   </FormControl>
                   <FormControl
+                    colorScheme="messenger"
                     isInvalid={!!errors.password && touched.password}
                   >
                     <FormLabel htmlFor="password">Password</FormLabel>
@@ -62,19 +68,17 @@ export default function Login() {
                       type="password"
                       id="password"
                       name="password"
+                      variant="filled"
+                      borderColor="facebook.400"
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
                 </VStack>
                 <Button
-                  mt={10}
+                  mt={8}
                   type="submit"
                   w="full"
-                  bg="telegram.600"
-                  color="white"
-                  borderRadius={0}
-                  _hover={{ bg: "facebook.700", boxShadow: "none" }}
-                  _active={{ bg: "facebook.700", boxShadow: "none" }}
+                  colorScheme={"telegram"}
                   style={{ boxShadow: "none" }}
                 >
                   Login
@@ -82,6 +86,16 @@ export default function Login() {
               </form>
             )}
           </Formik>
+          <Box mt={2}>
+            <Link
+              as={ReactLink}
+              to="/app/register"
+              color={"telegram.700"}
+              style={{ boxShadow: "none" }}
+            >
+              Not having an account? register
+            </Link>
+          </Box>
         </Box>
       </Flex>
     </>

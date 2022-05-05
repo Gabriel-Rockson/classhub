@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as ReactLink } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -9,57 +10,91 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
+  Link,
 } from "@chakra-ui/react";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 
 export default function Register() {
+  const validationSchema = yup.object({
+    username: yup.string().required("Username field is required"),
+    email: yup.string().email("Email must be a valid email").notRequired(),
+    password: yup
+      .string()
+      .required("Password field is required")
+      .min(8, "A min of 8 characters required"),
+  });
+
   return (
     <>
-      <Flex bg="gray.200" align="center" justify="center" h="100vh">
-        <Box bg="white" w={["80%", 96]} px={5} py={8}>
+      <Flex bg="whitesmoke" align="center" justify="center" h="100vh">
+        <Box w={["80%", 96]} px={5} py={8}>
           <Heading py={3} fontSize="2xl" textAlign="center">
             Register Account
           </Heading>
-          <Formik>
-            {() => (
-              <form>
+          <Formik
+            initialValues={{
+              username: "",
+              email: "",
+              password: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={(data) => alert(JSON.stringify(data, null, 2))}
+          >
+            {({ handleSubmit, errors, touched }) => (
+              <form onSubmit={handleSubmit}>
                 <VStack spacing={6}>
-                  <FormControl>
+                  <FormControl
+                    colorScheme="messenger"
+                    isInvalid={!!errors.username && touched.username}
+                  >
                     <FormLabel>Username</FormLabel>
                     <Field
                       as={Input}
                       type="text"
                       id="username"
                       name="username"
+                      variant="filled"
+                      borderColor="facebook.400"
                     />
-                    <FormErrorMessage></FormErrorMessage>
+                    <FormErrorMessage>{errors.username}</FormErrorMessage>
                   </FormControl>
-                  <FormControl>
+                  <FormControl
+                    colorScheme="messenger"
+                    isInvalid={!!errors.email && touched.email}
+                  >
                     <FormLabel>Email</FormLabel>
-                    <Field as={Input} type="email" id="email" name="email" />
-                    <FormErrorMessage></FormErrorMessage>
+                    <Field
+                      as={Input}
+                      type="email"
+                      id="email"
+                      name="email"
+                      variant="filled"
+                      borderColor="facebook.400"
+                    />
+                    <FormErrorMessage>{errors.email}</FormErrorMessage>
                   </FormControl>
-                  <FormControl>
+                  <FormControl
+                    colorScheme="messenger"
+                    isInvalid={!!errors.password && touched.password}
+                  >
                     <FormLabel>Password</FormLabel>
                     <Field
                       as={Input}
                       type="password"
                       id="password"
                       name="password"
+                      variant="filled"
+                      borderColor="facebook.400"
                     />
-                    <FormErrorMessage></FormErrorMessage>
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
                 </VStack>
                 <Button
-                  mt={10}
+                  mt={8}
                   type="submit"
                   w="full"
-                  bg="telegram.600"
-                  color="white"
-                  borderRadius={0}
-                  _hover={{ bg: "facebook.700", boxShadow: "none" }}
-                  _active={{ bg: "facebook.700", boxShadow: "none" }}
+                  colorScheme="messenger"
                   style={{ boxShadow: "none" }}
                 >
                   Register
@@ -67,6 +102,16 @@ export default function Register() {
               </form>
             )}
           </Formik>
+          <Box mt={2}>
+            <Link
+              as={ReactLink}
+              to="/app/login"
+              color={"telegram.700"}
+              style={{ boxShadow: "none" }}
+            >
+              Already having an account? login
+            </Link>
+          </Box> 
         </Box>
       </Flex>
     </>
