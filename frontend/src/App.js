@@ -12,12 +12,15 @@ import StudentDetail from "./dashboard/StudentDetail";
 import StudentList from "./dashboard/StudentList";
 import AddAttendance from "./dashboard/AddAttendance";
 import AttendanceList from "./dashboard/AttendanceList";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
 
 const colors = {
   brand: {
     900: "#1a365d",
     800: "#153e75",
     700: "#2a69ac",
+    dark: "rgb(26, 32, 44)",
   },
 };
 
@@ -40,6 +43,8 @@ function App() {
               <Route path="add-attendance" element={<AddAttendance />} />
             </Route>
           </Route>
+          <Route path="/app/login" element={<Login />} />
+          <Route path="app/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
