@@ -26,7 +26,7 @@ export default function Login() {
     <>
       <Flex bg="gray.200" align="center" justify="center" h="100vh">
         <Box bg="white" px={5} py={8} w={["80%", 96]}>
-          <Heading py={3} textAlign="center">
+          <Heading py={3} textAlign="center" fontSize="2xl">
             Login
           </Heading>
           <Formik
@@ -65,20 +65,20 @@ export default function Login() {
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
-                  <Button
-                    mt={2}
-                    type="submit"
-                    w="full"
-                    bg="telegram.600"
-                    color="white"
-                    borderRadius={0}
-                    _hover={{ bg: "facebook.700", boxShadow: "none" }}
-                    _active={{ bg: "facebook.700", boxShadow: "none" }}
-                    style={{ boxShadow: "none" }}
-                  >
-                    Login
-                  </Button>
                 </VStack>
+                <Button
+                  mt={10}
+                  type="submit"
+                  w="full"
+                  bg="telegram.600"
+                  color="white"
+                  borderRadius={0}
+                  _hover={{ bg: "facebook.700", boxShadow: "none" }}
+                  _active={{ bg: "facebook.700", boxShadow: "none" }}
+                  style={{ boxShadow: "none" }}
+                >
+                  Login
+                </Button>
               </form>
             )}
           </Formik>
