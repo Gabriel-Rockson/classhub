@@ -11,6 +11,7 @@ import {
   Heading,
   Link,
   Button,
+  Spinner,
 } from "@chakra-ui/react";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
@@ -29,7 +30,9 @@ export default function Login() {
   const handleFormSubmit = (data, { setSubmitting, setErrors }) => {
     setSubmitting(true);
     AuthService.login(data.username, data.password)
-      .then((res) => navigate("/app/dashboard"))
+      .then((res) => {
+        navigate("/app/dashboard");
+      })
       .catch((err) => setErrors(err.response.data))
       .finally(() => setSubmitting(false));
   };
@@ -95,7 +98,7 @@ export default function Login() {
                   colorScheme={"telegram"}
                   style={{ boxShadow: "none" }}
                 >
-                  Login
+                  {isSubmitting && <Spinner color="white" mr={2} />} Login
                 </Button>
               </form>
             )}

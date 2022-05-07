@@ -11,6 +11,7 @@ import {
   FormLabel,
   FormErrorMessage,
   Link,
+  Spinner,
 } from "@chakra-ui/react";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
@@ -56,7 +57,7 @@ export default function Register() {
             validationSchema={validationSchema}
             onSubmit={handleFormSubmit}
           >
-            {({ handleSubmit, errors, touched }) => (
+            {({ handleSubmit, errors, touched, isSubmitting }) => (
               <form onSubmit={handleSubmit}>
                 <VStack spacing={6}>
                   <FormControl isInvalid={!!errors.detail}>
@@ -109,13 +110,14 @@ export default function Register() {
                   </FormControl>
                 </VStack>
                 <Button
+                  disabled={isSubmitting}
                   mt={8}
                   type="submit"
                   w="full"
                   colorScheme="messenger"
                   style={{ boxShadow: "none" }}
                 >
-                  Register
+                  {isSubmitting && <Spinner color="white" mr={2} />} Register
                 </Button>
               </form>
             )}
