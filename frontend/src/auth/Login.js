@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as ReactLink } from "react-router-dom";
+import { Link as ReactLink, useNavigate } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -14,8 +14,10 @@ import {
 } from "@chakra-ui/react";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
+import AuthService from "../services/auth.service";
 
 export default function Login() {
+  const navigate = useNavigate();
   const validationSchema = yup.object({
     username: yup.string().required("Username field is required"),
     password: yup
@@ -23,6 +25,19 @@ export default function Login() {
       .required("Password field is required")
       .min(8, "Minimum of 8 characters."),
   });
+
+  const handleFormSubmit = (data, { setSubmitting, setErrors }) => {
+    setSubmitting(true);
+    AuthService.login(data.username, data.password)
+      .then((res) => navigate("/app/dashboard"))
+      .catch((err) => setErrors(err.response.data))
+      .finally(() => setSubmitting(false));
+  };
+
+  const formData = {
+    username: "",
+    password: "",
+  };
 
   return (
     <>
@@ -32,17 +47,16 @@ export default function Login() {
             Login
           </Heading>
           <Formik
-            initialValues={{
-              username: "",
-              password: "",
-            }}
+            initialValues={formData}
             validationSchema={validationSchema}
-            u
-            onSubmit={(data) => alert(JSON.stringify(data, null, 2))}
+            onSubmit={handleFormSubmit}
           >
-            {({ errors, handleSubmit, touched }) => (
+            {({ errors, handleSubmit, touched, isSubmitting }) => (
               <form method="post" onSubmit={handleSubmit}>
                 <VStack spacing={6}>
+                  <FormControl isInvalid={!!errors.detail}>
+                    <FormErrorMessage>{errors.detail}</FormErrorMessage>
+                  </FormControl>
                   <FormControl
                     colorScheme="messenger"
                     isInvalid={!!errors.username && touched.username}
@@ -54,7 +68,7 @@ export default function Login() {
                       id="username"
                       name="username"
                       variant="filled"
-                      borderColor="facebook.400"
+                      borderColor="facebook.200"
                     />
                     <FormErrorMessage>{errors.username}</FormErrorMessage>
                   </FormControl>
@@ -69,7 +83,7 @@ export default function Login() {
                       id="password"
                       name="password"
                       variant="filled"
-                      borderColor="facebook.400"
+                      borderColor="facebook.200"
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link as ReactLink } from "react-router-dom";
+import React, { useState } from "react";
+import { Link as ReactLink, useNavigate } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -15,8 +15,11 @@ import {
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 
+import AuthService from "../services/auth.service";
+
 export default function Register() {
-  const validationSchema = yup.object({
+  const navigate = useNavigate();
+  const validationSchema = yup.object().shape({
     username: yup.string().required("Username field is required"),
     email: yup.string().email("Email must be a valid email").notRequired(),
     password: yup
@@ -24,6 +27,18 @@ export default function Register() {
       .required("Password field is required")
       .min(8, "A min of 8 characters required"),
   });
+
+  const handleFormSubmit = (data, { setSubmitting, setErrors }) => {
+    setSubmitting(true);
+    AuthService.register(data.username, data.email, data.password)
+      .then((res) => {
+        navigate("/app/dashboard");
+      })
+      .catch((err) => {
+        setErrors(err.response.data);
+      })
+      .finally(() => setSubmitting(false));
+  };
 
   return (
     <>
@@ -39,11 +54,14 @@ export default function Register() {
               password: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={(data) => alert(JSON.stringify(data, null, 2))}
+            onSubmit={handleFormSubmit}
           >
             {({ handleSubmit, errors, touched }) => (
               <form onSubmit={handleSubmit}>
                 <VStack spacing={6}>
+                  <FormControl isInvalid={!!errors.detail}>
+                    <FormErrorMessage>{errors.detail}</FormErrorMessage>
+                  </FormControl>
                   <FormControl
                     colorScheme="messenger"
                     isInvalid={!!errors.username && touched.username}
@@ -55,7 +73,7 @@ export default function Register() {
                       id="username"
                       name="username"
                       variant="filled"
-                      borderColor="facebook.400"
+                      borderColor="facebook.200"
                     />
                     <FormErrorMessage>{errors.username}</FormErrorMessage>
                   </FormControl>
@@ -70,7 +88,7 @@ export default function Register() {
                       id="email"
                       name="email"
                       variant="filled"
-                      borderColor="facebook.400"
+                      borderColor="facebook.200"
                     />
                     <FormErrorMessage>{errors.email}</FormErrorMessage>
                   </FormControl>
@@ -85,7 +103,7 @@ export default function Register() {
                       id="password"
                       name="password"
                       variant="filled"
-                      borderColor="facebook.400"
+                      borderColor="facebook.200"
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
@@ -111,7 +129,7 @@ export default function Register() {
             >
               Already having an account? login
             </Link>
-          </Box> 
+          </Box>
         </Box>
       </Flex>
     </>
