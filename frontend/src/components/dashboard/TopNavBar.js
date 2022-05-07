@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef, forwardRef } from "react";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Heading,
   Flex,
@@ -33,6 +34,8 @@ import { CgProfile, CgLogOut } from "react-icons/cg";
 
 import SecondaryNavBarMobile from "./SecondaryNavBarMobile";
 
+import AuthService from "../../services/auth.service";
+
 const SearchInput = () => {
   return (
     <>
@@ -54,9 +57,16 @@ const SearchInput = () => {
 };
 
 const TopNavBar = () => {
+  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const windowWidth = useWindowWidth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const sideMenuBtn = useRef();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    AuthService.logout();
+    navigate("/");
+  };
 
   return (
     <>
@@ -119,7 +129,6 @@ const TopNavBar = () => {
         <Flex alignItems={"center"}>
           {windowWidth >= 768 && <SearchInput />}
 
-          {/* <Text>Nancy</Text> <Icon as={AiFillCaretDown} /> */}
           <Menu>
             <MenuButton>
               <Flex
@@ -134,7 +143,7 @@ const TopNavBar = () => {
                   src="https://bit.ly/dan-abramov"
                   mr={2}
                 />
-                Nancy <Icon as={AiFillCaretDown} />
+                {currentUser?.user.username} <Icon as={AiFillCaretDown} />
               </Flex>
             </MenuButton>
             <MenuList
@@ -143,9 +152,16 @@ const TopNavBar = () => {
               color={"telegram.900"}
               fontWeight={"bold"}
             >
-              <MenuItem icon={<CgProfile />}>Profile</MenuItem>
+              <MenuItem
+                icon={<CgProfile />}
+                onClick={() => navigate("/app/dashboard/profile")}
+              >
+                Profile
+              </MenuItem>
               <MenuDivider />
-              <MenuItem icon={<CgLogOut />}>Logout</MenuItem>
+              <MenuItem icon={<CgLogOut />} onClick={() => handleLogout()}>
+                Logout
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>
