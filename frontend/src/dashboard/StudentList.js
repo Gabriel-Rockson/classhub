@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -25,31 +25,68 @@ import {
   ModalCloseButton,
   useDisclosure,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   Select,
   VStack,
+  Spinner,
 } from "@chakra-ui/react";
+import { Formik, Form, Field } from "formik";
 import { useWindowWidth } from "../hooks/custom-hooks";
 
 import { MdPersonAdd } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
 import { HStack } from "@chakra-ui/react";
 
-const data = {
-  name: "Gabriel Rockson",
-  gender: "Male",
-  race: "Black / Black American",
-  address: "Kotei Rd",
-  student_id: "20594513",
-};
-function StudentList() {
+import AddStudentForm from "../forms/AddStudentForm";
+
+import StudentService from "../services/student.service";
+
+export default function StudentList() {
+  const [students, setStudents] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
   const windowWidth = useWindowWidth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setIsFetching(true);
+    StudentService.getStudentList()
+      .then((response) => {
+        setStudents(response.data);
+      })
+      .catch((error) => {
+        // TODO display the error that will arise in an alert on the page
+        console.error(error);
+      })
+      .finally(() => {
+        setIsFetching(false);
+      });
+  }, []);
+
   const handleClick = (student_uid) => {
     navigate(`/app/dashboard/class-list/${student_uid}`);
+  };
+
+  const handleFormSubmit = () => {};
+
+  const initialValues = {
+    first_name: "",
+    middle_name: "",
+    last_name: "",
+    date_of_birth: "",
+    gender: "M",
+    race: "W",
+    student_id: "",
+    address: "",
+    father_name: "",
+    father_contact: "",
+    mother_name: "",
+    mother_contact: "",
+    guardian_name: "",
+    guardian_email: "",
+    home_phone: "",
   };
 
   return (
@@ -90,80 +127,10 @@ function StudentList() {
             <ModalCloseButton style={{ boxShadow: "none" }} color="red" />
 
             <ModalBody>
-              <VStack spacing={5}>
-                <FormControl>
-                  <FormLabel>First Name</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Middle Name</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Last Name</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Date of Birth</FormLabel>
-                  {/* TODO replace this date time picker with a custom component that fits chakra or a package */}
-                  <Input type="date" borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Gender</FormLabel>
-                  <Select borderRadius={0}>
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
-                    <option value="O">Other</option>
-                  </Select>
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Race</FormLabel>
-                  <Select borderRadius={0}>
-                    <option value="W">White</option>
-                    <option value="B">Black / African American</option>
-                    <option value="AIN">American Indian</option>
-                    <option value="H">Native Hawaiian</option>
-                    <option value="O">Some Other Race</option>
-                  </Select>
-                </FormControl>
-                {/* TODO the grade of the student should be automatically filled based on the class list being viewed */}
-                <FormControl>
-                  <FormLabel>Student ID</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Address</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Father's Name</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Father's Contact</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Mother's Name</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Mother's Contact</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Guardian's Name</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Guardian's Email</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Home Phone</FormLabel>
-                  <Input borderRadius={0} />
-                </FormControl>
-              </VStack>
+              <AddStudentForm
+                initialValues={initialValues}
+                handleFormSubmit={handleFormSubmit}
+              />
             </ModalBody>
 
             <ModalFooter>
@@ -199,50 +166,57 @@ function StudentList() {
             Swipe on the table to reveal more data
           </Text>
         )}
-        <TableContainer mb={10} boxShadow="lg" rounded="md">
-          <Table variant={"unstyled"}>
-            <Thead borderBottom={"2px"} borderColor={"gray.200"}>
-              <Tr>
-                <Th>Name</Th>
-                <Th>Gender</Th>
-                <Th>Race</Th>
-                <Th>Address</Th>
-                <Th>Student ID</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => (
-                <Tr key={number}>
-                  <Td>{data["name"]}</Td>
-                  <Td>{data["gender"]}</Td>
-                  <Td>{data["race"]}</Td>
-                  <Td>{data["address"]}</Td>
-                  <Td>{data["student_id"]}</Td>
-                  <Td>
-                    <Button
-                      size={"sm"}
-                      backgroundColor={"telegram.700"}
-                      style={{ boxShadow: "none" }}
-                      borderRadius={0}
-                      _hover={{ backgroundColor: "telegram.800" }}
-                      _active={{ backgroundColor: "telegram.800" }}
-                      color="white"
-                      onClick={() => handleClick(number)}
-                    >
-                      <Flex alignItems={"center"}>
-                        <Icon as={IoEyeSharp} mr={2} />
-                        view more
-                      </Flex>
-                    </Button>
-                  </Td>
+        {isFetching && (
+          <Flex justify="center" align="center" py={5}>
+            <Spinner color="telegram.700" size={["md", "lg"]} />
+          </Flex>
+        )}
+        {!isFetching && (
+          <TableContainer mb={10} boxShadow="lg" rounded="md">
+            <Table variant={"unstyled"}>
+              <Thead borderBottom={"2px"} borderColor={"gray.200"}>
+                <Tr>
+                  <Th>Name</Th>
+                  <Th>Gender</Th>
+                  <Th>Race</Th>
+                  <Th>Address</Th>
+                  <Th>Student ID</Th>
                 </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+              </Thead>
+              <Tbody>
+                {!isFetching &&
+                  students?.map((student) => (
+                    <Tr key={student.student_uid}>
+                      <Td>{`${student.first_name} ${student.middle_name} ${student.last_name}`}</Td>
+                      <Td>{student.gender_display}</Td>
+                      <Td>{student.race_display}</Td>
+                      <Td>{student.address}</Td>
+                      <Td>{student.student_id}</Td>
+                      <Td>
+                        <Button
+                          size={"sm"}
+                          backgroundColor={"telegram.700"}
+                          style={{ boxShadow: "none" }}
+                          borderRadius={0}
+                          _hover={{ backgroundColor: "telegram.800" }}
+                          _active={{ backgroundColor: "telegram.800" }}
+                          color="white"
+                          onClick={() => handleClick(number)}
+                        >
+                          <Flex alignItems={"center"}>
+                            <Icon as={IoEyeSharp} mr={2} />
+                            view more
+                          </Flex>
+                        </Button>
+                      </Td>
+                    </Tr>
+                  ))}
+              </Tbody>
+              <TableCaption>Student List</TableCaption>
+            </Table>
+          </TableContainer>
+        )}
       </Box>
     </>
   );
 }
-
-export default StudentList;
