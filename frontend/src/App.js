@@ -1,8 +1,14 @@
 import { createRoot } from "react-dom/client";
-import React from "react";
+import React, { useState } from "react";
 
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 
 import HomePage from "./HomePage";
 import Dashboard from "./dashboard/Dashboard";
@@ -14,6 +20,9 @@ import AddAttendance from "./dashboard/AddAttendance";
 import AttendanceList from "./dashboard/AttendanceList";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import Profile from "./dashboard/Profile";
+
+import AuthService from "./services/auth.service";
 
 const colors = {
   brand: {
@@ -42,6 +51,7 @@ function App() {
               <Route index element={<AttendanceList />} />
               <Route path="add-attendance" element={<AddAttendance />} />
             </Route>
+            <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="/app/login" element={<Login />} />
           <Route path="app/register" element={<Register />} />
