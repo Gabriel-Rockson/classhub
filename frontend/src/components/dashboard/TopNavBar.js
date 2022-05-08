@@ -66,7 +66,6 @@ const TopNavBar = () => {
   const handleLogout = () => {
     AuthService.logout();
     navigate("/", { replace: true });
-    window.location.reload();
   };
 
   return (

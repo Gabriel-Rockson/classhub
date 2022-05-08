@@ -32,7 +32,6 @@ export default function Login() {
     AuthService.login(data.username, data.password)
       .then((res) => {
         navigate("/app/dashboard", { replace: true });
-        window.location.reload();
       })
       .catch((err) => setErrors(err.response.data))
       .finally(() => setSubmitting(false));
