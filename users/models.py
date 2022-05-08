@@ -40,8 +40,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    user_uid = models.UUIDField(
-        verbose_name=_("User Uid"),
+    id = models.UUIDField(
+        verbose_name=_("ID"),
+        primary_key=True,
         null=False,
         blank=False,
         db_index=True,

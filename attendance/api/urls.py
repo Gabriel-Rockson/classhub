@@ -9,7 +9,7 @@ from attendance.api.views import (
 
 urlpatterns = [
     path("attendances/", StudentAttendanceListCreateAPIView.as_view()),
-    path("attendances/<str:attendance_uid>/", StudentAttendanceDetailAPIView.as_view()),
+    path("attendances/<str:id>/", StudentAttendanceDetailAPIView.as_view()),
     path("classes/", ClassListCreateAPIView.as_view()),
-    path("classes/<str:class_uid>/", ClassDetailAPIView.as_view()),
+    path("classes/<str:id>/", ClassDetailAPIView.as_view()),
 ]

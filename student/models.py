@@ -24,8 +24,10 @@ class Student(models.Model):
         HAWAIIAN = "H", "Native Hawaiian / Other Pacific Islander"
         OTHER = "O", "Some Other Race"
 
-    student_uid = models.UUIDField(
-        _("Student Unique Identifier"),
+    id = models.UUIDField(
+        verbose_name=_("ID"),
+        db_index=True,
+        primary_key=True,
         default=uuid.uuid4,
         unique=True,
         editable=False,

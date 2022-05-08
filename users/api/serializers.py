@@ -13,7 +13,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "id",
-            "user_uid",
             "username",
             "email",
             "is_staff",
@@ -46,7 +45,6 @@ class RegisterSerializer(UserSerializer):
         model = User
         fields = [
             "id",
-            "user_uid",
             "username",
             "password",
             "email",

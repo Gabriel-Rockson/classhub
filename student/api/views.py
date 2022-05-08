@@ -12,6 +12,6 @@ class StudentListCreateAPIView(generics.ListCreateAPIView):
 
 class StudentDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated,]
-    lookup_field = "student_uid"
+    lookup_field = "id"
     queryset = Student.objects.all()
     serializer_class = StudentSerializer

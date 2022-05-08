@@ -24,13 +24,15 @@ class Class(models.Model):
         FIFTEEN = 15, _("15")
         SIXTEEN = 16, _("16")
 
-    class_uid = models.UUIDField(
-        _("Class Unique Identifier"),
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
+    id = models.UUIDField(
+        verbose_name=_("ID"),
+        primary_key=True,
         null=False,
         blank=False,
+        db_index=True,
+        unique=True,
+        editable=False,
+        default=uuid.uuid4,
     )
     grade = models.CharField(
         verbose_name=_("Grade"),
@@ -61,20 +63,22 @@ class StudentAttendance(models.Model):
         UTRD = "UTRD", _("SC-UTRD ( Unexcused Tardy )")
         VTP = "VTP", _("SC-VTP ( Virtual Present Code )")
 
+    id = models.UUIDField(
+        verbose_name=_("ID"),
+        primary_key=True,
+        null=False,
+        blank=False,
+        db_index=True,
+        unique=True,
+        editable=False,
+        default=uuid.uuid4,
+    )
     student = models.ForeignKey(
         "student.Student",
         on_delete=models.CASCADE,
         null=False,
         blank=False,
         related_name="attendances",
-    )
-    attendance_uid = models.UUIDField(
-        _("Attendance Unique Identifier"),
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        null=False,
-        blank=False,
     )
     attendance_created = models.DateTimeField(
         _("Attendance Creation Date"), blank=False, null=False, auto_now_add=True

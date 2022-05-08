@@ -11,7 +11,7 @@ class StudentAttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentAttendance
         fields = [
-            "attendance_uid",
+            "id",
             "student",
             "attendance_created",
             "attendance_updated",

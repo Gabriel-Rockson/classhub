@@ -79,4 +79,4 @@ class UserDetailAPIView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
-    lookup_field = "user_uid"
+    lookup_field = "id"

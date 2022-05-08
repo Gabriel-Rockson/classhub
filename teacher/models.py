@@ -1,10 +1,21 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+import uuid
 
 
 class Teacher(models.Model):
     """Model to represent individual teacher"""
 
+    id = models.UUIDField(
+        verbose_name=_("ID"),
+        primary_key=True,
+        null=False,
+        blank=False,
+        db_index=True,
+        unique=True,
+        editable=False,
+        default=uuid.uuid4,
+    )
     first_name = models.CharField(
         verbose_name=_("First Name"),
         null=False,

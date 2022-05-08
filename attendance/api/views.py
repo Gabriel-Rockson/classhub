@@ -10,7 +10,7 @@ class StudentAttendanceListCreateAPIView(generics.ListCreateAPIView):
 
 
 class StudentAttendanceDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    lookup_field = "attendance_uid"
+    lookup_field = "id"
     queryset = StudentAttendance.objects.all()
     serializer_class = StudentAttendanceSerializer
 
@@ -21,6 +21,6 @@ class ClassListCreateAPIView(generics.ListCreateAPIView):
 
 
 class ClassDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    lookup_field = "class_uid"
+    lookup_field = "id"
     queryset = Class.objects.all()
     serializer_class = ClassSerializer
