@@ -8,6 +8,18 @@ const auth_axios = axios.create({
   baseURL: AUTH_API_URL,
 });
 
+const setUser = (user) => {
+  JSON.stringify(window.localStorage.setItem("user", user));
+};
+
+const setAccessToken = (user) => {
+  window.localStorage.setItem("accessToken", user.access);
+};
+
+const setRefreshToken = (user) => {
+  window.localStorage.setItem("refreshToken", user.refresh);
+};
+
 const login = async (username, password) => {
   return await auth_axios
     .post("login", {
@@ -16,7 +28,14 @@ const login = async (username, password) => {
     })
     .then((res) => {
       if (res.data.user) {
-        localStorage.setItem("user", JSON.stringify(res.data));
+        const userData = res.data;
+        setUser(userData);
+        if (userData.access) {
+          setAccessToken(userData);
+        }
+        if (userData.refresh) {
+          setRefreshToken(userData);
+        }
       }
       return res.data;
     });
@@ -31,7 +50,14 @@ const register = async (username, email, password) => {
     })
     .then((res) => {
       if (res.data.user) {
-        localStorage.setItem("user", JSON.stringify(res.data));
+        const userData = res.data;
+        setUser(userData);
+        if (userData.access) {
+          setAccessToken(userData);
+        }
+        if (userData.refresh) {
+          setRefreshToken(userData);
+        }
       }
       return res.data;
     });
@@ -45,12 +71,22 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const getAccessToken = () => {
+  return window.localStorage.getItem("accessToken");
+};
+
+const getRefreshToken = () => {
+  return window.localStorage.getItem("refreshToken");
+};
+
 const AuthService = {
   auth_axios,
   login,
   logout,
   register,
   getCurrentUser,
+  getAccessToken,
+  getRefreshToken,
 };
 
 export default AuthService;
