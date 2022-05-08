@@ -31,7 +31,8 @@ export default function Login() {
     setSubmitting(true);
     AuthService.login(data.username, data.password)
       .then((res) => {
-        navigate("/app/dashboard");
+        navigate("/app/dashboard", { replace: true });
+        window.location.reload();
       })
       .catch((err) => setErrors(err.response.data))
       .finally(() => setSubmitting(false));

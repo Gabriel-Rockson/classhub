@@ -33,7 +33,8 @@ export default function Register() {
     setSubmitting(true);
     AuthService.register(data.username, data.email, data.password)
       .then((res) => {
-        navigate("/app/dashboard");
+        navigate("/app/dashboard", { replace: true });
+        window.location.reload();
       })
       .catch((err) => {
         setErrors(err.response.data);
