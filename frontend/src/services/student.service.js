@@ -5,12 +5,37 @@ const AUTH_API_URL = "http://localhost:8000/api/v1/students/";
 
 const student_axios = axios.create({
   baseURL: AUTH_API_URL,
-  headers: authHeader(),
+  headers: {
+    "Content-Type": "application/json",
+  },
   withCredentials: true,
 });
 
+student_axios.interceptors.request.use(
+  (config) => {
+    config.headers = { ...config.headers, ...authHeader() };
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+student_axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 const getStudentList = async () => {
   return await student_axios.get("/");
+};
+
+const getStudentData = async (student_uid) => {
+  return await student_axios.get(`${student_uid}/`);
 };
 
 const addStudent = async (data) => {
@@ -19,6 +44,7 @@ const addStudent = async (data) => {
 
 const StudentService = {
   getStudentList,
+  getStudentData,
   addStudent,
 };
 
