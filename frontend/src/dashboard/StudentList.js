@@ -16,30 +16,15 @@ import {
   Th,
   Td,
   TableCaption,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   useDisclosure,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  Select,
-  VStack,
   Spinner,
 } from "@chakra-ui/react";
-import { Formik, Form, Field } from "formik";
 import { useWindowWidth } from "../hooks/custom-hooks";
 
 import { MdPersonAdd } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
-import { HStack } from "@chakra-ui/react";
 
-import AddStudentForm from "../forms/AddStudentForm";
+import AddStudentForm from "../components/forms/AddStudentForm";
 
 import StudentService from "../services/student.service";
 
@@ -69,26 +54,6 @@ export default function StudentList() {
     navigate(`/app/dashboard/class-list/${student_uid}`);
   };
 
-  const handleFormSubmit = () => {};
-
-  const initialValues = {
-    first_name: "",
-    middle_name: "",
-    last_name: "",
-    date_of_birth: "",
-    gender: "M",
-    race: "W",
-    student_id: "",
-    address: "",
-    father_name: "",
-    father_contact: "",
-    mother_name: "",
-    mother_contact: "",
-    guardian_name: "",
-    guardian_email: "",
-    home_phone: "",
-  };
-
   return (
     <>
       <Box>
@@ -115,51 +80,11 @@ export default function StudentList() {
           </Button>
         </Flex>
 
-        <Modal
+        <AddStudentForm
           isOpen={isOpen}
           onClose={onClose}
-          scrollBehavior={"inside"}
-          closeOnOverlayClick={false}
-        >
-          <ModalOverlay />
-          <ModalContent borderRadius={0}>
-            <ModalHeader>Add New Student</ModalHeader>
-            <ModalCloseButton style={{ boxShadow: "none" }} color="red" />
-
-            <ModalBody>
-              <AddStudentForm
-                initialValues={initialValues}
-                handleFormSubmit={handleFormSubmit}
-              />
-            </ModalBody>
-
-            <ModalFooter>
-              <HStack spacing={5}>
-                <Button
-                  color="white"
-                  borderRadius={0}
-                  backgroundColor={"green.600"}
-                  style={{ boxShadow: "none" }}
-                  _hover={{ backgroundColor: "green.800" }}
-                  _active={{ backgroundColor: "green.800" }}
-                >
-                  Add Student
-                </Button>
-                <Button
-                  color="white"
-                  borderRadius={0}
-                  backgroundColor={"red.600"}
-                  style={{ boxShadow: "none" }}
-                  _hover={{ backgroundColor: "red.800" }}
-                  _active={{ backgroundColor: "red.800" }}
-                  onClick={onClose}
-                >
-                  Cancel
-                </Button>
-              </HStack>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+          setStudents={setStudents}
+        />
 
         {windowWidth <= 1024 && (
           <Text as={"small"} color={"telegram.900"} fontWeight={"bold"}>
