@@ -1,5 +1,6 @@
 import axios from "axios";
 import authHeader from "./auth-header";
+import AuthService from "./auth.service";
 
 const AUTH_API_URL = "http://localhost:8000/api/v1/students/";
 
@@ -26,6 +27,30 @@ student_axios.interceptors.response.use(
     return response;
   },
   (error) => {
+    const originalConfig = error.config;
+    if (error.response) {
+      if (error.response.status === 401 && !originalConfig._retry) {
+        originalConfig._retry = true;
+        AuthService.refreshToken()
+          .then((res) => {
+            AuthService.setAccessToken(res.data.access);
+            student_axios.defaults.headers.common = {
+              ...student_axios.defaults.headers.common,
+              ...authHeader(),
+            };
+            // TODO find a better way to refresh the page without reloading
+            window.location.reload(); 
+            return student_axios(originalConfig);
+          })
+          .catch((_error) => {
+            if (_error.response && _error.response.data) {
+              return Promise.reject(_error.reponse.data);
+            }
+            return Promise.reject(_error);
+          });
+      }
+    }
+
     return Promise.reject(error);
   }
 );

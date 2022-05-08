@@ -12,12 +12,24 @@ const setUser = (user) => {
   window.localStorage.setItem("user", JSON.stringify(user));
 };
 
-const setAccessToken = (user) => {
-  window.localStorage.setItem("accessToken", user.access);
+const setAccessToken = (token) => {
+  window.localStorage.setItem("accessToken", token);
 };
 
-const setRefreshToken = (user) => {
-  window.localStorage.setItem("refreshToken", user.refresh);
+const setRefreshToken = (token) => {
+  window.localStorage.setItem("refreshToken", token);
+};
+
+const getCurrentUser = () => {
+  return JSON.parse(localStorage.getItem("user"));
+};
+
+const getAccessToken = () => {
+  return window.localStorage.getItem("accessToken");
+};
+
+const getRefreshToken = () => {
+  return window.localStorage.getItem("refreshToken");
 };
 
 const login = async (username, password) => {
@@ -31,10 +43,10 @@ const login = async (username, password) => {
         const userData = res.data;
         setUser(userData);
         if (userData.access) {
-          setAccessToken(userData);
+          setAccessToken(userData.access);
         }
         if (userData.refresh) {
-          setRefreshToken(userData);
+          setRefreshToken(userData.refresh);
         }
       }
       return res.data;
@@ -53,10 +65,10 @@ const register = async (username, email, password) => {
         const userData = res.data;
         setUser(userData);
         if (userData.access) {
-          setAccessToken(userData);
+          setAccessToken(userData.access);
         }
         if (userData.refresh) {
-          setRefreshToken(userData);
+          setRefreshToken(userData.refresh);
         }
       }
       return res.data;
@@ -69,16 +81,10 @@ const logout = () => {
   localStorage.removeItem("refreshToken");
 };
 
-const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
-};
-
-const getAccessToken = () => {
-  return window.localStorage.getItem("accessToken");
-};
-
-const getRefreshToken = () => {
-  return window.localStorage.getItem("refreshToken");
+const refreshToken = async () => {
+  return await auth_axios.post("refresh", {
+    refresh: getRefreshToken(),
+  });
 };
 
 const AuthService = {
@@ -86,6 +92,9 @@ const AuthService = {
   login,
   logout,
   register,
+  refreshToken,
+  setAccessToken,
+  setRefreshToken,
   getCurrentUser,
   getAccessToken,
   getRefreshToken,
