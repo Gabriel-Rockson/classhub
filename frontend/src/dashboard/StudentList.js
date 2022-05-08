@@ -35,6 +35,7 @@ export default function StudentList() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
+  // TODO fetch the students related to the class that has been opened
   useEffect(() => {
     setIsFetching(true);
     StudentService.getStudentList()
@@ -50,7 +51,7 @@ export default function StudentList() {
       });
   }, []);
 
-  const handleClick = (student_uid) => {
+  const handleShowMore = (student_uid) => {
     navigate(`/app/dashboard/class-list/${student_uid}`);
   };
 
@@ -93,7 +94,7 @@ export default function StudentList() {
         )}
         {isFetching && (
           <Flex justify="center" align="center" py={5}>
-            <Spinner color="telegram.700" size={["md", "lg"]} />
+            <Spinner color="telegram.700" size={["xl", "2xl"]} />
           </Flex>
         )}
         {!isFetching && (
@@ -126,11 +127,11 @@ export default function StudentList() {
                           _hover={{ backgroundColor: "telegram.800" }}
                           _active={{ backgroundColor: "telegram.800" }}
                           color="white"
-                          onClick={() => handleClick(number)}
+                          onClick={() => handleShowMore(student.student_uid)}
                         >
                           <Flex alignItems={"center"}>
                             <Icon as={IoEyeSharp} mr={2} />
-                            view more
+                            show more
                           </Flex>
                         </Button>
                       </Td>
@@ -141,6 +142,7 @@ export default function StudentList() {
             </Table>
           </TableContainer>
         )}
+        {/* TODO add class statistics, graphs and numbers showing the class details */}
       </Box>
     </>
   );
