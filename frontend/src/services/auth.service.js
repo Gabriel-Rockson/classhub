@@ -9,7 +9,7 @@ const auth_axios = axios.create({
 });
 
 const setUser = (user) => {
-  JSON.stringify(window.localStorage.setItem("user", user));
+  window.localStorage.setItem("user", JSON.stringify(user));
 };
 
 const setAccessToken = (user) => {
@@ -65,6 +65,8 @@ const register = async (username, email, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
 };
 
 const getCurrentUser = () => {
