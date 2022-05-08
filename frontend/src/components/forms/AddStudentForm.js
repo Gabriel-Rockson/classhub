@@ -55,6 +55,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents }) => {
     setSubmitting(true);
     StudentService.addStudent(data)
       .then((response) => {
+        // TODO sort the names list according to names
         setStudents((prevStudents) => [...prevStudents, response.data]);
         onClose();
       })
