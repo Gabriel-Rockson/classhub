@@ -1,11 +1,11 @@
 import AuthService from "./auth.service";
 
 export default function authHeader() {
-  const user = AuthService.getCurrentUser();
+  const accessToken = AuthService.getAccessToken();
 
-  if (user) {
+  if (accessToken) {
     return {
-      Authorization: `Bearer ${user.access}`,
+      Authorization: `Bearer ${accessToken}`,
     };
   } else {
     return {};
