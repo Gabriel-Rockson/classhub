@@ -102,7 +102,7 @@ export default function StudentList() {
         )}
         {isFetching && (
           <Flex justify="center" align="center" py={5}>
-            <Spinner color="telegram.700" size={["xl", "2xl"]} />
+            <Spinner color="telegram.700" />
           </Flex>
         )}
         {!isFetching && (
