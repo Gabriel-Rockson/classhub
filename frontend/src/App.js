@@ -45,7 +45,7 @@ function App() {
             <Route index element={<AttendanceList />} />
             <Route path="class-list" element={<ClassList />}>
               <Route index element={<StudentList />} />
-              <Route path=":studentUid" element={<StudentDetail />} />
+              <Route path=":id" element={<StudentDetail />} />
             </Route>
             <Route path="class-attendance" element={<ClassAttendance />}>
               <Route index element={<AttendanceList />} />
