@@ -122,6 +122,10 @@ const TopNavBar = () => {
             fontSize={["lg", "xl", "xl"]}
             color={"telegram.900"}
             fontFamily={"fantasy"}
+            cursor="pointer"
+            onClick={() => {
+              navigate("/", { replace: true });
+            }}
           >
             StudentsAttendance
           </Heading>
