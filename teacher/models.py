@@ -52,6 +52,13 @@ class Teacher(models.Model):
         help_text="Email address of the teacher.",
         max_length=255,
     )
+    grade = models.OneToOneField(
+        "attendance.Class",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=False,
+        related_name="class_teacher",
+    )
     address = models.CharField(
         verbose_name=_("Address of Teacher"), null=True, blank=True, max_length=100
     )
