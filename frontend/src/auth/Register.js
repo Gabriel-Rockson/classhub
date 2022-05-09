@@ -36,7 +36,7 @@ export default function Register() {
         navigate("/app/dashboard/profile", { replace: true });
       })
       .catch((err) => {
-        setErrors(err.response.data);
+        setErrors(err.response?.data);
       })
       .finally(() => setSubmitting(false));
   };

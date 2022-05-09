@@ -33,7 +33,7 @@ export default function Login() {
       .then((res) => {
         navigate("/app/dashboard", { replace: true });
       })
-      .catch((err) => setErrors(err.response.data))
+      .catch((err) => console.log(setErrors(err.response?.data)))
       .finally(() => setSubmitting(false));
   };
 

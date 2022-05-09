@@ -3,7 +3,7 @@
 import axios from "axios";
 
 const AUTH_API_URL = "https://students-attendance.onrender.com/api/v1/auth/";
-
+// const AUTH_API_URL = "http://localhost:8000/api/v1/auth/";
 const auth_axios = axios.create({
   baseURL: AUTH_API_URL,
 });
@@ -33,9 +33,6 @@ const getRefreshToken = () => {
 };
 
 const login = async (username, password) => {
-  console.log("----env----")
-  console.log(env);
-  console.log("----env----")
   return await auth_axios
     .post("login", {
       username,

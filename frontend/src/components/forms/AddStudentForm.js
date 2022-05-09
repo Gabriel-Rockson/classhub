@@ -60,7 +60,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
         onClose();
       })
       .catch((error) => {
-        setErrors(error.response.data);
+        setErrors(error.response?.data);
       })
       .finally(() => setSubmitting(false));
   };

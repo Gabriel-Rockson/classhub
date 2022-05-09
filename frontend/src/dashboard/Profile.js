@@ -101,7 +101,7 @@ export default function Profile() {
         fetchUpdatedUserData();
       })
       .catch((error) => {
-        setErrors(error.response.data);
+        setErrors(error.response?.data);
       })
       .finally(() => setSubmitting(false));
   };
