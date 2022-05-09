@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 import uuid
+from django.conf import settings
 
 
 class Teacher(models.Model):
@@ -16,16 +17,23 @@ class Teacher(models.Model):
         editable=False,
         default=uuid.uuid4,
     )
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        blank=False,
+        null=True,
+        related_name="teacher_profile",
+    )
     first_name = models.CharField(
         verbose_name=_("First Name"),
-        null=False,
+        null=True,
         blank=False,
         max_length=50,
         help_text="Enter the first name of the teacher.",
     )
     last_name = models.CharField(
         verbose_name=_("Last Name"),
-        null=False,
+        null=True,
         blank=False,
         max_length=50,
         help_text="Enter the last name of the teacher.",
@@ -39,7 +47,7 @@ class Teacher(models.Model):
     )
     email = models.EmailField(
         verbose_name=_("Email Address"),
-        null=False,
+        null=True,
         blank=False,
         help_text="Email address of the teacher.",
         max_length=255,
@@ -49,7 +57,7 @@ class Teacher(models.Model):
     )
     cell_number = models.CharField(
         verbose_name=_("Cell Number"),
-        null=False,
+        null=True,
         blank=False,
         max_length=20,
     )
