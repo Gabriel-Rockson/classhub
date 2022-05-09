@@ -22,6 +22,7 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  Spinner,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -113,9 +114,9 @@ export default function Profile() {
         onClose={onClose}
       >
         <AlertDialogOverlay>
-          <AlertDialogContent>
+          <AlertDialogContent bg={"blackAlpha.900"}>
             <AlertDialogBody>
-              <Alert variant="top-accent" status="success" my={3}>
+              <Alert variant="top-accent" status="success">
                 <AlertIcon />
                 <Box>
                   <AlertTitle>Profile Update Successful</AlertTitle>
@@ -129,7 +130,7 @@ export default function Profile() {
             <AlertDialogFooter>
               <Button
                 colorScheme={"telegram"}
-                style={{ boxShadow: "noneI" }}
+                style={{ boxShadow: "none" }}
                 ref={cancelRef}
                 onClick={onClose}
               >
@@ -307,6 +308,8 @@ export default function Profile() {
                           id="grade"
                           name="grade"
                         >
+                          {/* TODO fix options default value */}
+                          <option value="">---------</option>
                           {classes?.map((grade) => (
                             <option key={grade.id} value={grade.id}>
                               Class {grade.grade}
@@ -352,15 +355,15 @@ export default function Profile() {
                     </Stack>
 
                     <Button
+                      disabled={isSubmitting}
                       type="submit"
                       mt={8}
-                      _hover={{ bg: "green.700" }}
-                      _active={{ bg: "green.700" }}
-                      bg="green.600"
+                      colorScheme={"telegram"}
                       color="white"
                       style={{ boxShadow: "none" }}
                     >
-                      Save Teacher Profile Changes
+                      {isSubmitting && <Spinner color="white" mr={2} />} Save
+                      Teacher Profile Changes
                     </Button>
                   </Form>
                 </>
