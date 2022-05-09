@@ -19,10 +19,10 @@ import StudentService from "../services/student.service";
 
 function StudentDetail() {
   const [studentData, setStudentData] = useState(null);
-  const { studentUid } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    StudentService.getStudentData(studentUid)
+    StudentService.getStudentData(id)
       .then((response) => {
         setStudentData(() => response.data);
       })
