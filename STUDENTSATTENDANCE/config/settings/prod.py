@@ -29,8 +29,7 @@ if RENDER_EXTERNAL_HOSTNAME:
 # Databases
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgres://students_attendance_user:tg16chbacahdDcvCoRqVrRN2qqiom7rx@dpg-c9ktesc41ls49b94eek0-a/students_attendance_db_up8o",
+        default="postgres://students_attendance_user:nGYRWUNrueXbLggPQXDSrRZvSleAeaEA@dpg-c9sh8uc6fj3b5php2pk0-a/students_attendance_db_2j12",
         conn_max_age=600,
     )
 }
-
