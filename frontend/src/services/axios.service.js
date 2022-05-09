@@ -28,6 +28,7 @@ axios_instance.interceptors.response.use(
   },
   (error) => {
     const originalConfig = error.config;
+    // TODO if the original config has _retry = true, navigate to the homepage
     if (error.response) {
       if (error.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
