@@ -15,8 +15,13 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  CloseButton,
   useDisclosure,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -26,33 +31,13 @@ import TeacherService from "../services/teacher.service";
 import UserService from "../services/user.service";
 import ClassService from "../services/class.service";
 
-const AlertBox = () => {
-  const {
-    isOpen: isVisible,
-    onClose,
-    onOpen,
-  } = useDisclosure({ defaultIsOpen: true });
-
-  return (
-    isVisible && (
-      <Alert variant="top-accent" status="success" my={3}>
-        <AlertIcon />
-        <Box>
-          <AlertTitle>Profile Update Successful</AlertTitle>
-          <AlertDescription>
-            You have successfully updated your profile details
-          </AlertDescription>
-        </Box>
-      </Alert>
-    )
-  );
-};
-
 // TODO add alert on successfully updating
 
 export default function Profile() {
   const [classes, setClasses] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
 
   useEffect(() => {
     ClassService.getClassList()
@@ -70,6 +55,12 @@ export default function Profile() {
   };
 
   const teacher_profile = currentUser?.teacher_profile;
+
+  if (teacher_profile === null) {
+    return (
+      <Heading>There is no associated teacher profile for this user</Heading>
+    );
+  }
 
   const initialTeacherData = {
     first_name: teacher_profile.first_name ? teacher_profile.first_name : "",
@@ -94,6 +85,7 @@ export default function Profile() {
     UserService.getUserData(currentUser.id)
       .then((response) => {
         setCurrentUser((prevValue) => AuthService.getCurrentUser());
+        onOpen();
       })
       .catch((err) => {
         console.log(err);
@@ -115,6 +107,38 @@ export default function Profile() {
 
   return (
     <>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogBody>
+              <Alert variant="top-accent" status="success" my={3}>
+                <AlertIcon />
+                <Box>
+                  <AlertTitle>Profile Update Successful</AlertTitle>
+                  <AlertDescription>
+                    You have successfully updated your profile details
+                  </AlertDescription>
+                </Box>
+              </Alert>
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button
+                colorScheme={"telegram"}
+                style={{ boxShadow: "noneI" }}
+                ref={cancelRef}
+                onClick={onClose}
+              >
+                OK
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
       <Flex align="center" justify="center">
         <Box w={["100%", "90%", "80%", "70%", "60%"]} px={4} mb={20}>
           <Heading py={5} fontSize="2xl">
