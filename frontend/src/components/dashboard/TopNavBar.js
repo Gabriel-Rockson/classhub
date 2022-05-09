@@ -143,7 +143,7 @@ const TopNavBar = () => {
                   src="https://bit.ly/dan-abramov"
                   mr={2}
                 />
-                {currentUser?.user.username} <Icon as={AiFillCaretDown} />
+                {currentUser?.username} <Icon as={AiFillCaretDown} />
               </Flex>
             </MenuButton>
             <MenuList

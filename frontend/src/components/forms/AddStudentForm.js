@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   FormErrorMessage,
@@ -20,7 +20,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import StudentService from "../../services/student.service";
 
-const AddStudentForm = ({ isOpen, onClose, setStudents }) => {
+const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required("First name is required"),
     last_name: Yup.string().required("Last name is required"),
@@ -40,6 +40,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents }) => {
     gender: "M",
     race: "W",
     student_id: "",
+    grade: grade ? grade : "",
     address: "",
     father_name: "",
     father_contact: "",
@@ -49,7 +50,6 @@ const AddStudentForm = ({ isOpen, onClose, setStudents }) => {
     guardian_email: "",
     home_phone: "",
   };
-  // TODO add the grade field, but make it hidden, and auto set it to the class that is currently being viewed
 
   const handleFormSubmit = (data, { setSubmitting, setErrors }) => {
     setSubmitting(true);
@@ -189,7 +189,6 @@ const AddStudentForm = ({ isOpen, onClose, setStudents }) => {
                         />
                         <FormErrorMessage>{errors.home_phone}</FormErrorMessage>
                       </FormControl>
-                      {/* TODO the grade of the student should be automatically filled based on the class list being viewed */}
                       <FormControl>
                         <FormLabel htmlFor="student_id">Student ID</FormLabel>
                         <Field
