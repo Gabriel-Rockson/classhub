@@ -26,33 +26,39 @@ import { IoEyeSharp } from "react-icons/io5";
 
 import AddStudentForm from "../components/forms/AddStudentForm";
 
+import AuthService from "../services/auth.service";
 import StudentService from "../services/student.service";
+import ClassService from "../services/class.service";
 
 export default function StudentList() {
+  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+  const [grade, setGrade] = useState(null);
   const [students, setStudents] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const windowWidth = useWindowWidth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
-  // TODO fetch the students related to the class that has been opened
   useEffect(() => {
     setIsFetching(true);
-    StudentService.getStudentList()
+    const grade_id = currentUser?.teacher_profile?.grade;
+    console.log(grade_id);
+    if (grade_id === null) {
+      navigate("/app/dashboard/profile", { replace: true });
+    }
+    ClassService.getClassData(grade_id)
       .then((response) => {
-        setStudents(response.data);
+        setGrade((prevValue) => response.data);
+        setStudents((prevValue) => response.data.students);
       })
-      .catch((error) => {
-        // TODO display the error that will arise in an alert on the page
-        console.error(error);
-      })
+      .catch((error) => console.log(error))
       .finally(() => {
         setIsFetching(false);
       });
   }, []);
 
-  const handleShowMore = (student_uid) => {
-    navigate(`/app/dashboard/class-list/${student_uid}`);
+  const handleShowMore = (id) => {
+    navigate(`/app/dashboard/class-list/${id}`);
   };
 
   return (
@@ -60,7 +66,7 @@ export default function StudentList() {
       <Box>
         <Flex alignItems={"center"} my={6}>
           <Heading fontSize={["lg", "xl"]} mr={5}>
-            Class 2
+            Class {grade?.grade}
           </Heading>
 
           <Button
@@ -81,10 +87,12 @@ export default function StudentList() {
           </Button>
         </Flex>
 
+        {/* Form to add student */}
         <AddStudentForm
           isOpen={isOpen}
           onClose={onClose}
           setStudents={setStudents}
+          grade={currentUser?.teacher_profile?.grade}
         />
 
         {windowWidth <= 1024 && (
@@ -112,7 +120,7 @@ export default function StudentList() {
               <Tbody>
                 {!isFetching &&
                   students?.map((student) => (
-                    <Tr key={student.student_uid}>
+                    <Tr key={student.id}>
                       <Td>{`${student.first_name} ${student.middle_name} ${student.last_name}`}</Td>
                       <Td>{student.gender_display}</Td>
                       <Td>{student.race_display}</Td>
@@ -127,7 +135,7 @@ export default function StudentList() {
                           _hover={{ backgroundColor: "telegram.800" }}
                           _active={{ backgroundColor: "telegram.800" }}
                           color="white"
-                          onClick={() => handleShowMore(student.student_uid)}
+                          onClick={() => handleShowMore(student.id)}
                         >
                           <Flex alignItems={"center"}>
                             <Icon as={IoEyeSharp} mr={2} />
