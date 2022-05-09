@@ -11,6 +11,12 @@ import {
   Stack,
   Select,
   Button,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -19,6 +25,30 @@ import AuthService from "../services/auth.service";
 import TeacherService from "../services/teacher.service";
 import UserService from "../services/user.service";
 import ClassService from "../services/class.service";
+
+const AlertBox = () => {
+  const {
+    isOpen: isVisible,
+    onClose,
+    onOpen,
+  } = useDisclosure({ defaultIsOpen: true });
+
+  return (
+    isVisible && (
+      <Alert variant="top-accent" status="success" my={3}>
+        <AlertIcon />
+        <Box>
+          <AlertTitle>Profile Update Successful</AlertTitle>
+          <AlertDescription>
+            You have successfully updated your profile details
+          </AlertDescription>
+        </Box>
+      </Alert>
+    )
+  );
+};
+
+// TODO add alert on successfully updating
 
 export default function Profile() {
   const [classes, setClasses] = useState(undefined);
@@ -45,9 +75,7 @@ export default function Profile() {
     first_name: teacher_profile.first_name ? teacher_profile.first_name : "",
     middle_name: teacher_profile.middle_name ? teacher_profile.middle_name : "",
     last_name: teacher_profile.last_name ? teacher_profile.last_name : "",
-    email_address: teacher_profile.email_address
-      ? teacher_profile.email_address
-      : "",
+    email_address: teacher_profile.email ? teacher_profile.email : "",
     grade: teacher_profile.grade ? teacher_profile.grade : "",
     address: teacher_profile.address ? teacher_profile.address : "",
     cell_phone: teacher_profile.cell_phone ? teacher_profile.cell_phone : "",
@@ -62,15 +90,25 @@ export default function Profile() {
       .required("Email Address is required"),
   });
 
+  const fetchUpdatedUserData = () => {
+    UserService.getUserData(currentUser.id)
+      .then((response) => {
+        setCurrentUser((prevValue) => AuthService.getCurrentUser());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleTeacherDataSubmission = (data, { setSubmitting, setErrors }) => {
     setSubmitting(true);
     const id = teacher_profile.id;
     TeacherService.updateTeacherData(id, data)
       .then((response) => {
-        console.log(response);
+        fetchUpdatedUserData();
       })
       .catch((error) => {
-        console.log(error);
+        setErrors(error.response.data);
       })
       .finally(() => setSubmitting(false));
   };
@@ -97,6 +135,7 @@ export default function Profile() {
                       <FormControl>
                         <FormLabel htmlFor="username">Username</FormLabel>
                         <Field
+                          variant="filled"
                           as={Input}
                           id="username"
                           name="username"
@@ -107,6 +146,7 @@ export default function Profile() {
                       <FormControl>
                         <FormLabel htmlFor="email">Email</FormLabel>
                         <Field
+                          variant="filled"
                           as={Input}
                           id="email"
                           name="email"
@@ -146,12 +186,8 @@ export default function Profile() {
           </Box>
 
           <hr />
-          
-          <Text>{initialTeacherData.first_name}</Text>{}
-          <Text>{initialTeacherData.grade}</Text>{}
-
           <Box mt={10}>
-            <Heading py={4} fontSize="xl">
+            <Heading py={5} mb={5} fontSize="xl">
               Teacher Profile
             </Heading>
 
@@ -169,6 +205,7 @@ export default function Profile() {
                       >
                         <FormLabel htmlFor="first_name">First Name</FormLabel>
                         <Field
+                          variant="filled"
                           as={Input}
                           id="first_name"
                           name="first_name"
@@ -181,6 +218,7 @@ export default function Profile() {
                       >
                         <FormLabel htmlFor="middle_name">Middle Name</FormLabel>
                         <Field
+                          variant="filled"
                           as={Input}
                           id="middle_name"
                           name="middle_name"
@@ -202,6 +240,7 @@ export default function Profile() {
                       >
                         <FormLabel htmlFor="last_name">Last Name</FormLabel>
                         <Field
+                          variant="filled"
                           as={Input}
                           id="last_name"
                           name="last_name"
@@ -218,6 +257,7 @@ export default function Profile() {
                           Email Address
                         </FormLabel>
                         <Field
+                          variant="filled"
                           as={Input}
                           id="email_address"
                           name="email_address"
@@ -237,7 +277,12 @@ export default function Profile() {
                       {/* TODO when the class is set once, it shouldn't be changed without admin authorization */}
                       <FormControl isInvalid={!!errors.grade && touched.grade}>
                         <FormLabel htmlFor="grade">Class</FormLabel>
-                        <Field as={Select} id="grade" name="grade">
+                        <Field
+                          variant="filled"
+                          as={Select}
+                          id="grade"
+                          name="grade"
+                        >
                           {classes?.map((grade) => (
                             <option key={grade.id} value={grade.id}>
                               Class {grade.grade}
@@ -251,6 +296,7 @@ export default function Profile() {
                       >
                         <FormLabel htmlFor="address">Address</FormLabel>
                         <Field
+                          variant="filled"
                           as={Input}
                           id="address"
                           name="address"
@@ -271,6 +317,7 @@ export default function Profile() {
                       >
                         <FormLabel>Cell Phone</FormLabel>
                         <Field
+                          variant="filled"
                           as={Input}
                           id="cell_phone"
                           name="cell_phone"
