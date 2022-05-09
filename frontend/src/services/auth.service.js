@@ -41,7 +41,7 @@ const login = async (username, password) => {
     .then((res) => {
       if (res.data.user) {
         const userData = res.data;
-        setUser(userData);
+        setUser(userData.user);
         if (userData.access) {
           setAccessToken(userData.access);
         }
@@ -63,7 +63,7 @@ const register = async (username, email, password) => {
     .then((res) => {
       if (res.data.user) {
         const userData = res.data;
-        setUser(userData);
+        setUser(userData.user);
         if (userData.access) {
           setAccessToken(userData.access);
         }
@@ -93,6 +93,7 @@ const AuthService = {
   logout,
   register,
   refreshToken,
+  setUser,
   setAccessToken,
   setRefreshToken,
   getCurrentUser,
