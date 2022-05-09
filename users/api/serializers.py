@@ -1,14 +1,17 @@
-from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.settings import api_settings
 from django.contrib.auth.models import update_last_login
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.settings import api_settings
+from teacher.api.serializers import TeacherSerializer
 
 User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
+    teacher_profile = TeacherSerializer(read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -18,6 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
             "is_staff",
             "is_superuser",
             "date_joined",
+            "teacher_profile",
         ]
 
 
@@ -40,6 +44,7 @@ class RegisterSerializer(UserSerializer):
     password = serializers.CharField(
         max_length=128, min_length=8, write_only=True, required=True
     )
+    teacher_profile = TeacherSerializer(read_only=True)
 
     class Meta:
         model = User
@@ -51,6 +56,7 @@ class RegisterSerializer(UserSerializer):
             "date_joined",
             "is_staff",
             "is_superuser",
+            "teacher_profile",
         ]
         extra_kwargs = {
             "is_staff": {"read_only": True},
