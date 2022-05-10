@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Chakra components
 import {
   Box,
   Flex,
@@ -24,20 +27,24 @@ import {
   AlertDialogOverlay,
   Spinner,
 } from "@chakra-ui/react";
+
+// Formik and Yp
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
+// Services
 import AuthService from "../services/auth.service";
 import TeacherService from "../services/teacher.service";
 import UserService from "../services/user.service";
 import ClassService from "../services/class.service";
 
-// TODO add alert on successfully updating
+// TODO add alert on successfully updating the user info
 
 export default function Profile() {
   const [classes, setClasses] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
   const cancelRef = React.useRef();
 
   useEffect(() => {
@@ -128,14 +135,27 @@ export default function Profile() {
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button
-                colorScheme={"telegram"}
-                style={{ boxShadow: "none" }}
-                ref={cancelRef}
-                onClick={onClose}
-              >
-                OK
-              </Button>
+              <Stack direction="row" spacing={5}>
+                <Button
+                  borderRadius={5}
+                  colorScheme={"telegram"}
+                  style={{ boxShadow: "none" }}
+                  onClick={() =>
+                    navigate("/app/dashboard/class-list", { replace: true })
+                  }
+                >
+                  Go to Class List
+                </Button>
+                <Button
+                  borderRadius={5}
+                  colorScheme={"whatsapp"}
+                  style={{ boxShadow: "none" }}
+                  ref={cancelRef}
+                  onClick={onClose}
+                >
+                  OK
+                </Button>
+              </Stack>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialogOverlay>
@@ -195,12 +215,11 @@ export default function Profile() {
                       </Text>
                     </Flex>
                     <Button
+                      borderRadius={5}
+                      colorScheme={"telegram"}
+                      style={{ boxShadow: "none" }}
                       my={8}
                       type="submit"
-                      _hover={{ bg: "telegram.700" }}
-                      bg="telegram.600"
-                      color="white"
-                      style={{ boxShadow: "none" }}
                     >
                       Save User Info Changes
                     </Button>
@@ -355,12 +374,12 @@ export default function Profile() {
                     </Stack>
 
                     <Button
+                      borderRadius={5}
+                      colorScheme={"telegram"}
+                      style={{ boxShadow: "none" }}
                       disabled={isSubmitting}
                       type="submit"
                       mt={8}
-                      colorScheme={"telegram"}
-                      color="white"
-                      style={{ boxShadow: "none" }}
                     >
                       {isSubmitting && <Spinner color="white" mr={2} />} Save
                       Teacher Profile Changes
