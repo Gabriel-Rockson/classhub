@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
+// Chakra components
 import {
   Box,
   Flex,
@@ -13,15 +14,25 @@ import {
   Tr,
   Th,
   Td,
+  Button,
+  Icon,
+  Spinner,
 } from "@chakra-ui/react";
 
+// Icons
+import { AiOutlineRollback } from "react-icons/ai";
+
+// Services
 import StudentService from "../services/student.service";
 
 function StudentDetail() {
   const [studentData, setStudentData] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
+    setIsFetching(true);
     StudentService.getStudentData(id)
       .then((response) => {
         setStudentData(() => response.data);
@@ -29,22 +40,49 @@ function StudentDetail() {
       .catch((error) => {
         // TODO properly display the error and do something about it HANDLE IT
         console.error(error);
+      })
+      .finally(() => {
+        setIsFetching(false);
       });
   }, []);
 
+  if (isFetching) {
+    return (
+      <>
+        <Flex justify="center" align="center" py={5}>
+          <Spinner color="telegram.700" />
+        </Flex>
+      </>
+    );
+  }
+
   return (
     <>
-      <Box>
-        <Heading py={4} fontSize={["lg", "xl", "2xl"]}>
+      <Button
+        borderRadius={5}
+        colorScheme={"orange"}
+        style={{ boxShadow: "none" }}
+        my={6}
+        size={["md"]}
+        fontSize={"14px"}
+        onClick={() => navigate(-1)}
+      >
+        <Flex alignItems={"center"}>
+          <Icon as={AiOutlineRollback} mr={2} /> Attendance List
+        </Flex>
+      </Button>
+
+      <Box w={["100%", null, null, "50%"]}>
+        <Heading
+          py={4}
+          textAlign={"center"}
+          color="gray.600"
+          fontSize={["lg", "xl", "2xl"]}
+        >
           {`${studentData?.first_name} ${studentData?.middle_name} ${studentData?.last_name}`}
         </Heading>
-        <TableContainer
-          w={["100vw", null, null, "50vw"]}
-          boxShadow="lg"
-          rounded="md"
-          mb={10}
-        >
-          <Table variant="striped" colorScheme="linkedin">
+        <TableContainer boxShadow="lg" rounded="md" mb={10} w={"100%"}>
+          <Table variant="striped" colorScheme="telegram">
             <Thead borderBottom={"2px"} borderColor={"gray.200"}>
               <Tr>
                 <Th>Key</Th>
