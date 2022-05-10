@@ -186,7 +186,7 @@ export default function Profile() {
                           name="username"
                           type="text"
                         />
-                        <FormErrorMessage></FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold"></FormErrorMessage>
                       </FormControl>
                       <FormControl>
                         <FormLabel htmlFor="email">Email</FormLabel>
@@ -197,7 +197,7 @@ export default function Profile() {
                           name="email"
                           type="email"
                         />
-                        <FormErrorMessage></FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold"></FormErrorMessage>
                       </FormControl>
                     </Stack>
 
@@ -255,7 +255,7 @@ export default function Profile() {
                           name="first_name"
                           type="text"
                         />
-                        <FormErrorMessage>{errors.first_name}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.first_name}</FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={!!errors.middle_name && touched.middle_name}
@@ -268,7 +268,7 @@ export default function Profile() {
                           name="middle_name"
                           type="text"
                         />
-                        <FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
                           {errors.middle_name}
                         </FormErrorMessage>
                       </FormControl>
@@ -290,7 +290,7 @@ export default function Profile() {
                           name="last_name"
                           type="text"
                         />
-                        <FormErrorMessage>{errors.last_name}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.last_name}</FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={
@@ -307,7 +307,7 @@ export default function Profile() {
                           name="email_address"
                           type="email"
                         />
-                        <FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
                           {errors.email_address}
                         </FormErrorMessage>
                       </FormControl>
@@ -335,7 +335,7 @@ export default function Profile() {
                             </option>
                           ))}
                         </Field>
-                        <FormErrorMessage>{errors.grade}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.grade}</FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={!!errors.address && touched.address}
@@ -348,7 +348,7 @@ export default function Profile() {
                           name="address"
                           type="text"
                         />
-                        <FormErrorMessage>{errors.address}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.address}</FormErrorMessage>
                       </FormControl>
                     </Stack>
 
@@ -369,7 +369,7 @@ export default function Profile() {
                           name="cell_phone"
                           type="text"
                         />
-                        <FormErrorMessage>{errors.cell_phone}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.cell_phone}</FormErrorMessage>
                       </FormControl>
                     </Stack>
 
