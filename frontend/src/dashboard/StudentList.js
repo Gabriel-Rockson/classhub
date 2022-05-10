@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Chakra components
 import {
   Box,
   Flex,
@@ -18,48 +19,43 @@ import {
   TableCaption,
   useDisclosure,
   Spinner,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  AlertTitle,
+  Stack,
 } from "@chakra-ui/react";
-import { useWindowWidth } from "../hooks/custom-hooks";
 
+// Custom hooks
+import { useWindowWidth, useGradeAndStudents } from "../hooks/custom-hooks";
+
+// Icons
 import { MdPersonAdd } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
 
+// Forms
 import AddStudentForm from "../components/forms/AddStudentForm";
 
-import AuthService from "../services/auth.service";
-import StudentService from "../services/student.service";
-import ClassService from "../services/class.service";
-
 export default function StudentList() {
-  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
-  const [grade, setGrade] = useState(null);
-  const [students, setStudents] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
+  const { isFetching, grade, students, currentUser, setStudents } =
+    useGradeAndStudents();
   const windowWidth = useWindowWidth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setIsFetching(true);
-    const grade_id = currentUser?.teacher_profile?.grade;
-    console.log(grade_id);
-    if (grade_id === null) {
-      navigate("/app/dashboard/profile", { replace: true });
-    }
-    ClassService.getClassData(grade_id)
-      .then((response) => {
-        setGrade((prevValue) => response.data);
-        setStudents((prevValue) => response.data.students);
-      })
-      .catch((error) => console.log(error))
-      .finally(() => {
-        setIsFetching(false);
-      });
-  }, []);
-
   const handleShowMore = (id) => {
     navigate(`/app/dashboard/class-list/${id}`);
   };
+
+  if (isFetching) {
+    return (
+      <>
+        <Flex justify="center" align="center" py={5}>
+          <Spinner color="telegram.700" />
+        </Flex>
+      </>
+    );
+  }
 
   return (
     <>
@@ -70,14 +66,11 @@ export default function StudentList() {
           </Heading>
 
           <Button
+            borderRadius={5}
+            colorScheme={"telegram"}
+            style={{ boxShadow: "none" }}
             size={["md"]}
             fontSize={"14px"}
-            borderRadius={0}
-            style={{ boxShadow: "none" }}
-            backgroundColor={"telegram.600"}
-            color={"white"}
-            _hover={{ backgroundColor: "facebook.800" }}
-            _active={{ backgroundColor: "facebook.800" }}
             shadow={"md"}
             onClick={onOpen}
           >
@@ -100,12 +93,27 @@ export default function StudentList() {
             Swipe on the table to reveal more data
           </Text>
         )}
-        {isFetching && (
-          <Flex justify="center" align="center" py={5}>
-            <Spinner color="telegram.700" />
-          </Flex>
+
+        {!isFetching && students?.length === 0 && (
+          <>
+            <Flex py={5}>
+              <Alert status="info">
+                <Stack direction="column" spacing={5}>
+                  <Flex direction="row">
+                    <AlertIcon />
+                    <AlertTitle>Empty Class</AlertTitle>
+                  </Flex>
+                  <AlertDescription>
+                    Sorry!!! There are no students registered in this class yet,
+                    you can click the 'Add Student' button to register a student
+                  </AlertDescription>
+                </Stack>
+              </Alert>
+            </Flex>
+          </>
         )}
-        {!isFetching && (
+
+        {!isFetching && students?.length > 0 && (
           <TableContainer mb={10} boxShadow="lg" rounded="md">
             <Table variant={"unstyled"}>
               <Thead borderBottom={"2px"} borderColor={"gray.200"}>
@@ -128,13 +136,10 @@ export default function StudentList() {
                       <Td>{student.student_id}</Td>
                       <Td>
                         <Button
-                          size={"sm"}
-                          backgroundColor={"telegram.700"}
+                          borderRadius={5}
+                          colorScheme={"telegram"}
                           style={{ boxShadow: "none" }}
-                          borderRadius={0}
-                          _hover={{ backgroundColor: "telegram.800" }}
-                          _active={{ backgroundColor: "telegram.800" }}
-                          color="white"
+                          size={"sm"}
                           onClick={() => handleShowMore(student.id)}
                         >
                           <Flex alignItems={"center"}>
