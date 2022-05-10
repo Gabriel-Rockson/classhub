@@ -23,7 +23,7 @@ export const useWindowWidth = () => {
 export const useGradeAndStudents = () => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const [grade, setGrade] = useState(null);
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const navigate = useNavigate();
 
