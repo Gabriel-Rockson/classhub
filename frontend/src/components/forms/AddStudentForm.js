@@ -27,6 +27,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
     date_of_birth: Yup.string().required("Date of Birth is required"),
     gender: Yup.string().required("Gender is required"),
     race: Yup.string().required("Race is required"),
+    student_id: Yup.string().required("Student ID is required"),
     home_phone: Yup.string()
       .required("Home Phone is required")
       .min(10, "Minimum of 10 digits"),
@@ -74,7 +75,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
         closeOnOverlayClick={false}
       >
         <ModalOverlay />
-        <ModalContent borderRadius={0}>
+        <ModalContent borderRadius={5}>
           <ModalHeader>Add New Student</ModalHeader>
           <ModalCloseButton style={{ boxShadow: "none" }} color="red" />
 
@@ -97,9 +98,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           type="text"
                           id="first_name"
                           name="first_name"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
-                        <FormErrorMessage>{errors.first_name}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.first_name}</FormErrorMessage>
                       </FormControl>
                       <FormControl>
                         <FormLabel htmlFor="middle_name">Middle Name</FormLabel>
@@ -108,7 +109,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="middle_name"
                           name="middle_name"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
                       </FormControl>
                       <FormControl
@@ -120,9 +121,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="last_name"
                           name="last_name"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
-                        <FormErrorMessage>{errors.last_name}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.last_name}</FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={
@@ -138,9 +139,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="date_of_birth"
                           name="date_of_birth"
                           type="date"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
-                        <FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
                           {errors.date_of_birth}
                         </FormErrorMessage>
                       </FormControl>
@@ -152,13 +153,13 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           as={Select}
                           id="gender"
                           name="gender"
-                          borderRadius={0}
+                          borderRadius={5}
                         >
                           <option value="M">Male</option>
                           <option value="F">Female</option>
                           <option value="O">Other</option>
                         </Field>
-                        <FormErrorMessage>{errors.gender}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.gender}</FormErrorMessage>
                       </FormControl>
                       <FormControl isInvalid={!!errors.race && touched.race}>
                         <FormLabel htmlFor="race">Race</FormLabel>
@@ -166,7 +167,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           as={Select}
                           id="race"
                           name="race"
-                          borderRadius={0}
+                          borderRadius={5}
                         >
                           <option value="W">White</option>
                           <option value="B">Black / African American</option>
@@ -174,7 +175,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           <option value="H">Native Hawaiian</option>
                           <option value="O">Some Other Race</option>
                         </Field>
-                        <FormErrorMessage>{errors.race}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.race}</FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={!!errors.home_phone && touched.home_phone}
@@ -185,19 +186,22 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="home_phone"
                           name="home_phone"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
-                        <FormErrorMessage>{errors.home_phone}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">{errors.home_phone}</FormErrorMessage>
                       </FormControl>
-                      <FormControl>
+                      <FormControl
+                        isInvalid={!!errors.student_id && touched.student_id}
+                      >
                         <FormLabel htmlFor="student_id">Student ID</FormLabel>
                         <Field
                           as={Input}
                           id="student_id"
                           name="student_id"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
+                        <FormErrorMessage fontWeight="bold">{errors.student_id}</FormErrorMessage>
                       </FormControl>
                       <FormControl htmlFor="address">
                         <FormLabel>Address</FormLabel>
@@ -206,7 +210,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="address"
                           name="address"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
                       </FormControl>
                       <FormControl>
@@ -218,7 +222,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="father_name"
                           name="father_name"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
                       </FormControl>
                       <FormControl>
@@ -230,7 +234,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="father_contact"
                           name="father_contact"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
                       </FormControl>
                       <FormControl>
@@ -242,7 +246,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="mother_name"
                           name="mother_name"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
                       </FormControl>
                       <FormControl>
@@ -254,7 +258,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="mother_contact"
                           name="mother_contact"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
                       </FormControl>
                       <FormControl>
@@ -266,7 +270,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="guardian_name"
                           name="guardian_name"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
                       </FormControl>
                       <FormControl>
@@ -278,7 +282,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           id="guardian_email"
                           name="guardian_email"
                           type="text"
-                          borderRadius={0}
+                          borderRadius={5}
                         />
                       </FormControl>
                     </VStack>
@@ -287,23 +291,17 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                 <ModalFooter>
                   <HStack spacing={5}>
                     <Button
-                      color="white"
-                      borderRadius={0}
-                      backgroundColor={"green.600"}
+                      borderRadius={5}
+                      colorScheme={"telegram"}
                       style={{ boxShadow: "none" }}
-                      _hover={{ backgroundColor: "green.800" }}
-                      _active={{ backgroundColor: "green.800" }}
                       onClick={submitForm}
                     >
                       Add Student
                     </Button>
                     <Button
-                      color="white"
-                      borderRadius={0}
-                      backgroundColor={"red.600"}
+                      borderRadius={5}
+                      colorScheme={"red"}
                       style={{ boxShadow: "none" }}
-                      _hover={{ backgroundColor: "red.800" }}
-                      _active={{ backgroundColor: "red.800" }}
                       onClick={onClose}
                     >
                       Cancel
