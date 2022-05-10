@@ -61,7 +61,7 @@ export default function Register() {
               <form onSubmit={handleSubmit}>
                 <VStack spacing={6}>
                   <FormControl isInvalid={!!errors.detail}>
-                    <FormErrorMessage>{errors.detail}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">{errors.detail}</FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -76,7 +76,7 @@ export default function Register() {
                       variant="filled"
                       borderColor="facebook.200"
                     />
-                    <FormErrorMessage>{errors.username}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">{errors.username}</FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -91,7 +91,7 @@ export default function Register() {
                       variant="filled"
                       borderColor="facebook.200"
                     />
-                    <FormErrorMessage>{errors.email}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">{errors.email}</FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -106,16 +106,17 @@ export default function Register() {
                       variant="filled"
                       borderColor="facebook.200"
                     />
-                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">{errors.password}</FormErrorMessage>
                   </FormControl>
                 </VStack>
                 <Button
+                  borderRadius={5}
+                  colorScheme={"telegram"}
+                  style={{ boxShadow: "none" }}
                   disabled={isSubmitting}
                   mt={8}
                   type="submit"
                   w="full"
-                  colorScheme="messenger"
-                  style={{ boxShadow: "none" }}
                 >
                   {isSubmitting && <Spinner color="white" mr={2} />} Register
                 </Button>

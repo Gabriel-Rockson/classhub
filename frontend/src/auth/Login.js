@@ -58,7 +58,7 @@ export default function Login() {
               <form method="post" onSubmit={handleSubmit}>
                 <VStack spacing={6}>
                   <FormControl isInvalid={!!errors.detail}>
-                    <FormErrorMessage>{errors.detail}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">{errors.detail}</FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -73,7 +73,7 @@ export default function Login() {
                       variant="filled"
                       borderColor="facebook.200"
                     />
-                    <FormErrorMessage>{errors.username}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">{errors.username}</FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -88,15 +88,16 @@ export default function Login() {
                       variant="filled"
                       borderColor="facebook.200"
                     />
-                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">{errors.password}</FormErrorMessage>
                   </FormControl>
                 </VStack>
                 <Button
+                  borderRadius={5}
+                  colorScheme={"telegram"}
+                  style={{ boxShadow: "none" }}
                   mt={8}
                   type="submit"
                   w="full"
-                  colorScheme={"telegram"}
-                  style={{ boxShadow: "none" }}
                 >
                   {isSubmitting && <Spinner color="white" mr={2} />} Login
                 </Button>
