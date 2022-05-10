@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
 import {
@@ -35,13 +35,35 @@ const colors = {
 
 const theme = extendTheme({ colors });
 
+const ProtectedRoute = ({ children }) => {
+  const [user, setUser] = useState(AuthService.getCurrentUser());
+  const [accessToken, setAccessToken] = useState(AuthService.getAccessToken());
+
+  useEffect(() => {
+    setUser((prevValue) => AuthService.getCurrentUser());
+    setAccessToken((prevValue) => AuthService.getAccessToken());
+  }, []);
+
+  if (!user && !accessToken) {
+    return <Navigate to="/app/login" replace={true} />;
+  }
+  return children;
+};
+
 function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/app/dashboard" element={<Dashboard />}>
+          <Route
+            path="/app/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<AttendanceList />} />
             <Route path="class-list" element={<ClassList />}>
               <Route index element={<StudentList />} />
