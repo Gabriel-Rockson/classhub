@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
+// Chakra components
 import {
   TableContainer,
   Table,
@@ -13,12 +15,16 @@ import {
   Icon,
   HStack,
   Box,
-  Heading
+  Heading,
 } from "@chakra-ui/react";
 
+// Icons
 import { MdOutlinePostAdd, MdDelete } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
 import { BsFillPatchQuestionFill } from "react-icons/bs";
+
+// Custom hooks
+import { useGradeAndStudents } from "../hooks/custom-hooks";
 
 const data = {
   date: "Tue May 03 2022",
@@ -36,11 +42,12 @@ const QuestionIcon = () => {
   );
 };
 
-// FIX - Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
-// This is the error that is preventing you from using tooltips or popovers, fix that and use popovers to show more information on the question marks
+// ! FIX - Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+// ! This is the error that is preventing you from using tooltips or popovers, fix that and use popovers to show more information on the question marks
 
 const AllAttendances = () => {
   const navigate = useNavigate();
+  const { grade } = useGradeAndStudents();
 
   const handleAddAttendance = () => {
     navigate("/app/dashboard/class-attendance/add-attendance");
@@ -48,17 +55,17 @@ const AllAttendances = () => {
 
   return (
     <Box>
-      <Flex my={6}>
+      <Flex align="center" my={6}>
+        <Heading fontSize={["lg", "xl"]} mr={5}>
+          Class {grade?.grade}
+        </Heading>
+
         <Button
+          borderRadius={5}
+          colorScheme={"telegram"}
+          style={{ boxShadow: "none" }}
           size={["md"]}
           fontSize={"14px"}
-          borderRadius={0}
-          style={{ boxShadow: "none" }}
-          backgroundColor={"telegram.600"}
-          color={"white"}
-          _hover={{ backgroundColor: "facebook.800" }}
-          _active={{ backgroundColor: "facebook.800" }}
-          shadow={"md"}
           onClick={handleAddAttendance}
         >
           <Flex alignItems={"center"}>
@@ -115,13 +122,10 @@ const AllAttendances = () => {
                 <Td>
                   <HStack spacing={4}>
                     <Button
-                      size={"sm"}
-                      backgroundColor={"telegram.700"}
+                      borderRadius={5}
+                      colorScheme={"telegram"}
                       style={{ boxShadow: "none" }}
-                      borderRadius={0}
-                      _hover={{ backgroundColor: "telegram.800" }}
-                      _active={{ backgroundColor: "telegram.800" }}
-                      color="white"
+                      size={"sm"}
                       onClick={() => handleClick(number)}
                     >
                       <Flex alignItems={"center"}>
@@ -130,13 +134,10 @@ const AllAttendances = () => {
                       </Flex>
                     </Button>
                     <Button
-                      size={"sm"}
-                      backgroundColor={"red.700"}
+                      borderRadius={5}
+                      colorScheme={"red"}
                       style={{ boxShadow: "none" }}
-                      borderRadius={0}
-                      _hover={{ backgroundColor: "red.800" }}
-                      _active={{ backgroundColor: "red.800" }}
-                      color="white"
+                      size={"sm"}
                       onClick={() => handleClick(number)}
                     >
                       <Flex alignItems={"center"}>
