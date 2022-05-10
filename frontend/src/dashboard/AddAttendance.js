@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
+// Chakra components
 import {
   TableContainer,
   Table,
@@ -13,33 +15,66 @@ import {
   Flex,
   Icon,
   Heading,
+  Stack,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  AlertTitle,
+  Spinner,
 } from "@chakra-ui/react";
 
+// Icons
 import { GiCheckMark } from "react-icons/gi";
 import { ImUserCheck } from "react-icons/im";
 import { AiOutlineRollback } from "react-icons/ai";
 
-const data = {
-  name: "Gabriel Rockson",
-  student_id: "20594513",
-};
+// Custom hooks
+import { useGradeAndStudents } from "../hooks/custom-hooks";
 
 const AddAttendance = () => {
   const navigate = useNavigate();
+  const { isFetching, students, grade } = useGradeAndStudents();
+
+  if (isFetching) {
+    return (
+      <>
+        <Flex justify="center" align="center" py={5}>
+          <Spinner color="telegram.700" />
+        </Flex>
+      </>
+    );
+  }
+
+  if (!isFetching && students?.length === 0) {
+    return (
+      <>
+        <Flex py={5}>
+          <Alert status="info">
+            <Stack direction="column" spacing={5}>
+              <Flex direction="row">
+                <AlertIcon />
+                <AlertTitle>Empty Class</AlertTitle>
+              </Flex>
+              <AlertDescription>
+                Sorry!!! There are no students registered in this class yet, you
+                can go to the 'Class List' page to register a new student.
+              </AlertDescription>
+            </Stack>
+          </Alert>
+        </Flex>
+      </>
+    );
+  }
 
   return (
     <>
       <Button
+        borderRadius={5}
+        colorScheme={"orange"}
+        style={{ boxShadow: "none" }}
         mt={6}
         size={["md"]}
         fontSize={"14px"}
-        borderRadius={0}
-        style={{ boxShadow: "none" }}
-        backgroundColor={"orange.800"}
-        color={"white"}
-        _hover={{ backgroundColor: "orange.900" }}
-        _active={{ backgroundColor: "orange.900" }}
-        shadow={"md"}
         onClick={() => navigate(-1)}
       >
         <Flex alignItems={"center"}>
@@ -49,7 +84,7 @@ const AddAttendance = () => {
 
       <Flex mt={3} mb={6} justifyContent={"center"}>
         <Heading fontSize={["lg", "xl", "2xl"]}>
-          Class 2 Attendance - {new Date().toDateString()}
+          Class {grade?.grade} Attendance - {new Date().toDateString()}
         </Heading>
       </Flex>
 
@@ -63,12 +98,12 @@ const AddAttendance = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {[1, 2, 3, 4, 5].map((number) => (
-              <Tr key={number}>
-                <Td>{data["name"]}</Td>
-                <Td>{data["student_id"]}</Td>
+            {students?.map((student) => (
+              <Tr key={student.id}>
+                <Td>{`${student.first_name} ${student.middle_name} ${student.last_name}`}</Td>
+                <Td>{student.student_id}</Td>
                 <Td>
-                  <Select borderRadius={0}>
+                  <Select borderRadius={5}>
                     <option value="P">Present</option>
                     <option value="UNEX">
                       SC-UNEX ( Unexcused / Unverified )
@@ -80,13 +115,9 @@ const AddAttendance = () => {
                 </Td>
                 <Td>
                   <Button
-                    backgroundColor={"telegram.600"}
-                    color="white"
-                    borderRadius={0}
+                    colorScheme={"telegram"}
+                    borderRadius={5}
                     style={{ boxShadow: "none" }}
-                    _hover={{ backgroundColor: "telegram.700" }}
-                    _focus={{ backgroundColor: "telegram.800" }}
-                    _active={{ backgroundColor: "telegram.800" }}
                   >
                     <Flex alignItems="center">
                       <Icon as={ImUserCheck} mr={2} /> Save
@@ -99,13 +130,9 @@ const AddAttendance = () => {
         </Table>
         <Flex justifyContent={"center"} py={2}>
           <Button
-            backgroundColor={"green.600"}
-            color="white"
-            borderRadius={0}
+            borderRadius={5}
+            colorScheme={"telegram"}
             style={{ boxShadow: "none" }}
-            _hover={{ backgroundColor: "green.700" }}
-            _focus={{ backgroundColor: "green.800" }}
-            _active={{ backgroundColor: "green.800" }}
           >
             <Flex alignItems={"center"}>
               <Icon as={GiCheckMark} mr={2} /> Save Attendance
