@@ -13,14 +13,14 @@ class StudentAttendanceSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "student",
-            "attendance_created",
-            "attendance_updated",
+            "created",
+            "updated",
             "attendance",
             "attendance_display",
         ]
         read_only_fields = [
-            "attendance_created",
-            "attendance_updated",
+            "created",
+            "updated",
         ]
         extra_kwargs = {
             "student": {"write_only": True},

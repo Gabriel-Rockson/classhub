@@ -80,12 +80,10 @@ class StudentAttendance(models.Model):
         blank=False,
         related_name="attendances",
     )
-    attendance_created = models.DateTimeField(
+    created = models.DateField(
         _("Attendance Creation Date"), blank=False, null=False, auto_now_add=True
     )
-    attendance_updated = models.DateTimeField(
-        _("Last Modified"), null=True, blank=True, auto_now=True
-    )
+    updated = models.DateField(_("Last Modified"), null=True, blank=True, auto_now=True)
     attendance = models.CharField(
         verbose_name=_("Attendance"),
         max_length=4,
@@ -96,4 +94,4 @@ class StudentAttendance(models.Model):
     )
 
     def __str__(self):
-        return f"Attendance on - {self.attendance_created}"
+        return f"Attendance on - {self.created}"
