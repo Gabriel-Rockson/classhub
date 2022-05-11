@@ -109,7 +109,7 @@ const TopNavBar = () => {
                   style={{ boxShadow: "none" }}
                   color={"red.600"}
                 />
-                <DrawerHeader>StudentsAttendance</DrawerHeader>
+                <DrawerHeader>ClassHub</DrawerHeader>
 
                 <DrawerBody>
                   <SearchInput />
@@ -127,7 +127,7 @@ const TopNavBar = () => {
               navigate("/", { replace: true });
             }}
           >
-            StudentsAttendance
+            ClassHub
           </Heading>
         </Flex>
         <Flex alignItems={"center"}>
