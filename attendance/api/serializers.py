@@ -26,7 +26,6 @@ class StudentAttendanceSerializer(serializers.ModelSerializer):
             "updated",
         ]
         extra_kwargs = {
-            "student": {"write_only": True},
             "attendance": {"write_only": True},
         }
 
