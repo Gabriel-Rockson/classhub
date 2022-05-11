@@ -3,11 +3,18 @@ from attendance.models import StudentAttendance, Class
 from attendance.api.serializers import StudentAttendanceSerializer
 from student.api.serializers import ClassSerializer
 from rest_framework.permissions import IsAuthenticated
+from datetime import datetime
 
 
 class StudentAttendanceListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = StudentAttendance.objects.all()
+    serializer_class = StudentAttendanceSerializer
+
+
+class StudentAttendanceTodayListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = StudentAttendance.objects.filter(created=datetime.today().date())
     serializer_class = StudentAttendanceSerializer
 
 
