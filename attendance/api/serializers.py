@@ -31,10 +31,6 @@ class StudentAttendanceSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        """
-        1. check if the attendance for today already exists for this student
-        2. raise validation error if attendance exists
-        """
         student_attendance_today_exists = False
         try:
             student_attendance_today = StudentAttendance.objects.get(
