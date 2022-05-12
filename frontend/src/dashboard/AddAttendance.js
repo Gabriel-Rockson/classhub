@@ -31,6 +31,7 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 
 // Icons
+import { VscCheckAll } from "react-icons/vsc";
 import { ImUserCheck } from "react-icons/im";
 import { AiOutlineRollback } from "react-icons/ai";
 
@@ -49,7 +50,6 @@ const AddAttendance = () => {
     AttendanceService.getTodayAttendances()
       .then((response) => {
         setAttendanceToday(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -208,7 +208,11 @@ const AddAttendance = () => {
                           }
                         >
                           <Flex alignItems="center">
-                            <Icon as={ImUserCheck} mr={2} />{" "}
+                            {checkAttendance(isSubmitting, status, student) ? (
+                              <Icon as={VscCheckAll} mr={2} />
+                            ) : (
+                              <Icon as={ImUserCheck} mr={2} />
+                            )}
                             {checkAttendance(isSubmitting, status, student)
                               ? "Saved"
                               : "Save"}
