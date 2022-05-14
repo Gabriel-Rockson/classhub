@@ -1,9 +1,11 @@
+import React from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 import authHeader from "./auth-header";
 import AuthService from "./auth.service";
 
-const BASE_API_URL = "https://classhub.onrender.com/api/v1/";
-// const BASE_API_URL = "http://localhost:8000/api/v1/";
+// const BASE_API_URL = "https://classhub.onrender.com/api/v1/";
+const BASE_API_URL = "http://localhost:8000/api/v1/";
 
 const axios_instance = axios.create({
   baseURL: BASE_API_URL,
@@ -30,6 +32,7 @@ axios_instance.interceptors.response.use(
   (error) => {
     const originalConfig = error.config;
     // TODO if the original config has _retry = true, navigate to the homepage
+
     if (error.response) {
       if (error.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
@@ -46,7 +49,8 @@ axios_instance.interceptors.response.use(
           })
           .catch((_error) => {
             if (_error.response && _error.response?.data) {
-              return Promise.reject(_error.reponse.data);
+              AuthService.logout();
+              return <Navigate to="/app/login" replace={true} />;
             }
             return Promise.reject(_error);
           });
