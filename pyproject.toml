@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "students-attendance"
+name = "classhub"
 version = "1.0.0"
-description = "Students attendance web application"
+description = "ClusHub web application"
 authors = ["Gabriel Rockson <thegabrielrockson@gmail.com>"]
 
 [tool.poetry.dependencies]
