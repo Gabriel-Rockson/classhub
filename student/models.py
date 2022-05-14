@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from attendance.models import Class
+from attendance.models import Grade
 import uuid
 
 
@@ -68,13 +68,13 @@ class Student(models.Model):
         verbose_name=_("Race"), max_length=3, choices=Race.choices, default=Race.WHITE
     )
     grade = models.ForeignKey(
-        "attendance.Class",
+        "attendance.Grade",
         on_delete=models.CASCADE,
         null=False,
         blank=False,
         related_name="students",
         help_text="What class is this student?",
-        default=Class.Grades.ONE,
+        default=Grade.Grades.ONE,
     )
     student_id = models.CharField(
         verbose_name=_("Student's ID"), max_length=20, null=True, blank=True

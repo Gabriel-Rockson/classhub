@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Class
+from .models import Grade
 
 
-@admin.register(Class)
-class ClassAdmin(admin.ModelAdmin):
+@admin.register(Grade)
+class GradeAdmin(admin.ModelAdmin):
     list_display = ["grade"]

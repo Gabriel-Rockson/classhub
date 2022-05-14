@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from student.models import Student
 from attendance.api.serializers import StudentAttendanceSerializer
-from attendance.models import Class
+from attendance.models import Grade
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -37,12 +37,12 @@ class StudentSerializer(serializers.ModelSerializer):
         extra_kwargs = {"race": {"write_only": True}, "gender": {"write_only": True}}
 
 
-# ! - I am defining the Class Serializer here so as to avoid import errors
-class ClassSerializer(serializers.ModelSerializer):
+# ! - I am defining the Grade Serializer here so as to avoid import errors
+class GradeSerializer(serializers.ModelSerializer):
     students = StudentSerializer(read_only=True, many=True)
 
     class Meta:
-        model = Class
+        model = Grade
         fields = [
             "id",
             "grade",
@@ -50,8 +50,8 @@ class ClassSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        if Class.objects.filter(grade=validated_data["grade"]):
-            raise serializers.ValidationError(f"Class {validated_data['grade']} exists already")
-        instance = super(ClassSerializer, self).create(validated_data)
+        if Grade.objects.filter(grade=validated_data["grade"]):
+            raise serializers.ValidationError(f"Grade {validated_data['grade']} exists already")
+        instance = super(GradeSerializer, self).create(validated_data)
         instance.save()
         return instance

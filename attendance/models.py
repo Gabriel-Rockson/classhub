@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 import uuid
 
 
-class Class(models.Model):
+class Grade(models.Model):
     """Model to represent individual classes"""
 
     class Grades(models.TextChoices):
@@ -48,8 +48,8 @@ class Class(models.Model):
         return f"Grade {self.grade}"
 
     class Meta:
-        verbose_name = "Class"
-        verbose_name_plural = "Classes"
+        verbose_name = "Grade"
+        verbose_name_plural = "Gradees"
         ordering = ("grade",)
 
 

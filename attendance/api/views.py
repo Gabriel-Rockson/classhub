@@ -1,7 +1,7 @@
 from rest_framework import generics
-from attendance.models import StudentAttendance, Class
+from attendance.models import StudentAttendance, Grade
 from attendance.api.serializers import StudentAttendanceSerializer
-from student.api.serializers import ClassSerializer
+from student.api.serializers import GradeSerializer
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
 
@@ -25,14 +25,14 @@ class StudentAttendanceDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = StudentAttendanceSerializer
 
 
-class ClassListCreateAPIView(generics.ListCreateAPIView):
+class GradeListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = Class.objects.all()
-    serializer_class = ClassSerializer
+    queryset = Grade.objects.all()
+    serializer_class = GradeSerializer
 
 
-class ClassDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class GradeDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     lookup_field = "id"
-    queryset = Class.objects.all()
-    serializer_class = ClassSerializer
+    queryset = Grade.objects.all()
+    serializer_class = GradeSerializer

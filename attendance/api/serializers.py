@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from attendance.models import Class, StudentAttendance
+from attendance.models import Grade, StudentAttendance
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 

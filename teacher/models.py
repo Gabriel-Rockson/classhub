@@ -53,7 +53,7 @@ class Teacher(models.Model):
         max_length=255,
     )
     grade = models.OneToOneField(
-        "attendance.Class",
+        "attendance.Grade",
         on_delete=models.CASCADE,
         null=True,
         blank=False,
