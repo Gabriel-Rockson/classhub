@@ -67,5 +67,14 @@ class RegisterSerializer(UserSerializer):
         try:
             user = User.objects.get(username=validated_data["username"])
         except ObjectDoesNotExist:
-            user = User.objects.create_user(**validated_data)
+            user = User.objects.create_teacher_user(**validated_data)
         return user
+
+
+class SuperUserRegisterSerializer(RegisterSerializer):
+    
+    def create(self, validated_data):
+        try:
+            user = User.objects.get(username=validated_data["username"])
+        except ObjectDoesNotExist:
+            user = User.objects.create_superuser(**validated_data)

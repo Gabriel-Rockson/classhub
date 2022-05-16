@@ -3,7 +3,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from users.api.serializers import LoginSerializer, RegisterSerializer
+from users.api.serializers import LoginSerializer, RegisterSerializer, SuperUserRegisterSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from users.api.serializers import UserSerializer
 from django.contrib.auth import get_user_model
@@ -49,6 +49,9 @@ class RegistrationAPIView(generics.CreateAPIView, TokenObtainPairView):
             },
             status=status.HTTP_201_CREATED,
         )
+
+class SuperAdminUserRegistrationAPIView(RegistrationAPIView):
+    serializer_class = SuperUserRegisterSerializer
 
 
 class RefreshTokenAPIView(generics.CreateAPIView, TokenRefreshView):
