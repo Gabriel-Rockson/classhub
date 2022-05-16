@@ -18,6 +18,8 @@ import * as yup from "yup";
 
 import AuthService from "../services/auth.service";
 
+import AuthNavBar from "../components/navbar/AuthNavBar";
+
 export default function Register() {
   const navigate = useNavigate();
   const validationSchema = yup.object().shape({
@@ -44,7 +46,9 @@ export default function Register() {
 
   return (
     <>
-      <Flex bg="whitesmoke" align="center" justify="center" h="100vh">
+      <Flex direction="column" bg="whitesmoke" align="center" justify="center" h="100vh">
+        <AuthNavBar />
+
         <Box w={["80%", 96]} px={5} py={8}>
           <Heading
             py={[3, 4, 5, 6]}

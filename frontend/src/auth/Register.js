@@ -18,6 +18,8 @@ import * as yup from "yup";
 
 import AuthService from "../services/auth.service";
 
+import AuthNavBar from "../components/navbar/AuthNavBar";
+
 export default function Register() {
   const navigate = useNavigate();
   const validationSchema = yup.object().shape({
@@ -43,15 +45,23 @@ export default function Register() {
 
   return (
     <>
-      <Flex bg="whitesmoke" align="center" justify="center" h="100vh">
+      <Flex
+        direction="column"
+        bg="whitesmoke"
+        align="center"
+        justify="center"
+        h="100vh"
+      >
+        <AuthNavBar />
+
         <Box w={["80%", 96]} px={5} py={8}>
           <Heading
-            py={[3, 4, 5, 6]}
+            py={[2]}
             fontSize={["2xl", "3xl", "4xl"]}
             textAlign="center"
-            color="facebook.800"
+            color="yellow.700"
           >
-            Let's Help You Manage Your Students Info
+            Let's Help You Manage Keep Track of Your Students' Data.
           </Heading>
           <Heading py={[3, 4, 5, 6]} fontSize={["2xl"]} textAlign="center">
             Create New Account

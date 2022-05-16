@@ -12,10 +12,13 @@ import {
   Link,
   Button,
   Spinner,
+  Text
 } from "@chakra-ui/react";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 import AuthService from "../services/auth.service";
+
+import AuthNavBar from "../components/navbar/AuthNavBar";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -44,90 +47,101 @@ export default function Login() {
 
   return (
     <>
-      <Flex bg="whitesmoke" align="center" justify="center" h="100vh">
-        <Box w={["80%", 96]} px={5} py={8}>
-          <Heading
-            py={[3, 4, 5, 6]}
-            fontSize={["2xl", "3xl", "4xl"]}
-            textAlign="center"
-          >
-            Welcome! Login to ClassHub
-          </Heading>
-          <Formik
-            initialValues={formData}
-            validationSchema={validationSchema}
-            onSubmit={handleFormSubmit}
-          >
-            {({ errors, handleSubmit, touched, isSubmitting }) => (
-              <form method="post" onSubmit={handleSubmit}>
-                <VStack spacing={6}>
-                  <FormControl isInvalid={!!errors.detail}>
-                    <FormErrorMessage fontWeight="bold">
-                      {errors.detail}
-                    </FormErrorMessage>
-                  </FormControl>
-                  <FormControl
-                    colorScheme="messenger"
-                    isInvalid={!!errors.username && touched.username}
-                  >
-                    <FormLabel htmlFor="username">Username</FormLabel>
-                    <Field
-                      as={Input}
-                      type="text"
-                      id="username"
-                      name="username"
-                      variant="filled"
-                      borderColor="gray.200"
-                      _hover={{ borderColor: "facebook.600" }}
-                    />
-                    <FormErrorMessage fontWeight="bold">
-                      {errors.username}
-                    </FormErrorMessage>
-                  </FormControl>
-                  <FormControl
-                    colorScheme="messenger"
-                    isInvalid={!!errors.password && touched.password}
-                  >
-                    <FormLabel htmlFor="password">Password</FormLabel>
-                    <Field
-                      as={Input}
-                      type="password"
-                      id="password"
-                      name="password"
-                      variant="filled"
-                      borderColor="gray.200"
-                      _hover={{ borderColor: "facebook.600" }}
-                    />
-                    <FormErrorMessage fontWeight="bold">
-                      {errors.password}
-                    </FormErrorMessage>
-                  </FormControl>
-                </VStack>
-                <Button
-                  borderRadius={5}
-                  colorScheme={"telegram"}
-                  style={{ boxShadow: "none" }}
-                  mt={8}
-                  type="submit"
-                  w="full"
-                >
-                  {isSubmitting && <Spinner color="white" mr={2} />} Login
-                </Button>
-              </form>
-            )}
-          </Formik>
-          <Box mt={2}>
-            <Link
-              as={ReactLink}
-              to="/app/register"
-              color={"telegram.700"}
-              style={{ boxShadow: "none" }}
+      <Box>
+        <Flex
+          direction="column"
+          bg="whitesmoke"
+          align="center"
+          justify="center"
+          h="100vh"
+        >
+          <AuthNavBar />
+
+          <Box w={["80%", 96]} px={5} py={8}>
+            <Heading
+              py={[3, 4, 5, 6]}
+              fontSize={["2xl", "3xl", "4xl"]}
+              textAlign="center"
             >
-              Not having an account? register
-            </Link>
+              <Text color="yellow.700" pb={-2}>Welcome!</Text>
+              Login to Your ClassHub Account
+            </Heading>
+            <Formik
+              initialValues={formData}
+              validationSchema={validationSchema}
+              onSubmit={handleFormSubmit}
+            >
+              {({ errors, handleSubmit, touched, isSubmitting }) => (
+                <form method="post" onSubmit={handleSubmit}>
+                  <VStack spacing={6}>
+                    <FormControl isInvalid={!!errors.detail}>
+                      <FormErrorMessage fontWeight="bold">
+                        {errors.detail}
+                      </FormErrorMessage>
+                    </FormControl>
+                    <FormControl
+                      colorScheme="messenger"
+                      isInvalid={!!errors.username && touched.username}
+                    >
+                      <FormLabel htmlFor="username">Username</FormLabel>
+                      <Field
+                        as={Input}
+                        type="text"
+                        id="username"
+                        name="username"
+                        variant="filled"
+                        borderColor="gray.200"
+                        _hover={{ borderColor: "facebook.600" }}
+                      />
+                      <FormErrorMessage fontWeight="bold">
+                        {errors.username}
+                      </FormErrorMessage>
+                    </FormControl>
+                    <FormControl
+                      colorScheme="messenger"
+                      isInvalid={!!errors.password && touched.password}
+                    >
+                      <FormLabel htmlFor="password">Password</FormLabel>
+                      <Field
+                        as={Input}
+                        type="password"
+                        id="password"
+                        name="password"
+                        variant="filled"
+                        borderColor="gray.200"
+                        _hover={{ borderColor: "facebook.600" }}
+                      />
+                      <FormErrorMessage fontWeight="bold">
+                        {errors.password}
+                      </FormErrorMessage>
+                    </FormControl>
+                  </VStack>
+                  <Button
+                    borderRadius={5}
+                    colorScheme={"telegram"}
+                    style={{ boxShadow: "none" }}
+                    mt={8}
+                    type="submit"
+                    w="full"
+                  >
+                    {isSubmitting && <Spinner color="white" mr={2} />} Login
+                  </Button>
+                </form>
+              )}
+            </Formik>
+            <Box mt={2}>
+              <Link
+                as={ReactLink}
+                to="/app/register"
+                color={"telegram.700"}
+                style={{ boxShadow: "none" }}
+              >
+                Not having an account? register
+              </Link>
+            </Box>
           </Box>
-        </Box>
-      </Flex>
+        </Flex>
+      </Box>
     </>
   );
 }
