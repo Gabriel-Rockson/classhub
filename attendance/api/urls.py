@@ -5,6 +5,7 @@ from attendance.api.views import (
     StudentAttendanceDetailAPIView,
     GradeListCreateAPIView,
     GradeDetailAPIView,
+    GradeAttendancesListAPIView,
 )
 
 
@@ -14,4 +15,5 @@ urlpatterns = [
     path("attendances/<str:id>/", StudentAttendanceDetailAPIView.as_view()),
     path("classes/", GradeListCreateAPIView.as_view()),
     path("classes/<str:id>/", GradeDetailAPIView.as_view()),
+    path("classes/attendances/<str:id>/", GradeAttendancesListAPIView.as_view())
 ]
