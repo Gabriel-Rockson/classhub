@@ -60,6 +60,12 @@ const AllAttendances = () => {
     }
   }, [grade]);
 
+  const handleViewMore = () => {
+    navigate("/app/dashboard/class-attendance/attendance-detail/", {
+      replace: true,
+    });
+  };
+
   // Function to group the attendances according to when they were created
   const groupAttendances = (array, key) => {
     return array?.reduce((groupedAttendances, currentAttendance) => {
@@ -113,7 +119,7 @@ const AllAttendances = () => {
                 colorScheme={"telegram"}
                 style={{ boxShadow: "none" }}
                 size={"sm"}
-                onClick={() => handleClick(number)}
+                onClick={handleViewMore}
               >
                 <Flex alignItems={"center"}>
                   <Icon as={IoEyeSharp} mr={2} />
@@ -125,7 +131,7 @@ const AllAttendances = () => {
                 colorScheme={"red"}
                 style={{ boxShadow: "none" }}
                 size={"sm"}
-                onClick={() => handleClick(number)}
+                disabled
               >
                 <Flex alignItems={"center"}>
                   <Icon as={MdDelete} mr={2} />
