@@ -10,6 +10,8 @@ class Grade(models.Model):
     """Model to represent individual classes"""
 
     class Grades(models.TextChoices):
+        THREE_K = "3K", _("3K")
+        FOUR_K = "4K", _("4K")
         ONE = 1, _("1")
         TWO = 2, _("2")
         THREE = 3, _("3")
@@ -22,10 +24,6 @@ class Grade(models.Model):
         TEN = 10, _("10")
         ELEVEN = 11, _("11")
         TWELVE = 12, _("12")
-        THIRTEEN = 13, _("13")
-        FOURTEEN = 14, _("14")
-        FIFTEEN = 15, _("15")
-        SIXTEEN = 16, _("16")
 
     id = models.UUIDField(
         verbose_name=_("ID"),
