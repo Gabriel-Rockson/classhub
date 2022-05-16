@@ -114,6 +114,7 @@ const AuthService = {
   login,
   logout,
   register,
+  registerSuperAdmin,
   refreshToken,
   setUser,
   setAccessToken,

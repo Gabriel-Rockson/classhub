@@ -31,7 +31,7 @@ export default function Register() {
 
   const handleFormSubmit = (data, { setSubmitting, setErrors }) => {
     setSubmitting(true);
-    AuthService.register(data.username, data.email, data.password)
+    AuthService.registerSuperAdmin(data.username, data.email, data.password)
       .then((res) => {
         navigate("/admin", { replace: true });
         window.location.reload();
