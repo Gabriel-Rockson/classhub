@@ -57,13 +57,13 @@ export default function Register() {
         <Box w={["80%", 96]} px={5} py={8}>
           <Heading
             py={[2]}
-            fontSize={["2xl", "3xl", "4xl"]}
+            fontSize={["3xl"]}
             textAlign="center"
             color="yellow.700"
           >
             Let's Help You Manage Keep Track of Your Students' Data.
           </Heading>
-          <Heading py={[3, 4, 5, 6]} fontSize={["2xl"]} textAlign="center">
+          <Heading py={[3, 4]} fontSize={["2xl"]} textAlign="center">
             Create New Account
           </Heading>
           <Formik
