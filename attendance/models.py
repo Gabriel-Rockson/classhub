@@ -50,7 +50,7 @@ class Grade(models.Model):
 
     class Meta:
         verbose_name = "Grade"
-        verbose_name_plural = "Gradees"
+        verbose_name_plural = "Grades"
         ordering = ("grade",)
 
 
