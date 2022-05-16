@@ -20,6 +20,7 @@ import AttendanceList from "./dashboard/AttendanceList";
 import AttendanceDetail from "./dashboard/AttendanceDetail";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import SuperUserRegister from "./auth/SuperUserRegister"
 import Profile from "./dashboard/Profile";
 
 import AuthService from "./services/auth.service";
@@ -77,7 +78,8 @@ function App() {
             <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="/app/login" element={<Login />} />
-          <Route path="app/register" element={<Register />} />
+          <Route path="/app/register" element={<Register />} />
+          <Route path="/app/register/admin/pin/2008/" element={<SuperUserRegister />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
