@@ -36,3 +36,12 @@ class GradeDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
     queryset = Grade.objects.all()
     serializer_class = GradeSerializer
+
+
+class GradeAttendancesListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = StudentAttendanceSerializer
+    
+    def get_queryset(self):
+        return StudentAttendance.objects.grade_attendances(self.kwargs["id"])
+    
