@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 import uuid
+from django.db.models.functions import TruncDate
+from itertools import groupby
+from operator import attrgetter
 
 
 class Grade(models.Model):
@@ -53,6 +56,10 @@ class Grade(models.Model):
         ordering = ("grade",)
 
 
+class StudentAttendanceManager(models.Manager):
+    def grade_attendances(self, grade_id):
+        return self.filter(student__grade=grade_id)
+
 class StudentAttendance(models.Model):
     """Model to represent individual attendance record of a student"""
 
@@ -93,5 +100,7 @@ class StudentAttendance(models.Model):
         choices=AttendanceOptions.choices,
     )
 
+    objects = StudentAttendanceManager()
+
     def __str__(self):
-        return f"Attendance on - {self.created}"
+        return f"StudentAttendance(student={self.student}, attendance={self.get_attendance_display()})"
