@@ -7,7 +7,6 @@ import {
   Routes,
   Route,
   Navigate,
-  Outlet,
 } from "react-router-dom";
 
 import HomePage from "./HomePage";
@@ -18,6 +17,7 @@ import StudentDetail from "./dashboard/StudentDetail";
 import StudentList from "./dashboard/StudentList";
 import AddAttendance from "./dashboard/AddAttendance";
 import AttendanceList from "./dashboard/AttendanceList";
+import AttendanceDetail from "./dashboard/AttendanceDetail";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Profile from "./dashboard/Profile";
@@ -72,6 +72,7 @@ function App() {
             <Route path="class-attendance" element={<ClassAttendance />}>
               <Route index element={<AttendanceList />} />
               <Route path="add-attendance" element={<AddAttendance />} />
+              <Route path="attendance-detail" element={<AttendanceDetail />} />
             </Route>
             <Route path="profile" element={<Profile />} />
           </Route>
