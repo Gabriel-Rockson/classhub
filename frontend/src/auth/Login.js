@@ -46,8 +46,12 @@ export default function Login() {
     <>
       <Flex bg="whitesmoke" align="center" justify="center" h="100vh">
         <Box w={["80%", 96]} px={5} py={8}>
-          <Heading py={3} textAlign="center" fontSize="2xl">
-            Login
+          <Heading
+            py={[3, 4, 5, 6]}
+            fontSize={["2xl", "3xl", "4xl"]}
+            textAlign="center"
+          >
+            Welcome! Login to ClassHub
           </Heading>
           <Formik
             initialValues={formData}
@@ -58,7 +62,9 @@ export default function Login() {
               <form method="post" onSubmit={handleSubmit}>
                 <VStack spacing={6}>
                   <FormControl isInvalid={!!errors.detail}>
-                    <FormErrorMessage fontWeight="bold">{errors.detail}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">
+                      {errors.detail}
+                    </FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -71,9 +77,12 @@ export default function Login() {
                       id="username"
                       name="username"
                       variant="filled"
-                      borderColor="facebook.200"
+                      borderColor="gray.200"
+                      _hover={{ borderColor: "facebook.600" }}
                     />
-                    <FormErrorMessage fontWeight="bold">{errors.username}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">
+                      {errors.username}
+                    </FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -86,9 +95,12 @@ export default function Login() {
                       id="password"
                       name="password"
                       variant="filled"
-                      borderColor="facebook.200"
+                      borderColor="gray.200"
+                      _hover={{ borderColor: "facebook.600" }}
                     />
-                    <FormErrorMessage fontWeight="bold">{errors.password}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">
+                      {errors.password}
+                    </FormErrorMessage>
                   </FormControl>
                 </VStack>
                 <Button

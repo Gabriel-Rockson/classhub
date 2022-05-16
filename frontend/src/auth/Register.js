@@ -45,8 +45,16 @@ export default function Register() {
     <>
       <Flex bg="whitesmoke" align="center" justify="center" h="100vh">
         <Box w={["80%", 96]} px={5} py={8}>
-          <Heading py={3} fontSize="2xl" textAlign="center">
-            Register Account
+          <Heading
+            py={[3, 4, 5, 6]}
+            fontSize={["2xl", "3xl", "4xl"]}
+            textAlign="center"
+            color="facebook.800"
+          >
+            Let's Help You Manage Your Students Info
+          </Heading>
+          <Heading py={[3, 4, 5, 6]} fontSize={["2xl"]} textAlign="center">
+            Create New Account
           </Heading>
           <Formik
             initialValues={{
@@ -61,7 +69,9 @@ export default function Register() {
               <form onSubmit={handleSubmit}>
                 <VStack spacing={6}>
                   <FormControl isInvalid={!!errors.detail}>
-                    <FormErrorMessage fontWeight="bold">{errors.detail}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">
+                      {errors.detail}
+                    </FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -74,9 +84,12 @@ export default function Register() {
                       id="username"
                       name="username"
                       variant="filled"
-                      borderColor="facebook.200"
+                      borderColor="gray.200"
+                      _hover={{ borderColor: "facebook.600" }}
                     />
-                    <FormErrorMessage fontWeight="bold">{errors.username}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">
+                      {errors.username}
+                    </FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -89,9 +102,12 @@ export default function Register() {
                       id="email"
                       name="email"
                       variant="filled"
-                      borderColor="facebook.200"
+                      borderColor="gray.200"
+                      _hover={{ borderColor: "facebook.600" }}
                     />
-                    <FormErrorMessage fontWeight="bold">{errors.email}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">
+                      {errors.email}
+                    </FormErrorMessage>
                   </FormControl>
                   <FormControl
                     colorScheme="messenger"
@@ -104,9 +120,12 @@ export default function Register() {
                       id="password"
                       name="password"
                       variant="filled"
-                      borderColor="facebook.200"
+                      borderColor="gray.200"
+                      _hover={{ borderColor: "facebook.600" }}
                     />
-                    <FormErrorMessage fontWeight="bold">{errors.password}</FormErrorMessage>
+                    <FormErrorMessage fontWeight="bold">
+                      {errors.password}
+                    </FormErrorMessage>
                   </FormControl>
                 </VStack>
                 <Button
