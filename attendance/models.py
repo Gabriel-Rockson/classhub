@@ -1,12 +1,17 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 import uuid
+from django.db.models.functions import TruncDate
+from itertools import groupby
+from operator import attrgetter
 
 
-class Class(models.Model):
+class Grade(models.Model):
     """Model to represent individual classes"""
 
     class Grades(models.TextChoices):
+        THREE_K = "3K", _("3K")
+        FOUR_K = "4K", _("4K")
         ONE = 1, _("1")
         TWO = 2, _("2")
         THREE = 3, _("3")
@@ -19,10 +24,6 @@ class Class(models.Model):
         TEN = 10, _("10")
         ELEVEN = 11, _("11")
         TWELVE = 12, _("12")
-        THIRTEEN = 13, _("13")
-        FOURTEEN = 14, _("14")
-        FIFTEEN = 15, _("15")
-        SIXTEEN = 16, _("16")
 
     id = models.UUIDField(
         verbose_name=_("ID"),
@@ -48,10 +49,14 @@ class Class(models.Model):
         return f"Grade {self.grade}"
 
     class Meta:
-        verbose_name = "Class"
-        verbose_name_plural = "Classes"
+        verbose_name = "Grade"
+        verbose_name_plural = "Grades"
         ordering = ("grade",)
 
+
+class StudentAttendanceManager(models.Manager):
+    def grade_attendances(self, grade_id):
+        return self.filter(student__grade=grade_id)
 
 class StudentAttendance(models.Model):
     """Model to represent individual attendance record of a student"""
@@ -93,5 +98,7 @@ class StudentAttendance(models.Model):
         choices=AttendanceOptions.choices,
     )
 
+    objects = StudentAttendanceManager()
+
     def __str__(self):
-        return f"Attendance on - {self.created}"
+        return f"StudentAttendance(student={self.student}, attendance={self.get_attendance_display()})"

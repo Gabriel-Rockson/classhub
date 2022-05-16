@@ -1,15 +1,14 @@
 [tool.poetry]
-name = "students-attendance"
-version = "1.0.0"
-description = "Students attendance web application"
+name = "classhub"
+version = "1.0.1"
+description = "ClassHub web application"
 authors = ["Gabriel Rockson <thegabrielrockson@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-Django = "^4.0.4"
+python = "^3.10"
+Django = "4.0.0"
 djangorestframework = "^3.13.1"
 django-extensions = "^3.1.5"
-ipython = "^8.2.0"
 psycopg2-binary = "^2.9.3"
 waitress = "^2.1.1"
 whitenoise = {extras = ["brotli"], version = "^6.0.0"}
@@ -23,6 +22,9 @@ djangorestframework-simplejwt = "^5.1.0"
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"
 Werkzeug = "^2.1.1"
+ptipython = "^1.0.1"
+ipython = "^8.2.0"
+bpython = "^0.22.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

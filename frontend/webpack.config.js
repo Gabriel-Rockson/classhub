@@ -1,12 +1,14 @@
-const path = require('path');
+const path = require("path");
+// const zlib = require("zlib");
+// const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   entry: ["@babel/polyfill", "./src/index.js"],
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: path.resolve(__dirname, 'src'),
+        test: /\.(js||jsx)$/,
+        include: path.resolve(__dirname, "src"),
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",

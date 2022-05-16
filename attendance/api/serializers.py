@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from attendance.models import Class, StudentAttendance
+from attendance.models import Grade, StudentAttendance
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
@@ -25,9 +25,9 @@ class StudentAttendanceSerializer(serializers.ModelSerializer):
             "created",
             "updated",
         ]
-        extra_kwargs = {
-            "attendance": {"write_only": True},
-        }
+        # extra_kwargs = {
+        #     "attendance": {"write_only": True},
+        # }
 
     def create(self, validated_data):
         student_attendance_today_exists = False

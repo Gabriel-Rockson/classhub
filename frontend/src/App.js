@@ -7,7 +7,6 @@ import {
   Routes,
   Route,
   Navigate,
-  Outlet,
 } from "react-router-dom";
 
 import HomePage from "./HomePage";
@@ -18,8 +17,10 @@ import StudentDetail from "./dashboard/StudentDetail";
 import StudentList from "./dashboard/StudentList";
 import AddAttendance from "./dashboard/AddAttendance";
 import AttendanceList from "./dashboard/AttendanceList";
+import AttendanceDetail from "./dashboard/AttendanceDetail";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import SuperUserRegister from "./auth/SuperUserRegister"
 import Profile from "./dashboard/Profile";
 
 import AuthService from "./services/auth.service";
@@ -72,11 +73,13 @@ function App() {
             <Route path="class-attendance" element={<ClassAttendance />}>
               <Route index element={<AttendanceList />} />
               <Route path="add-attendance" element={<AddAttendance />} />
+              <Route path="attendance-detail" element={<AttendanceDetail />} />
             </Route>
             <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="/app/login" element={<Login />} />
-          <Route path="app/register" element={<Register />} />
+          <Route path="/app/register" element={<Register />} />
+          <Route path="/app/register/admin/pin/2008/" element={<SuperUserRegister />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
