@@ -121,7 +121,7 @@ const TopNavBar = () => {
           <Heading
             fontSize={["lg", "xl", "xl"]}
             color={"telegram.900"}
-            fontFamily={"fantasy"}
+            fontFamily={"sans-serif"}
             cursor="pointer"
             onClick={() => {
               navigate("/", { replace: true });
