@@ -25,9 +25,9 @@ class StudentAttendanceSerializer(serializers.ModelSerializer):
             "created",
             "updated",
         ]
-        extra_kwargs = {
-            "attendance": {"write_only": True},
-        }
+        # extra_kwargs = {
+        #     "attendance": {"write_only": True},
+        # }
 
     def create(self, validated_data):
         student_attendance_today_exists = False
