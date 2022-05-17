@@ -11,8 +11,8 @@ class Grade(models.Model):
     """Model to represent individual classes"""
 
     class Grades(models.TextChoices):
-        PRE_K = "P", _("Pre-K")
-        KINDERGARTEN = "K", _("Kindergarten")
+        PRE_K = "Pre-K", _("Pre-K")
+        KINDERGARTEN = "Kindergarten", _("Kindergarten")
         ONE = 1, _("1")
         TWO = 2, _("2")
         THREE = 3, _("3")
@@ -38,7 +38,7 @@ class Grade(models.Model):
     )
     grade = models.CharField(
         verbose_name=_("Grade"),
-        max_length=2,
+        max_length=20,
         help_text="Select grade of class.",
         null=False,
         blank=False,
