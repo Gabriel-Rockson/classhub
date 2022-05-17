@@ -19,6 +19,7 @@ import * as yup from "yup";
 import AuthService from "../services/auth.service";
 
 import AuthNavBar from "../components/navbar/AuthNavBar";
+import RequiredLabel from "../components/RequiredLabel";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ export default function Login() {
                       colorScheme="messenger"
                       isInvalid={!!errors.username && touched.username}
                     >
-                      <FormLabel htmlFor="username">Username</FormLabel>
+                      <FormLabel htmlFor="username"><RequiredLabel>Username</RequiredLabel></FormLabel>
                       <Field
                         as={Input}
                         type="text"
@@ -101,7 +102,7 @@ export default function Login() {
                       colorScheme="messenger"
                       isInvalid={!!errors.password && touched.password}
                     >
-                      <FormLabel htmlFor="password">Password</FormLabel>
+                      <FormLabel htmlFor="password"><RequiredLabel>Password</RequiredLabel></FormLabel>
                       <Field
                         as={Input}
                         type="password"

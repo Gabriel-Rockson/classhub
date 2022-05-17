@@ -20,6 +20,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import StudentService from "../../services/student.service";
 
+import RequiredLabel from "../RequiredLabel";
+
 const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required("First name is required"),
@@ -92,7 +94,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                       <FormControl
                         isInvalid={!!errors.first_name && touched.first_name}
                       >
-                        <FormLabel htmlFor="first_name">First Name</FormLabel>
+                        <FormLabel htmlFor="first_name">
+                          <RequiredLabel>First Name</RequiredLabel>
+                        </FormLabel>
                         <Field
                           as={Input}
                           type="text"
@@ -100,7 +104,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           name="first_name"
                           borderRadius={5}
                         />
-                        <FormErrorMessage fontWeight="bold">{errors.first_name}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.first_name}
+                        </FormErrorMessage>
                       </FormControl>
                       <FormControl>
                         <FormLabel htmlFor="middle_name">Middle Name</FormLabel>
@@ -115,7 +121,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                       <FormControl
                         isInvalid={!!errors.last_name && touched.last_name}
                       >
-                        <FormLabel htmlFor="last_name">Last Name</FormLabel>
+                        <FormLabel htmlFor="last_name">
+                          <RequiredLabel>Last Name</RequiredLabel>
+                        </FormLabel>
                         <Field
                           as={Input}
                           id="last_name"
@@ -123,7 +131,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           type="text"
                           borderRadius={5}
                         />
-                        <FormErrorMessage fontWeight="bold">{errors.last_name}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.last_name}
+                        </FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={
@@ -131,7 +141,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                         }
                       >
                         <FormLabel htmlFor="date_of_birth">
-                          Date of Birth
+                          <RequiredLabel>Date of Birth</RequiredLabel>
                         </FormLabel>
                         {/* TODO replace this date time picker with a custom component that fits chakra or a package */}
                         <Field
@@ -148,7 +158,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                       <FormControl
                         isInvalid={!!errors.gender && touched.gender}
                       >
-                        <FormLabel htmlFor="gender">Gender</FormLabel>
+                        <FormLabel htmlFor="gender">
+                          <RequiredLabel>Gender</RequiredLabel>
+                        </FormLabel>
                         <Field
                           as={Select}
                           id="gender"
@@ -159,10 +171,14 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           <option value="F">Female</option>
                           <option value="O">Other</option>
                         </Field>
-                        <FormErrorMessage fontWeight="bold">{errors.gender}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.gender}
+                        </FormErrorMessage>
                       </FormControl>
                       <FormControl isInvalid={!!errors.race && touched.race}>
-                        <FormLabel htmlFor="race">Race</FormLabel>
+                        <FormLabel htmlFor="race">
+                          <RequiredLabel>Race</RequiredLabel>
+                        </FormLabel>
                         <Field
                           as={Select}
                           id="race"
@@ -175,12 +191,16 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           <option value="H">Native Hawaiian</option>
                           <option value="O">Some Other Race</option>
                         </Field>
-                        <FormErrorMessage fontWeight="bold">{errors.race}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.race}
+                        </FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={!!errors.home_phone && touched.home_phone}
                       >
-                        <FormLabel htmlFor="home_phone">Home Phone</FormLabel>
+                        <FormLabel htmlFor="home_phone">
+                          <RequiredLabel>Home Phone</RequiredLabel>
+                        </FormLabel>
                         <Field
                           as={Input}
                           id="home_phone"
@@ -188,12 +208,16 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           type="text"
                           borderRadius={5}
                         />
-                        <FormErrorMessage fontWeight="bold">{errors.home_phone}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.home_phone}
+                        </FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={!!errors.student_id && touched.student_id}
                       >
-                        <FormLabel htmlFor="student_id">Student ID</FormLabel>
+                        <FormLabel htmlFor="student_id">
+                          <RequiredLabel>Home Phone</RequiredLabel>
+                        </FormLabel>
                         <Field
                           as={Input}
                           id="student_id"
@@ -201,7 +225,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           type="text"
                           borderRadius={5}
                         />
-                        <FormErrorMessage fontWeight="bold">{errors.student_id}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.student_id}
+                        </FormErrorMessage>
                       </FormControl>
                       <FormControl htmlFor="address">
                         <FormLabel>Address</FormLabel>

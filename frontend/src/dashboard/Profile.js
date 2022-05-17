@@ -38,6 +38,9 @@ import TeacherService from "../services/teacher.service";
 import UserService from "../services/user.service";
 import ClassService from "../services/class.service";
 
+// Components
+import RequiredLabel from "../components/RequiredLabel";
+
 // TODO add alert on successfully updating the user info
 
 export default function Profile() {
@@ -178,7 +181,9 @@ export default function Profile() {
                   <Form>
                     <Stack direction={["column", "column", "row"]} spacing={5}>
                       <FormControl>
-                        <FormLabel htmlFor="username">Username</FormLabel>
+                        <FormLabel htmlFor="username">
+                          Username <RequiredLabel />
+                        </FormLabel>
                         <Field
                           variant="filled"
                           as={Input}
@@ -189,7 +194,9 @@ export default function Profile() {
                         <FormErrorMessage fontWeight="bold"></FormErrorMessage>
                       </FormControl>
                       <FormControl>
-                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <FormLabel htmlFor="email">
+                          Email <RequiredLabel />
+                        </FormLabel>
                         <Field
                           variant="filled"
                           as={Input}
@@ -247,7 +254,9 @@ export default function Profile() {
                       <FormControl
                         isInvalid={!!errors.first_name && touched.first_name}
                       >
-                        <FormLabel htmlFor="first_name">First Name</FormLabel>
+                        <FormLabel htmlFor="first_name">
+                          <RequiredLabel>First Name</RequiredLabel>
+                        </FormLabel>
                         <Field
                           variant="filled"
                           as={Input}
@@ -255,7 +264,9 @@ export default function Profile() {
                           name="first_name"
                           type="text"
                         />
-                        <FormErrorMessage fontWeight="bold">{errors.first_name}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.first_name}
+                        </FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={!!errors.middle_name && touched.middle_name}
@@ -282,7 +293,9 @@ export default function Profile() {
                       <FormControl
                         isInvalid={!!errors.last_name && touched.last_name}
                       >
-                        <FormLabel htmlFor="last_name">Last Name</FormLabel>
+                        <FormLabel htmlFor="last_name">
+                          <RequiredLabel>Last Name</RequiredLabel>
+                        </FormLabel>
                         <Field
                           variant="filled"
                           as={Input}
@@ -290,7 +303,9 @@ export default function Profile() {
                           name="last_name"
                           type="text"
                         />
-                        <FormErrorMessage fontWeight="bold">{errors.last_name}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.last_name}
+                        </FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={
@@ -298,7 +313,7 @@ export default function Profile() {
                         }
                       >
                         <FormLabel htmlFor="email_address">
-                          Email Address
+                          <RequiredLabel>Email Address</RequiredLabel>
                         </FormLabel>
                         <Field
                           variant="filled"
@@ -320,7 +335,9 @@ export default function Profile() {
                     >
                       {/* TODO when the class is set once, it shouldn't be changed without admin authorization */}
                       <FormControl isInvalid={!!errors.grade && touched.grade}>
-                        <FormLabel htmlFor="grade">Class</FormLabel>
+                        <FormLabel htmlFor="grade">
+                          <RequiredLabel>Class</RequiredLabel>
+                        </FormLabel>
                         <Field
                           variant="filled"
                           as={Select}
@@ -331,11 +348,13 @@ export default function Profile() {
                           <option value="">---------</option>
                           {classes?.map((grade) => (
                             <option key={grade.id} value={grade.id}>
-                              Class {grade.grade}
+                              Grade {grade.grade}
                             </option>
                           ))}
                         </Field>
-                        <FormErrorMessage fontWeight="bold">{errors.grade}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.grade}
+                        </FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={!!errors.address && touched.address}
@@ -348,7 +367,9 @@ export default function Profile() {
                           name="address"
                           type="text"
                         />
-                        <FormErrorMessage fontWeight="bold">{errors.address}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.address}
+                        </FormErrorMessage>
                       </FormControl>
                     </Stack>
 
@@ -369,7 +390,9 @@ export default function Profile() {
                           name="cell_phone"
                           type="text"
                         />
-                        <FormErrorMessage fontWeight="bold">{errors.cell_phone}</FormErrorMessage>
+                        <FormErrorMessage fontWeight="bold">
+                          {errors.cell_phone}
+                        </FormErrorMessage>
                       </FormControl>
                     </Stack>
 

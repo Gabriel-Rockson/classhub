@@ -13,18 +13,25 @@ import {
   Link,
   Spinner,
 } from "@chakra-ui/react";
+
+// Formik and Yup
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 
 import AuthService from "../services/auth.service";
 
+// Components
 import AuthNavBar from "../components/navbar/AuthNavBar";
+import RequiredLabel from "../components/RequiredLabel";
 
 export default function Register() {
   const navigate = useNavigate();
   const validationSchema = yup.object().shape({
     username: yup.string().required("Username field is required"),
-    email: yup.string().email("Email must be a valid email").notRequired(),
+    email: yup
+      .string()
+      .email("Email must be a valid email")
+      .required("Email field is required"),
     password: yup
       .string()
       .required("Password field is required")
@@ -88,7 +95,9 @@ export default function Register() {
                     colorScheme="messenger"
                     isInvalid={!!errors.username && touched.username}
                   >
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>
+                      <RequiredLabel>Username</RequiredLabel>
+                    </FormLabel>
                     <Field
                       as={Input}
                       type="text"
@@ -106,7 +115,9 @@ export default function Register() {
                     colorScheme="messenger"
                     isInvalid={!!errors.email && touched.email}
                   >
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>
+                      <RequiredLabel>Email</RequiredLabel>
+                    </FormLabel>
                     <Field
                       as={Input}
                       type="email"
@@ -124,7 +135,9 @@ export default function Register() {
                     colorScheme="messenger"
                     isInvalid={!!errors.password && touched.password}
                   >
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>
+                      <RequiredLabel>Password</RequiredLabel>
+                    </FormLabel>
                     <Field
                       as={Input}
                       type="password"

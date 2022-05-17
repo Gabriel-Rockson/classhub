@@ -19,6 +19,7 @@ import * as yup from "yup";
 import AuthService from "../services/auth.service";
 
 import AuthNavBar from "../components/navbar/AuthNavBar";
+import RequiredLabel from "../components/RequiredLabel";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -46,7 +47,13 @@ export default function Register() {
 
   return (
     <>
-      <Flex direction="column" bg="whitesmoke" align="center" justify="center" h="100vh">
+      <Flex
+        direction="column"
+        bg="whitesmoke"
+        align="center"
+        justify="center"
+        h="100vh"
+      >
         <AuthNavBar />
 
         <Box w={["80%", 96]} px={5} py={8}>
@@ -78,7 +85,9 @@ export default function Register() {
                     colorScheme="messenger"
                     isInvalid={!!errors.username && touched.username}
                   >
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>
+                      <RequiredLabel>Username</RequiredLabel>
+                    </FormLabel>
                     <Field
                       as={Input}
                       type="text"
@@ -96,7 +105,9 @@ export default function Register() {
                     colorScheme="messenger"
                     isInvalid={!!errors.email && touched.email}
                   >
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>
+                      <RequiredLabel>Email</RequiredLabel>
+                    </FormLabel>
                     <Field
                       as={Input}
                       type="email"
@@ -114,7 +125,9 @@ export default function Register() {
                     colorScheme="messenger"
                     isInvalid={!!errors.password && touched.password}
                   >
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>
+                      <RequiredLabel>Password</RequiredLabel>
+                    </FormLabel>
                     <Field
                       as={Input}
                       type="password"
