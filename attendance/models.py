@@ -4,14 +4,15 @@ import uuid
 from django.db.models.functions import TruncDate
 from itertools import groupby
 from operator import attrgetter
+from django.core.exceptions import ValidationError
 
 
 class Grade(models.Model):
     """Model to represent individual classes"""
 
     class Grades(models.TextChoices):
-        THREE_K = "3K", _("3K")
-        FOUR_K = "4K", _("4K")
+        PRE_K = "P", _("Pre-K")
+        KINDERGARTEN = "K", _("Kindergarten")
         ONE = 1, _("1")
         TWO = 2, _("2")
         THREE = 3, _("3")
