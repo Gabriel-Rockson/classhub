@@ -153,7 +153,7 @@ const AllAttendances = () => {
     <Box>
       <Flex align="center" my={6}>
         <Heading fontSize={["lg", "xl"]} mr={5}>
-          Class {grade?.grade}
+          Grade: {grade?.grade}
         </Heading>
 
         <Button
