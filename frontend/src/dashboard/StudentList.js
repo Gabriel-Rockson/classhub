@@ -62,7 +62,7 @@ export default function StudentList() {
       <Box>
         <Flex alignItems={"center"} my={6}>
           <Heading fontSize={["lg", "xl"]} mr={5}>
-            Class {grade?.grade}
+            Grade: {grade?.grade}
           </Heading>
 
           <Button
