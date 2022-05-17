@@ -48,6 +48,9 @@ class Grade(models.Model):
     def __str__(self):
         return f"Grade {self.grade}"
 
+    def number_of_students(self):
+        return self.students.count()
+
     class Meta:
         verbose_name = "Grade"
         verbose_name_plural = "Grades"
@@ -57,6 +60,7 @@ class Grade(models.Model):
 class StudentAttendanceManager(models.Manager):
     def grade_attendances(self, grade_id):
         return self.filter(student__grade=grade_id)
+
 
 class StudentAttendance(models.Model):
     """Model to represent individual attendance record of a student"""
