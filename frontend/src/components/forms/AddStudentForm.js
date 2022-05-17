@@ -216,7 +216,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                         isInvalid={!!errors.student_id && touched.student_id}
                       >
                         <FormLabel htmlFor="student_id">
-                          <RequiredLabel>Home Phone</RequiredLabel>
+                          <RequiredLabel>Student ID</RequiredLabel>
                         </FormLabel>
                         <Field
                           as={Input}
