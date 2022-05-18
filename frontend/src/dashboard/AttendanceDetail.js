@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 // Chakra components
 import { Flex, Button, Heading, Icon } from "@chakra-ui/react";
@@ -10,9 +10,10 @@ import { AiOutlineRollback } from "react-icons/ai";
 // Custom hook
 import { useGradeAndStudents } from "../hooks/custom-hooks";
 
-export default function AttendanceDetail({ attendance }) {
+export default function AttendanceDetail() {
   const { grade } = useGradeAndStudents();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   return (
     <>
@@ -32,7 +33,8 @@ export default function AttendanceDetail({ attendance }) {
 
       <Flex mt={3} mb={6} justifyContent={"center"}>
         <Heading fontSize={["lg", "xl", "2xl"]}>
-          Grade {grade?.grade} Attendance Taken on - {new Date().toDateString()}
+          Grade {grade?.grade} Attendance Taken on -{" "}
+          {new Date(state.date).toDateString()}
         </Heading>
       </Flex>
 
