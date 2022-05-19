@@ -10,7 +10,7 @@ class StudentAttendanceSerializer(serializers.ModelSerializer):
         source="get_attendance_display", read_only=True
     )
     # student_name = serializers.CharField(source="student.first_name")
-    student_name = serializers.CharField(source="student.__str__")
+    student_name = serializers.CharField(source="student.__str__", read_only=True)
 
     class Meta:
         model = StudentAttendance
