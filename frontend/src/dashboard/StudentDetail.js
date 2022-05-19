@@ -24,6 +24,7 @@ import { AiOutlineRollback } from "react-icons/ai";
 
 // Services
 import StudentService from "../services/student.service";
+import { Stack } from "@chakra-ui/react";
 
 function StudentDetail() {
   const [studentData, setStudentData] = useState(null);
@@ -72,20 +73,21 @@ function StudentDetail() {
         </Flex>
       </Button>
 
-      <Box w={["100%", null, null, "50%"]}>
-        <Heading
-          py={4}
-          textAlign={"center"}
-          color="gray.600"
-          fontSize={["lg", "xl", "2xl"]}
-        >
-          {`${studentData?.first_name} ${studentData?.middle_name} ${studentData?.last_name}`}
-        </Heading>
-        <TableContainer boxShadow="lg" rounded="md" mb={10} w={"100%"}>
+      <Heading
+        py={4}
+        textAlign={"center"}
+        color="gray.600"
+        fontSize={["lg", "xl", "2xl"]}
+      >
+        {`${studentData?.first_name} ${studentData?.middle_name} ${studentData?.last_name}`}
+      </Heading>
+
+      <Stack direction={["column", "column", "row"]} spacing={5} w={"100%"}>
+        <TableContainer boxShadow="lg" rounded="md" mb={2}  w={["100%", null, "50%"]}>
           <Table variant="striped" colorScheme="telegram">
             <Thead borderBottom={"2px"} borderColor={"gray.200"}>
               <Tr>
-                <Th>Key</Th>
+                <Th>Field</Th>
                 <Th>Value</Th>
               </Tr>
             </Thead>
@@ -114,13 +116,26 @@ function StudentDetail() {
                 <Td fontWeight="bold">Race</Td>
                 <Td>{studentData?.race_display}</Td>
               </Tr>
-              <Tr>
-                <Td fontWeight="bold">Home Phone</Td>
-                <Td>{studentData?.home_phone}</Td>
-              </Tr>
+
               <Tr>
                 <Td fontWeight="bold">Student ID</Td>
                 <Td>{studentData?.student_id}</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <TableContainer boxShadow="lg" rounded="md" mb={10} w={["100%", null, "50%"]}>
+          <Table variant="striped" colorScheme={"telegram"}>
+            <Thead borderBottom={"2px"} borderColor={"gray.200"}>
+              <Tr>
+                <Th>Field</Th>
+                <Th>Value</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td fontWeight="bold">Home Phone</Td>
+                <Td>{studentData?.home_phone}</Td>
               </Tr>
               <Tr>
                 <Td fontWeight="bold">Address</Td>
@@ -153,7 +168,7 @@ function StudentDetail() {
             </Tbody>
           </Table>
         </TableContainer>
-      </Box>
+      </Stack>
     </>
   );
 }
