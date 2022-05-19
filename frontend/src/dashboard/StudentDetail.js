@@ -82,8 +82,18 @@ function StudentDetail() {
         {`${studentData?.first_name} ${studentData?.middle_name} ${studentData?.last_name}`}
       </Heading>
 
-      <Stack direction={["column", "column", "row"]} spacing={5} w={"100%"}>
-        <TableContainer boxShadow="lg" rounded="md" mb={2}  w={["100%", null, "50%"]}>
+      <Stack
+        direction={["column", "column", "row"]}
+        spacing={5}
+        w={"100%"}
+        mb={10}
+      >
+        <TableContainer
+          boxShadow="lg"
+          rounded="md"
+          mb={2}
+          w={["100%", null, "50%"]}
+        >
           <Table variant="striped" colorScheme="telegram">
             <Thead borderBottom={"2px"} borderColor={"gray.200"}>
               <Tr>
@@ -121,10 +131,14 @@ function StudentDetail() {
                 <Td fontWeight="bold">Student ID</Td>
                 <Td>{studentData?.student_id}</Td>
               </Tr>
+              <Tr>
+                <Td fontWeight="bold">Attendances Taken</Td>
+                <Td>{studentData?.attendances.length}</Td>
+              </Tr>
             </Tbody>
           </Table>
         </TableContainer>
-        <TableContainer boxShadow="lg" rounded="md" mb={10} w={["100%", null, "50%"]}>
+        <TableContainer boxShadow="lg" rounded="md" w={["100%", null, "50%"]}>
           <Table variant="striped" colorScheme={"telegram"}>
             <Thead borderBottom={"2px"} borderColor={"gray.200"}>
               <Tr>
