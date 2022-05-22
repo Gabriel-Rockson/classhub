@@ -29,10 +29,6 @@ import { useGradeAndStudents } from "../hooks/custom-hooks";
 // Services
 import ClassService from "../services/class.service";
 
-const data = {
-  date: "Tue May 03 2022",
-};
-
 const QuestionIcon = () => {
   return (
     <Icon
@@ -60,9 +56,10 @@ const AllAttendances = () => {
     }
   }, [grade]);
 
-  const handleViewMore = () => {
+  const handleViewMore = (date, attendances) => {
     navigate("/app/dashboard/class-attendance/attendance-detail/", {
       replace: true,
+      state: {date, attendances},
     });
   };
 
@@ -119,7 +116,7 @@ const AllAttendances = () => {
                 colorScheme={"telegram"}
                 style={{ boxShadow: "none" }}
                 size={"sm"}
-                onClick={handleViewMore}
+                onClick={() => handleViewMore(key, attendances)}
               >
                 <Flex alignItems={"center"}>
                   <Icon as={IoEyeSharp} mr={2} />
