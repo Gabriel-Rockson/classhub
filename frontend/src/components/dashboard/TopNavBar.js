@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Heading,
   Flex,
   Avatar,
   Icon,
@@ -33,6 +32,7 @@ import {
 import { CgProfile, CgLogOut } from "react-icons/cg";
 
 import SecondaryNavBarMobile from "./SecondaryNavBarMobile";
+import NavLabel from "../navbar/NavLabel";
 
 import AuthService from "../../services/auth.service";
 
@@ -109,7 +109,7 @@ const TopNavBar = () => {
                   style={{ boxShadow: "none" }}
                   color={"red.600"}
                 />
-                <DrawerHeader>ClassHub</DrawerHeader>
+                <DrawerHeader><NavLabel /></DrawerHeader>
 
                 <DrawerBody>
                   <SearchInput />
@@ -118,17 +118,7 @@ const TopNavBar = () => {
               </DrawerContent>
             </Drawer>
           )}
-          <Heading
-            fontSize={["lg", "xl", "xl"]}
-            color={"telegram.900"}
-            fontFamily={"sans-serif"}
-            cursor="pointer"
-            onClick={() => {
-              navigate("/", { replace: true });
-            }}
-          >
-            ClassHub
-          </Heading>
+          <NavLabel />
         </Flex>
         <Flex alignItems={"center"}>
           {windowWidth >= 768 && <SearchInput />}
