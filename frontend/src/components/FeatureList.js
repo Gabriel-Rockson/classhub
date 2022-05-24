@@ -52,12 +52,10 @@ const FeatureList = () => {
         >
           Features
         </Heading>
-        <Grid
-          templateRows="repeat(2, 1fr)"
-          templateColumns="repeat(4, 1fr)"
-        >
+        <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(4, 1fr)">
           {data?.map((feature) => (
             <GridItem
+              key={feature.id}
               colSpan={[4, 4, 4, 4, 2]}
               my={5}
               id={feature.id}
@@ -70,9 +68,7 @@ const FeatureList = () => {
                   boxSize={["50px", "100px", "200px"]}
                 />
                 <Box ml={5} width={"100%"}>
-                  <Heading fontSize={["x", "2xl"]}>
-                    {feature.heading}
-                  </Heading>
+                  <Heading fontSize={["x", "2xl"]}>{feature.heading}</Heading>
                   <Text fontWeight={"500"} color="gray.700">
                     {feature.description}
                   </Text>

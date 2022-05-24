@@ -1,9 +1,12 @@
 const path = require("path");
-// const zlib = require("zlib");
-// const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
-  entry: ["@babel/polyfill", "./src/index.js"],
+  entry: {
+    "index": ["@babel/polyfill", "./src/App.js"],
+  },
+  output: {
+    filename: '[name].bundle.js'
+  },
   module: {
     rules: [
       {
