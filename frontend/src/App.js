@@ -2,12 +2,7 @@ import { createRoot } from "react-dom/client";
 import React, { useState, useEffect } from "react";
 
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import HomePage from "./HomePage";
 import Dashboard from "./dashboard/Dashboard";
@@ -20,21 +15,17 @@ import AttendanceList from "./dashboard/AttendanceList";
 import AttendanceDetail from "./dashboard/AttendanceDetail";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
-import SuperUserRegister from "./auth/SuperUserRegister"
+import SuperUserRegister from "./auth/SuperUserRegister";
 import Profile from "./dashboard/Profile";
 
 import AuthService from "./services/auth.service";
 
-const colors = {
-  brand: {
-    900: "#1a365d",
-    800: "#153e75",
-    700: "#2a69ac",
-    dark: "rgb(26, 32, 44)",
+const theme = extendTheme({
+  fonts: {
+    heading: `'Roboto', 'Raleway', sans-serif`,
+    body: `'Roboto', 'Raleway', sans-serif`,
   },
-};
-
-const theme = extendTheme({ colors });
+});
 
 const ProtectedRoute = ({ children }) => {
   const [user, setUser] = useState(AuthService.getCurrentUser());
@@ -79,7 +70,10 @@ function App() {
           </Route>
           <Route path="/app/login" element={<Login />} />
           <Route path="/app/register" element={<Register />} />
-          <Route path="/app/register/admin/pin/2008/" element={<SuperUserRegister />} />
+          <Route
+            path="/app/register/admin/pin/2008/"
+            element={<SuperUserRegister />}
+          />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
