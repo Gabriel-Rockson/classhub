@@ -12,7 +12,7 @@ import {
   Link,
   Button,
   Spinner,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
@@ -58,14 +58,12 @@ export default function Login() {
         >
           <AuthNavBar />
 
-          <Box w={["80%", 96]} px={5} py={8}>
-            <Heading
-              py={[3, 4, 5, 6]}
-              fontSize={["2xl", "3xl", "4xl"]}
-              textAlign="center"
-            >
-              <Text color="yellow.700" pb={-2}>Welcome!</Text>
-              Login to Your ClassHub Account
+          <Box w={["80%", 96]} px={5} py={4}>
+            <Heading py={[2]} fontSize={["xl"]} textAlign="center">
+              <Text py={2}>Welcome!</Text>
+              <Text fontSize={"lg"} fontWeight={"500"} py={[2, 4]}>
+                Login to Your ClassHub Account
+              </Text>
             </Heading>
             <Formik
               initialValues={formData}
@@ -84,7 +82,9 @@ export default function Login() {
                       colorScheme="messenger"
                       isInvalid={!!errors.username && touched.username}
                     >
-                      <FormLabel htmlFor="username"><RequiredLabel>Username</RequiredLabel></FormLabel>
+                      <FormLabel htmlFor="username">
+                        <RequiredLabel>Username</RequiredLabel>
+                      </FormLabel>
                       <Field
                         as={Input}
                         type="text"
@@ -102,7 +102,9 @@ export default function Login() {
                       colorScheme="messenger"
                       isInvalid={!!errors.password && touched.password}
                     >
-                      <FormLabel htmlFor="password"><RequiredLabel>Password</RequiredLabel></FormLabel>
+                      <FormLabel htmlFor="password">
+                        <RequiredLabel>Password</RequiredLabel>
+                      </FormLabel>
                       <Field
                         as={Input}
                         type="password"

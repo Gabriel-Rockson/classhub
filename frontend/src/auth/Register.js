@@ -62,16 +62,16 @@ export default function Register() {
       >
         <AuthNavBar />
 
-        <Box w={["80%", 96]} px={5} py={8}>
-          <Heading
-            py={[2]}
-            fontSize={["xl", "2xl", "3xl"]}
-            textAlign="center"
-            color="yellow.700"
-          >
+        <Box w={["80%", 96]} px={5} py={4}>
+          <Heading py={[2]} fontSize={["xl"]} textAlign="center">
             Let's Help You Manage Keep Track of Your Students' Data.
           </Heading>
-          <Heading py={[2, 4]} fontSize={["xl", "2xl"]} textAlign="center">
+          <Heading
+            py={[2, 4]}
+            fontWeight={"500"}
+            fontSize={["lg"]}
+            textAlign="center"
+          >
             Create New Account
           </Heading>
           <Formik
