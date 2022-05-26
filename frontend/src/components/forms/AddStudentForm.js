@@ -19,13 +19,20 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
+
+// Formik and Yup
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import StudentService from "../../services/student.service";
 
+// Services
+import StudentService from "../../services/student.service";
+import AddressService from "../../services/address.service";
+
+// Custom components
 import RequiredLabel from "../RequiredLabel";
 
 const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
+  // Yup validation schema
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required("First name is required"),
     last_name: Yup.string().required("Last name is required"),
@@ -72,6 +79,19 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
       .finally(() => setSubmitting(false));
   };
 
+  // Function to verify the address, for now this works on only US based addresses
+  const verifyAddress = (address) => {
+    const data = {
+      ctry: "US",
+      format: "json",
+      DeliveryLines: "Off",
+      a1: address
+    }
+    AddressService.verifyAddress(data)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
       <Modal
@@ -91,7 +111,7 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
             onSubmit={handleFormSubmit}
             validationSchema={validationSchema}
           >
-            {({ errors, touched, submitForm }) => (
+            {({ values, errors, touched, submitForm }) => (
               <>
                 <ModalBody>
                   <Form>
@@ -275,6 +295,9 @@ const AddStudentForm = ({ isOpen, onClose, setStudents, grade }) => {
                           <FormErrorMessage fontWeight="bold">
                             {errors.address}
                           </FormErrorMessage>
+                          <Button onClick={() => verifyAddress(values.address)}>
+                            Verify Address
+                          </Button>
                         </FormControl>
                         <FormControl
                           isInvalid={!!errors.home_phone && touched.home_phone}
