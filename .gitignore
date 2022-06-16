@@ -135,3 +135,5 @@ node_modules/
 staticfiles/
 
 .vscode
+
+frontend/static/*
