@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     "student.apps.StudentConfig",
     "attendance.apps.AttendanceConfig",
     "home.apps.HomeConfig",
-    "frontend.apps.FrontendConfig",
 ]
 
 MIDDLEWARE = [
