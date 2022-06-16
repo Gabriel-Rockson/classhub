@@ -58,7 +58,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "STUDENTSATTENDANCE.config.urls"
+ROOT_URLCONF = "CLASSHUB.config.urls"
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "STUDENTSATTENDANCE.config.wsgi.application"
+WSGI_APPLICATION = "CLASSHUB.config.wsgi.application"
 
 
 # Password validation

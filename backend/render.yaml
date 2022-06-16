@@ -5,10 +5,10 @@ databases:
 
 services:
   - type: web
-    name: STUDENTSATTENDANCE
+    name: CLASSHUB
     env: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn STUDENTSATTENDANCE.config.wsgi:application"
+    startCommand: "gunicorn CLASSHUB.config.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
