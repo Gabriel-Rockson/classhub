@@ -10,7 +10,7 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost:8000",]
 
 # Render
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
@@ -33,3 +33,8 @@ DATABASES = {
         conn_max_age=600,
     )
 }
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:4173",
+]
+CSRF_TRUSTED_ORIGINS = CORS_ORIGIN_WHITELIST

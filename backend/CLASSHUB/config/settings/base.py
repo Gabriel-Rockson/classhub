@@ -140,18 +140,7 @@ if not DEBUG:
     }
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:8000",
-    "http://localhost:10000",
-    "https://students-attendance.onrender.com",
-    "http://example.com",
-]
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8000",
-    "http://localhost:10000",
-    "https://students-attendance.onrender.com",
-    "http://example.com",
-]
+
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (

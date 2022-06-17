@@ -2,7 +2,9 @@ from .base import *
 import os
 
 
-SECRET_KEY = os.environ.get("SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j")
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j"
+)
 
 DEBUG = True
 
@@ -22,3 +24,12 @@ DATABASES = {
         "PORT": 5432,
     }
 }
+
+
+# CORS
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "http://localhost:4173",
+]
+CSRF_TRUSTED_ORIGINS = CORS_ORIGIN_WHITELIST
