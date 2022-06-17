@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkfrontend=self.webpackChunkfrontend||[]).push([[673],{29673:(e,n,t)=>{t.r(n),t.d(n,{default:()=>a});var l=t(67294),r=t(96974),u=t(68527);const a=function(){return l.createElement(l.Fragment,null,l.createElement(u.xu,null,l.createElement(r.j3,null)))}}}]);

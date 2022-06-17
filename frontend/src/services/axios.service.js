@@ -50,7 +50,9 @@ axios_instance.interceptors.response.use(
           .catch((_error) => {
             if (_error.response && _error.response?.data) {
               AuthService.logout();
-              return <Navigate to="/app/login" replace={true} />;
+              // ! BUG - Unexpected token "<"
+              // return <Navigate to="/app/login" replace={true } />
+              console.log("An error occured here");
             }
             return Promise.reject(_error);
           });

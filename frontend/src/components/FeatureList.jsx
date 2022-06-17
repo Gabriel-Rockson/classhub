@@ -43,21 +43,21 @@ const data = [
 const FeatureList = () => {
   return (
     <>
-      <Box my={10}>
+      <Box my={20}>
         <Heading
+          fontSize={["4xl", null, "5xl", "6xl"]}
           textDecoration={"underline"}
-          textUnderlineOffset={"4px"}
+          textUnderlineOffset={"20px"}
           textAlign={"center"}
-          color={"gray.800"}
+          color={"blue.800"}
         >
           Features
         </Heading>
-        <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(4, 1fr)">
+        <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(4, 1fr)" gap={20} mt={20}>
           {data?.map((feature) => (
             <GridItem
               key={feature.id}
               colSpan={[4, 4, 4, 4, 2]}
-              my={5}
               id={feature.id}
               shadow={"lg"}
             >

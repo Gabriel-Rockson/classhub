@@ -1,4 +1,3 @@
-import { createRoot } from "react-dom/client";
 import React, { useState, useEffect, Suspense, lazy } from "react";
 
 import { extendTheme, ChakraProvider, Flex, Spinner } from "@chakra-ui/react";
@@ -68,7 +67,7 @@ const LoadingSpinner = () => {
   );
 };
 
-function App() {
+export default function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
@@ -114,7 +113,3 @@ function App() {
     </ChakraProvider>
   );
 }
-
-const container = document.getElementById("app");
-const root = createRoot(container);
-root.render(<App tab="home" />);
