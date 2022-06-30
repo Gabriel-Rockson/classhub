@@ -137,3 +137,5 @@ staticfiles/
 .vscode
 
 frontend/static/*
+
+backend/.vim/*
