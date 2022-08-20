@@ -92,6 +92,7 @@ export default function Login() {
                         name="username"
                         variant="filled"
                         borderColor="gray.200"
+                        border="solid"
                         _hover={{ borderColor: "facebook.600" }}
                       />
                       <FormErrorMessage fontWeight="bold">
@@ -112,6 +113,7 @@ export default function Login() {
                         name="password"
                         variant="filled"
                         borderColor="gray.200"
+                        border="solid"
                         _hover={{ borderColor: "facebook.600" }}
                       />
                       <FormErrorMessage fontWeight="bold">

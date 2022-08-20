@@ -105,6 +105,7 @@ export default function Register() {
                       name="username"
                       variant="filled"
                       borderColor="gray.200"
+                      border="solid"
                       _hover={{ borderColor: "facebook.600" }}
                     />
                     <FormErrorMessage fontWeight="bold">
@@ -125,6 +126,7 @@ export default function Register() {
                       name="email"
                       variant="filled"
                       borderColor="gray.200"
+                      border="solid"
                       _hover={{ borderColor: "facebook.600" }}
                     />
                     <FormErrorMessage fontWeight="bold">
@@ -145,6 +147,7 @@ export default function Register() {
                       name="password"
                       variant="filled"
                       borderColor="gray.200"
+                      border="solid"
                       _hover={{ borderColor: "facebook.600" }}
                     />
                     <FormErrorMessage fontWeight="bold">
