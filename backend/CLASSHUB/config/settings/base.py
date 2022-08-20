@@ -14,15 +14,10 @@ SECRET_KEY = os.environ.get(
     "SECRET_KEY", default="hrhppn-&+r2+^n4siakw4)@8+ua@i^a(yokss$+ln@-a2z=v8j"
 )
 
-DEBUG = "RENDER" not in os.environ
+DEBUG = "DYNO" not in os.environ
 
 if not DEBUG:
     ALLOWED_HOSTS = ["localhost"]
-
-    # Render
-    RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-    if RENDER_EXTERNAL_HOSTNAME:
-        ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -131,16 +126,7 @@ AUTH_USER_MODEL = "users.User"
 
 # SHELL_PLUS = "ipython"
 
-if not DEBUG:
-    DATABASES = {
-        "default": dj_database_url.config(
-            default="postgres://students_attendance_user:nGYRWUNrueXbLggPQXDSrRZvSleAeaEA@dpg-c9sh8uc6fj3b5php2pk0-a/students_attendance_db_2j12",
-            conn_max_age=600,
-        )
-    }
-
 CORS_ALLOW_CREDENTIALS = True
-
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
