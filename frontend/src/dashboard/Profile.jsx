@@ -38,6 +38,8 @@ import TeacherService from "../services/teacher.service";
 import UserService from "../services/user.service";
 import ClassService from "../services/class.service";
 
+import IncompleteProfileAlert from "../components/alerts/IncompleteFormAlert.jsx";
+
 // Components
 import RequiredLabel from "../components/RequiredLabel";
 
@@ -66,6 +68,11 @@ export default function Profile() {
   };
 
   const teacher_profile = currentUser?.teacher_profile;
+
+  const show_alert =
+    teacher_profile.first_name &&
+    teacher_profile.last_name &&
+    teacher_profile.grade;
 
   if (teacher_profile === null) {
     return (
@@ -165,6 +172,7 @@ export default function Profile() {
       </AlertDialog>
       <Flex align="center" justify="center">
         <Box w={["100%", "90%", "80%", "70%", "60%"]} px={4} mb={20}>
+          {!show_alert && <IncompleteProfileAlert />}
           <Heading py={5} fontSize="2xl">
             Account Settings
           </Heading>
