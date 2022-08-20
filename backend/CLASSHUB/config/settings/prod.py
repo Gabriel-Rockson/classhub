@@ -25,6 +25,8 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:4173",
+    "https://students-classhub.vercel.app",
+    "https://*.onrender.com",
 ]
 CSRF_TRUSTED_ORIGINS = CORS_ORIGIN_WHITELIST
 
