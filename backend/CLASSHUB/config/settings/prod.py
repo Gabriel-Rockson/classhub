@@ -3,6 +3,9 @@ import django_on_heroku
 
 import dj_database_url
 
+# Configure django app for heroku
+django_on_heroku.settings(locals())
+
 from .base import *
 
 IS_HEROKU = "DYNO" in os.environ
@@ -32,17 +35,10 @@ CSRF_TRUSTED_ORIGINS = CORS_ORIGIN_WHITELIST
 # Database
 MAX_CONN_AGE = 600
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3"
-    }
-}
+DATABASES = {}
 
 if "DATABASE_URL" in os.environ:
     DATABASES["default"] = dj_database_url.config(
         conn_max_age = MAX_CONN_AGE, ssl_require=True
     )
 
-# Configure django app for heroku
-django_on_heroku.settings(locals())
