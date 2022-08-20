@@ -35,10 +35,4 @@ CSRF_TRUSTED_ORIGINS = CORS_ORIGIN_WHITELIST
 # Database
 MAX_CONN_AGE = 600
 
-DATABASES = {}
-
-if "DATABASE_URL" in os.environ:
-    DATABASES["default"] = dj_database_url.config(
-        conn_max_age = MAX_CONN_AGE, ssl_require=True
-    )
-
+DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
