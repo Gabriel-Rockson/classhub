@@ -10,6 +10,8 @@ psycopg2-binary = "==2.9.3"
 django-extensions = "*"
 ipython = "*"
 werkzeug = "*"
+gunicorn = "*"
+django-on-heroku = "*"
 
 [dev-packages]
 djangorestframework = "==3.13.1"
